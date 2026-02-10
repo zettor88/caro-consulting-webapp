@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Margin Leakage Root Cause Explorer - CARO CONSULTING</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1F4E78",
+                        "secondary": "#28A745",
+                        "alert": "#FFC107",
+                        "danger": "#DC3545",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .pareto-bar { transition: width 0.3s ease; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="bg-white dark:bg-[#1a110c] border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-lg text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<h2 class="text-primary dark:text-white text-lg font-extrabold leading-tight tracking-tight uppercase">CARO CONSULTING</h2>
+<p class="text-[10px] text-slate-500 font-semibold tracking-widest uppercase">Pricing &amp; Profitability Diagnostics</p>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-300 text-sm font-semibold hover:text-primary" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary py-1" href="#">Analytics</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-semibold hover:text-primary" href="#">Governance</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-semibold hover:text-primary" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-slate-900 dark:text-white">Aceros del Sur SpA</p>
+<p class="text-[10px] text-slate-500">B2B Industrial Division</p>
+</div>
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border-2 border-primary/20">
+<img alt="Profile" data-alt="User profile picture of a CEO" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpAaTvSOUJjtIYKL3Qb9BAG5dWk1c-ievLDR5Sl_qpH7GlFzZJyehiBKdA5IfR7QbNfnOmYM7hGyrVA4k9WUaTKVLlOR7CigzMc5o96kI8A6jYwCY6gnvFOZziqqeGJbqxGKtwDJRkQzdM_81dZwucpVq09_MiSiDiUb7-UH-sxmNxZw7JEBI6lx7oSBryuvB-WzaunV4Q_ggVsH2sJDSQbTM7eqVlimK1zJLfAJKmiZAMF8fE0I_S8pM4h0UWMLycVRJUc5c5g6wU"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-6 lg:px-12 py-8">
+<!-- Breadcrumbs & Header -->
+<div class="mb-8">
+<nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-2">
+<span class="font-medium">Fase 3</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-bold">Pricing</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span>Diagnóstico de Rentabilidad</span>
+</nav>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight">Margin Leakage Root Cause Explorer</h1>
+<p class="text-slate-600 dark:text-slate-400 mt-1 max-w-2xl">Identificación estratégica de erosión de margen y factores operativos críticos para la toma de decisiones ejecutivas.</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold shadow-sm hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>Último Trimestre</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">download</span>
+<span>Export Deep Dive (Excel)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- KPI Ribbon -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<!-- Total Leakage -->
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+<div class="flex items-center justify-between mb-4">
+<p class="text-sm font-bold text-slate-500 dark:text-slate-400">Total Leakage $</p>
+<span class="material-symbols-outlined text-danger">trending_up</span>
+</div>
+<p class="text-3xl font-black text-slate-900 dark:text-white">$65.400.000</p>
+<div class="mt-2 flex items-center gap-1">
+<span class="text-danger text-sm font-bold">+8.2%</span>
+<span class="text-[10px] text-slate-400 font-medium">vs. trimestre anterior</span>
+</div>
+</div>
+<!-- Leakage % of Sales -->
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+<div class="flex items-center justify-between mb-4">
+<p class="text-sm font-bold text-slate-500 dark:text-slate-400">Leakage % of Sales</p>
+<span class="material-symbols-outlined text-alert">warning</span>
+</div>
+<p class="text-3xl font-black text-slate-900 dark:text-white">5,4%</p>
+<div class="mt-2 flex items-center gap-1">
+<span class="text-danger text-sm font-bold">+1.2%</span>
+<span class="text-[10px] text-slate-400 font-medium">Sobre el target del 3%</span>
+</div>
+</div>
+<!-- Most Affected Family -->
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+<div class="flex items-center justify-between mb-4">
+<p class="text-sm font-bold text-slate-500 dark:text-slate-400">Fuga Crítica: Segmento</p>
+<span class="material-symbols-outlined text-primary">category</span>
+</div>
+<p class="text-2xl font-black text-slate-900 dark:text-white truncate">Perfiles de Acero</p>
+<div class="mt-2 flex items-center gap-1">
+<span class="text-danger text-sm font-bold">-$12.4M</span>
+<span class="text-[10px] text-slate-400 font-medium">Impacto en esta familia</span>
+</div>
+</div>
+<!-- Impact on EBITDA -->
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+<div class="flex items-center justify-between mb-4">
+<p class="text-sm font-bold text-slate-500 dark:text-slate-400">Impacto en EBITDA</p>
+<span class="material-symbols-outlined text-danger">account_balance_wallet</span>
+</div>
+<p class="text-3xl font-black text-danger">-12.3%</p>
+<div class="mt-2 flex items-center gap-1">
+<span class="text-slate-400 text-[10px] font-medium">Margen neto erosionado</span>
+</div>
+</div>
+</div>
+<!-- Main Analytics Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+<!-- Root Cause Pareto Chart -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-lg font-black text-slate-900 dark:text-white">Primary Leakage Drivers by Root Cause Category</h3>
+<div class="flex gap-4 text-xs font-bold uppercase tracking-tighter">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-primary rounded-sm"></span> Leakage $
+                        </div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-slate-200 dark:bg-slate-600 rounded-sm"></span> Acumulado %
+                        </div>
+</div>
+</div>
+<div class="space-y-6">
+<!-- Driver 1 -->
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-bold text-slate-700 dark:text-slate-300">Freight Subsidies (Fletes no recuperados)</span>
+<span class="font-black text-primary">$20.928.000 (32%)</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-700 h-6 rounded-full overflow-hidden flex">
+<div class="bg-primary h-full rounded-l-full" style="width: 32%"></div>
+</div>
+</div>
+<!-- Driver 2 -->
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-bold text-slate-700 dark:text-slate-300">Unquoted Extras (Servicios Adicionales)</span>
+<span class="font-black text-primary">$14.388.000 (22%)</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-700 h-6 rounded-full overflow-hidden flex">
+<div class="bg-primary/80 h-full" style="width: 22%"></div>
+</div>
+</div>
+<!-- Driver 3 -->
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-bold text-slate-700 dark:text-slate-300">Commercial Discounts (Exceso de Desc.)</span>
+<span class="font-black text-primary">$13.080.000 (20%)</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-700 h-6 rounded-full overflow-hidden flex">
+<div class="bg-primary/60 h-full" style="width: 20%"></div>
+</div>
+</div>
+<!-- Driver 4 -->
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-bold text-slate-700 dark:text-slate-300">Volume Mix Shift (Efecto Mix Negativo)</span>
+<span class="font-black text-primary">$10.464.000 (16%)</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-700 h-6 rounded-full overflow-hidden flex">
+<div class="bg-primary/40 h-full" style="width: 16%"></div>
+</div>
+</div>
+<!-- Driver 5 -->
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-bold text-slate-700 dark:text-slate-300">Payment Terms (Condiciones de Pago)</span>
+<span class="font-black text-primary">$6.540.000 (10%)</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-700 h-6 rounded-full overflow-hidden flex">
+<div class="bg-primary/20 h-full" style="width: 10%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Governance & Action Section -->
+<div class="flex flex-col gap-6">
+<!-- Triggered Action Box -->
+<div class="bg-danger/10 border border-danger/20 p-6 rounded-xl relative overflow-hidden flex-1">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-8xl text-danger">error</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-danger">gavel</span>
+<h3 class="font-black text-danger uppercase tracking-tight">Acción Disparada (Governance)</h3>
+</div>
+<p class="text-slate-900 dark:text-white text-lg font-bold leading-tight mb-4">
+                            ⚠️ ALERTA DE MARGEN CRÍTICA
+                        </p>
+<div class="space-y-4">
+<div class="p-4 bg-white/80 dark:bg-slate-900/80 rounded-lg border border-danger/10">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Threshold Excedido</p>
+<p class="text-sm font-medium">Leakage actual (5,4%) supera el umbral máximo de <span class="text-danger font-bold">5,0%</span> definido para Aceros del Sur.</p>
+</div>
+<div class="p-4 bg-danger text-white rounded-lg shadow-lg">
+<p class="text-xs font-black uppercase mb-1 opacity-80">Requerimiento Inmediato</p>
+<p class="text-sm font-bold">Emergency Margin Review Meeting requerida con Gerencia Comercial dentro de las próximas 48 horas.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Strategic Summary -->
+<div class="bg-primary p-6 rounded-xl text-white">
+<h3 class="font-black mb-4">Focus del Periodo</h3>
+<ul class="space-y-3">
+<li class="flex gap-3 text-sm">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+<span>Ajustar Política de Fletes para RM y Biobío.</span>
+</li>
+<li class="flex gap-3 text-sm">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+<span>Revisar Lista de Precios en SKU-045.</span>
+</li>
+<li class="flex gap-3 text-sm">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+<span>Capacitación en Negociación de Extras.</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Detail Grid: Top Leaking SKUs & Customers -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Top 5 Leaking SKUs -->
+<div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+<div class="p-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
+<h3 class="font-black text-slate-900 dark:text-white">Top 5 Leaking SKUs</h3>
+<span class="text-xs font-bold text-primary">Análisis por Producto</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 dark:bg-slate-900/50 text-slate-500 uppercase text-[10px] font-bold">
+<tr>
+<th class="px-6 py-4">Producto (SKU)</th>
+<th class="px-6 py-4">Leakage $</th>
+<th class="px-6 py-4">Root Cause Tag</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+<tr>
+<td class="px-6 py-4 font-bold">Tubo estructural cuadrado (SKU-045)</td>
+<td class="px-6 py-4 text-danger font-black">$4.200.000</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300">Outdated List Price</span>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-bold">Plancha Laminada 2mm</td>
+<td class="px-6 py-4 text-danger font-black">$3.850.000</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300">Freight Subsidies</span>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-bold">Perfil C Zinc-Alum 0.8mm</td>
+<td class="px-6 py-4 text-danger font-black">$2.900.000</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300">Volume Mix Shift</span>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-bold">Ángulo de Acero 40x40</td>
+<td class="px-6 py-4 text-danger font-black">$2.100.000</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300">Unquoted Extras</span>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-bold">Viga IPE 100</td>
+<td class="px-6 py-4 text-danger font-black">$1.850.000</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300">Commercial Discounts</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Top 5 Leaking Customers -->
+<div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+<div class="p-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
+<h3 class="font-black text-slate-900 dark:text-white">Top 5 Leaking Customers</h3>
+<span class="text-xs font-bold text-primary">Análisis por Cliente</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 dark:bg-slate-900/50 text-slate-500 uppercase text-[10px] font-bold">
+<tr>
+<th class="px-6 py-4">Cliente / Cuenta</th>
+<th class="px-6 py-4">Leakage $</th>
+<th class="px-6 py-4">Root Cause Tag</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+<tr>
+<td class="px-6 py-4 font-bold">Industrias Varias S.A.</td>
+<td class="px-6 py-4 text-danger font-black">$7.500.000</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300">Excessive Discounts</span>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-bold">Constructora Del Norte</td>
+<td class="px-6 py-4 text-danger font-black">$5.200.000</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300">Freight Subsidies</span>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-bold">Maestranza Central SpA</td>
+<td class="px-6 py-4 text-danger font-black">$4.800.000</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300">Payment Terms</span>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-bold">Acero-Tech Ltda</td>
+<td class="px-6 py-4 text-danger font-black">$3.900.000</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300">Unquoted Extras</span>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-bold">Logística Integral Sur</td>
+<td class="px-6 py-4 text-danger font-black">$2.150.000</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300">Commercial Discounts</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Strategic Action Bar -->
+<div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-wrap gap-4 items-center justify-center md:justify-end pb-12">
+<button class="flex items-center gap-2 px-6 py-3 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg font-bold hover:bg-slate-300 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span>Set Alert Thresholds</span>
+</button>
+<button class="flex items-center gap-2 px-6 py-3 bg-secondary text-white rounded-lg font-bold hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">event</span>
+<span>Schedule Root Cause Workshop</span>
+</button>
+<button class="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-bold shadow-lg hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined">description</span>
+<span>Download Executive Summary (PDF)</span>
+</button>
+</div>
+</main>
+<footer class="bg-white dark:bg-[#1a110c] border-t border-slate-200 dark:border-slate-800 py-6">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-2 opacity-50">
+<span class="material-symbols-outlined text-sm">copyright</span>
+<span class="text-xs font-bold uppercase tracking-widest">CARO CONSULTING 2024</span>
+</div>
+<div class="flex gap-6">
+<a class="text-xs font-bold text-slate-400 hover:text-primary uppercase" href="#">Metodología</a>
+<a class="text-xs font-bold text-slate-400 hover:text-primary uppercase" href="#">Soporte Analítico</a>
+<a class="text-xs font-bold text-slate-400 hover:text-primary uppercase" href="#">Data Governance</a>
+</div>
+</div>
+</footer>
+</body></html>

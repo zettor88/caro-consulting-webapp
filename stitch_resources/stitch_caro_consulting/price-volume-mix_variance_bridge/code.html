@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PVM Variance Bridge Dashboard | CARO CONSULTING</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                        "corp-blue": "#1F4E78",
+                        "success": "#28A745",
+                        "danger": "#DC3545",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .waterfall-bar { transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen text-slate-800 dark:text-slate-100 font-display">
+<div class="flex flex-col min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 py-3">
+<div class="max-w-[1400px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="bg-primary text-white p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-xl font-bold">analytics</span>
+</div>
+<h1 class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white uppercase">CARO CONSULTING</h1>
+</div>
+<div class="h-6 w-px bg-slate-300 dark:bg-slate-700 mx-2"></div>
+<div class="hidden md:flex flex-col">
+<span class="text-xs font-semibold text-primary uppercase tracking-wider">Fase 3: Modelamiento Analítico</span>
+<span class="text-sm font-medium text-slate-500">Aceros del Sur SpA</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Q3 2024 Actualizado</span>
+</div>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="size-9 rounded-full bg-corp-blue flex items-center justify-center text-white font-bold text-sm border-2 border-white dark:border-slate-800 shadow-sm">
+                        JD
+                    </div>
+</div>
+</div>
+</header>
+<main class="flex-grow p-6 lg:p-10 max-w-[1400px] mx-auto w-full">
+<!-- Header Section -->
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Price-Volume-Mix (PVM) Variance Bridge</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Análisis de Variación de Contribución Marginal vs. Trimestre Anterior</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-xl text-sm font-bold shadow-sm hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined text-lg">download</span>
+                        Exportar Reporte
+                    </button>
+<button class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold shadow-md shadow-primary/20 hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-lg">filter_alt</span>
+                        Filtros
+                    </button>
+</div>
+</div>
+<!-- KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Margen Actual</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-slate-900 dark:text-white">$216.0MM</span>
+<span class="text-xs font-bold text-slate-400">Actual Q3</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Margen Anterior (Target)</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-slate-900 dark:text-white">$200.0MM</span>
+<span class="text-xs font-bold text-slate-400">Base Q2</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 border-l-4 border-l-success">
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Variación Total</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-success">+$16.0MM</span>
+<span class="bg-success/10 text-success text-sm font-bold px-2 py-0.5 rounded-full">+8.0%</span>
+</div>
+</div>
+</div>
+<!-- Waterfall Chart Section -->
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8">
+<div class="lg:col-span-3 bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-8 flex items-center gap-2">
+<span class="material-symbols-outlined text-corp-blue">waterfall_chart</span>
+                        Descomposición de Variación de Margen ($MM)
+                    </h3>
+<div class="relative h-72 flex items-end justify-between gap-4 px-4">
+<!-- Y-Axis Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none border-b border-slate-200 dark:border-slate-700">
+<div class="w-full border-t border-slate-100 dark:border-slate-700/50"></div>
+<div class="w-full border-t border-slate-100 dark:border-slate-700/50"></div>
+<div class="w-full border-t border-slate-100 dark:border-slate-700/50"></div>
+<div class="w-full border-t border-slate-100 dark:border-slate-700/50"></div>
+</div>
+<!-- Bar 1: Base -->
+<div class="flex-1 flex flex-col items-center group relative h-full justify-end">
+<div class="w-full bg-corp-blue rounded-t-lg h-[80%] flex items-center justify-center text-white text-xs font-bold shadow-lg">
+                                $200.0
+                            </div>
+<p class="absolute -bottom-10 text-center text-[11px] font-bold text-slate-500 uppercase leading-tight mt-2">Base Periodo<br/>Anterior</p>
+</div>
+<!-- Bar 2: Price Effect -->
+<div class="flex-1 flex flex-col items-center group relative h-full justify-end pb-[80%]">
+<div class="w-full bg-success rounded-lg h-[5%] flex items-center justify-center text-white text-[10px] font-bold shadow-md">
+                                +12.5
+                            </div>
+<p class="absolute -bottom-10 text-center text-[11px] font-bold text-success uppercase leading-tight mt-2">Efecto<br/>Precio</p>
+</div>
+<!-- Bar 3: Volume Effect -->
+<div class="flex-1 flex flex-col items-center group relative h-full justify-end pb-[85%]">
+<div class="w-full bg-success rounded-lg h-[3.2%] flex items-center justify-center text-white text-[10px] font-bold shadow-md">
+                                +8.0
+                            </div>
+<p class="absolute -bottom-10 text-center text-[11px] font-bold text-success uppercase leading-tight mt-2">Efecto<br/>Volumen</p>
+</div>
+<!-- Bar 4: Mix Effect -->
+<div class="flex-1 flex flex-col items-center group relative h-full justify-end pb-[86.5%] translate-y-[2%]">
+<div class="w-full bg-danger rounded-lg h-[1.8%] flex items-center justify-center text-white text-[10px] font-bold shadow-md">
+                                -4.5
+                            </div>
+<p class="absolute -bottom-10 text-center text-[11px] font-bold text-danger uppercase leading-tight mt-2">Efecto<br/>Mix</p>
+</div>
+<!-- Bar 5: Final -->
+<div class="flex-1 flex flex-col items-center group relative h-full justify-end">
+<div class="w-full bg-corp-blue rounded-t-lg h-[86.5%] flex items-center justify-center text-white text-xs font-bold shadow-lg">
+                                $216.0
+                            </div>
+<p class="absolute -bottom-10 text-center text-[11px] font-bold text-slate-500 uppercase leading-tight mt-2">Margen<br/>Actual</p>
+</div>
+</div>
+<div class="mt-20 flex justify-center gap-6 text-xs font-medium text-slate-400">
+<div class="flex items-center gap-1.5"><span class="size-2 rounded-full bg-corp-blue"></span> Totales</div>
+<div class="flex items-center gap-1.5"><span class="size-2 rounded-full bg-success"></span> Impacto Positivo</div>
+<div class="flex items-center gap-1.5"><span class="size-2 rounded-full bg-danger"></span> Impacto Negativo</div>
+</div>
+</div>
+<!-- Strategic Insights (Governance) -->
+<div class="lg:col-span-1 flex flex-col gap-6">
+<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent flex-grow">
+<div class="flex items-center gap-2 text-primary mb-4">
+<span class="material-symbols-outlined font-bold">warning</span>
+<h4 class="font-bold uppercase tracking-wide text-sm">Alerta de Mix Negativo</h4>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                            El efecto mix está erosionando un <span class="font-bold text-danger">2.2% del margen potencial</span>. Se observa un desplazamiento de ventas hacia el segmento <strong>Carbono</strong> (bajo margen) en desmedro de <strong>Inox</strong>.
+                        </p>
+<div class="bg-white/50 dark:bg-slate-900/50 p-4 rounded-xl border border-primary/10">
+<p class="text-xs font-bold text-primary uppercase mb-2">Acción Disparada:</p>
+<p class="text-xs text-slate-500 leading-tight">
+                                Revisar incentivos de fuerza de ventas para priorizar SKUs de alto margen (Inox y Estructurales) antes del cierre de Q4.
+                            </p>
+</div>
+</div>
+<div class="bg-corp-blue text-white p-6 rounded-2xl shadow-xl flex flex-col justify-between">
+<p class="text-xs font-bold opacity-80 uppercase tracking-widest mb-4">Siguiente Paso Sugerido</p>
+<h4 class="text-lg font-bold leading-tight mb-4">Simular escenario de ajuste de precios en Familia Estructural.</h4>
+<button class="w-full bg-white text-corp-blue font-bold py-2 rounded-lg text-sm hover:bg-slate-100 transition-colors">
+                            Ir al Simulador
+                        </button>
+</div>
+</div>
+</div>
+<!-- Detailed Table Section -->
+<div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
+<h3 class="text-base font-bold text-slate-900 dark:text-white">Top Variaciones por Familia de Producto</h3>
+<div class="flex gap-4 text-xs font-semibold text-slate-400">
+<span class="flex items-center gap-1"><span class="size-2 rounded-full bg-primary/30"></span> P = Precio</span>
+<span class="flex items-center gap-1"><span class="size-2 rounded-full bg-primary/30"></span> V = Volumen</span>
+<span class="flex items-center gap-1"><span class="size-2 rounded-full bg-primary/30"></span> M = Mix</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-[10px] uppercase tracking-widest text-slate-400 border-b border-slate-100 dark:border-slate-700">
+<th class="px-6 py-4 font-bold">Familia</th>
+<th class="px-6 py-4 font-bold text-center">Volumen (Ton)</th>
+<th class="px-6 py-4 font-bold text-center">Ef. Precio ($MM)</th>
+<th class="px-6 py-4 font-bold text-center">Ef. Volumen ($MM)</th>
+<th class="px-6 py-4 font-bold text-center">Ef. Mix ($MM)</th>
+<th class="px-6 py-4 font-bold text-right">Var. Total</th>
+</tr>
+</thead>
+<tbody class="text-sm divide-y divide-slate-100 dark:divide-slate-700">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+<td class="px-6 py-4 font-bold text-slate-700 dark:text-slate-200">Aceros Inoxidables</td>
+<td class="px-6 py-4 text-center">1,250 <span class="text-success font-bold text-xs">↑ 12%</span></td>
+<td class="px-6 py-4 text-center text-success font-bold">+$9.2</td>
+<td class="px-6 py-4 text-center text-success font-bold">+$4.1</td>
+<td class="px-6 py-4 text-center text-danger font-bold">-$0.8</td>
+<td class="px-6 py-4 text-right font-black text-slate-900 dark:text-white">+$12.5MM</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+<td class="px-6 py-4 font-bold text-slate-700 dark:text-slate-200">Carbono / Comercial</td>
+<td class="px-6 py-4 text-center">4,800 <span class="text-success font-bold text-xs">↑ 18%</span></td>
+<td class="px-6 py-4 text-center text-success font-bold">+$2.1</td>
+<td class="px-6 py-4 text-center text-success font-bold">+$3.4</td>
+<td class="px-6 py-4 text-center text-danger font-bold">-$3.2</td>
+<td class="px-6 py-4 text-right font-black text-slate-900 dark:text-white">+$2.3MM</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+<td class="px-6 py-4 font-bold text-slate-700 dark:text-slate-200">Estructural</td>
+<td class="px-6 py-4 text-center">2,100 <span class="text-danger font-bold text-xs">↓ 4%</span></td>
+<td class="px-6 py-4 text-center text-success font-bold">+$1.2</td>
+<td class="px-6 py-4 text-center text-danger font-bold">-$0.5</td>
+<td class="px-6 py-4 text-center text-danger font-bold">-$0.5</td>
+<td class="px-6 py-4 text-right font-black text-slate-900 dark:text-white">+$0.2MM</td>
+</tr>
+</tbody>
+<tfoot>
+<tr class="bg-slate-50 dark:bg-slate-800/80 font-bold border-t border-slate-200 dark:border-slate-700">
+<td class="px-6 py-4 text-slate-900 dark:text-white">TOTAL CONSOLIDADO</td>
+<td class="px-6 py-4 text-center">8,150</td>
+<td class="px-6 py-4 text-center text-success">+$12.5</td>
+<td class="px-6 py-4 text-center text-success">+$8.0</td>
+<td class="px-6 py-4 text-center text-danger">-$4.5</td>
+<td class="px-6 py-4 text-right text-success text-lg">+$16.0MM</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark py-6 px-10 text-center text-slate-500 text-xs">
+<div class="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-4">
+<span class="font-bold text-slate-800 dark:text-slate-200">CARO CONSULTING 2024</span>
+<span class="h-4 w-px bg-slate-300 dark:bg-slate-700"></span>
+<span class="tracking-widest uppercase">Metodología de 5 Fases</span>
+</div>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Confidencialidad</a>
+<a class="hover:text-primary transition-colors" href="#">Soporte Estratégico</a>
+<a class="hover:text-primary transition-colors" href="#">Versión 1.4.2</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

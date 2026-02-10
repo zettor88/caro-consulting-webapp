@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Price Waterfall Executive Audit - Caro Consulting</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1f517a',
+            secondary: '#1F4E78',
+            danger: '#DC3545',
+            warning: '#f6ad55',
+          },
+          fontFamily: {
+            sans: ['Manrope', 'Arial', 'sans-serif'],
+          },
+          borderRadius: {
+            'eight': '8px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layout">
+    body {
+      background-color: #f8fafc;
+      font-family: 'Manrope', sans-serif;
+    }
+    .waterfall-bar {
+      transition: all 0.3s ease;
+    }
+    .waterfall-bar:hover {
+      filter: brightness(90%);
+    }
+  </style>
+</head>
+<body class="p-6 md:p-10">
+<!-- BEGIN: MainHeader -->
+<header class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-200 pb-6" data-purpose="header">
+<div>
+<h1 class="text-2xl font-extrabold text-primary tracking-tight">CARO CONSULTING</h1>
+<p class="text-sm font-medium text-slate-500 mt-1 uppercase tracking-widest">Pricing &amp; Rentabilidad | Fase 3: Modelamiento Analítico</p>
+</div>
+<div class="mt-4 md:mt-0 text-right">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold uppercase mb-2">
+        Nivel A - Diagnóstico
+      </div>
+<h2 class="text-lg font-bold text-slate-800">Price Waterfall Executive Audit</h2>
+<p class="text-xs text-slate-500">Cliente: Aceros del Sur SpA</p>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main class="max-w-7xl mx-auto space-y-8">
+<!-- BEGIN: KPI Cards Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-purpose="kpi-dashboard">
+<!-- Card 1 -->
+<div class="bg-white p-6 rounded-eight shadow-sm border border-slate-100" data-purpose="kpi-card">
+<p class="text-xs font-bold text-slate-500 uppercase">Precio Lista Promedio</p>
+<p class="text-2xl font-extrabold text-slate-900 mt-2">$100.000<span class="text-sm font-normal text-slate-400">/ton</span></p>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-6 rounded-eight shadow-sm border border-slate-100 relative overflow-hidden" data-purpose="kpi-card">
+<p class="text-xs font-bold text-slate-500 uppercase">Erosión Total</p>
+<div class="flex items-baseline gap-2 mt-2">
+<p class="text-2xl font-extrabold text-slate-900">11.5%</p>
+<span class="flex items-center text-xs font-bold text-warning px-2 py-0.5 bg-orange-50 rounded-full">Warning</span>
+</div>
+<div class="absolute bottom-0 left-0 h-1 w-full bg-warning"></div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-6 rounded-eight shadow-sm border border-slate-100" data-purpose="kpi-card">
+<p class="text-xs font-bold text-slate-500 uppercase">Margen Neto Promedio</p>
+<p class="text-2xl font-extrabold text-slate-900 mt-2">6.2%</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-primary text-white p-6 rounded-eight shadow-lg" data-purpose="kpi-card">
+<p class="text-xs font-bold text-blue-100 uppercase">Oportunidad de Recuperación</p>
+<p class="text-2xl font-extrabold mt-2">$18.5MM<span class="text-sm font-normal text-blue-200">/mes</span></p>
+<p class="text-[10px] mt-2 text-blue-200 opacity-80">*Si se reduce la erosión en 2pp</p>
+</div>
+</section>
+<!-- END: KPI Cards Section -->
+<!-- BEGIN: Waterfall Chart Section -->
+<section class="bg-white p-8 rounded-eight shadow-sm border border-slate-100" data-purpose="waterfall-visualization">
+<div class="flex justify-between items-center mb-10">
+<h3 class="text-lg font-bold text-slate-800">Descomposición de Precio (Price Waterfall)</h3>
+<span class="text-xs text-slate-400 font-medium italic">Valores expresados en USD/ton</span>
+</div>
+<!-- Waterfall Canvas Simulation with CSS/HTML -->
+<div class="relative h-80 w-full mt-12 flex items-end justify-between px-4 sm:px-10">
+<!-- Bar 1: Precio Lista -->
+<div class="flex flex-col items-center group w-1/6">
+<span class="text-xs font-bold mb-2">$100.000</span>
+<div class="w-16 sm:w-24 bg-primary rounded-t-sm h-64 waterfall-bar"></div>
+<span class="text-[10px] sm:text-xs font-bold text-slate-600 mt-3 text-center">Precio Lista</span>
+</div>
+<!-- Step 1: Desc. Volumen -->
+<div class="flex flex-col items-center group w-1/6 relative">
+<span class="text-xs font-bold mb-2 text-danger">-$5.000</span>
+<!-- Positioned relative to the fall -->
+<div class="w-16 sm:w-24 bg-danger opacity-80 rounded-sm h-[32px] waterfall-bar mb-[224px]"></div>
+<span class="text-[10px] sm:text-xs font-bold text-slate-400 mt-3 text-center absolute -bottom-8">Desc. Vol.</span>
+</div>
+<!-- Step 2: Desc. Pronto Pago -->
+<div class="flex flex-col items-center group w-1/6 relative">
+<span class="text-xs font-bold mb-2 text-danger">-$2.000</span>
+<div class="w-16 sm:w-24 bg-danger opacity-80 rounded-sm h-[13px] waterfall-bar mb-[211px]"></div>
+<span class="text-[10px] sm:text-xs font-bold text-slate-400 mt-3 text-center absolute -bottom-8">Pronto Pago</span>
+</div>
+<!-- Step 3: Desc. Comercial -->
+<div class="flex flex-col items-center group w-1/6 relative">
+<span class="text-xs font-bold mb-2 text-danger">-$3.000</span>
+<div class="w-16 sm:w-24 bg-danger opacity-80 rounded-sm h-[19px] waterfall-bar mb-[192px]"></div>
+<span class="text-[10px] sm:text-xs font-bold text-slate-400 mt-3 text-center absolute -bottom-8">Comercial</span>
+</div>
+<!-- Step 4: Bonificación -->
+<div class="flex flex-col items-center group w-1/6 relative">
+<span class="text-xs font-bold mb-2 text-danger">-$1.500</span>
+<div class="w-16 sm:w-24 bg-danger opacity-80 rounded-sm h-[10px] waterfall-bar mb-[182px]"></div>
+<span class="text-[10px] sm:text-xs font-bold text-slate-400 mt-3 text-center absolute -bottom-8">Bonific.</span>
+</div>
+<!-- Bar Final: Precio Neto -->
+<div class="flex flex-col items-center group w-1/6">
+<span class="text-xs font-bold mb-2 text-primary">$88.500</span>
+<div class="w-16 sm:w-24 bg-primary rounded-t-sm h-[182px] waterfall-bar"></div>
+<span class="text-[10px] sm:text-xs font-bold text-primary mt-3 text-center">Precio Neto</span>
+</div>
+<!-- Connector Lines Overlay (Simulated) -->
+<div class="absolute inset-0 pointer-events-none" style="z-index: 0;">
+<!-- These would be svg lines in a production app -->
+</div>
+</div>
+<div class="h-12"></div> <!-- Spacer for absolute labels -->
+</section>
+<!-- END: Waterfall Chart Section -->
+<!-- BEGIN: Detailed Table Section -->
+<section class="bg-white rounded-eight shadow-sm border border-slate-100 overflow-hidden" data-purpose="data-table-container">
+<div class="p-6 border-b border-slate-100">
+<h3 class="text-lg font-bold text-slate-800">Top 10 Clientes con Mayor Erosión</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse" id="erosion-table">
+<thead>
+<tr class="bg-slate-50 text-slate-600 text-xs font-bold uppercase tracking-wider">
+<th class="px-6 py-4">Cliente</th>
+<th class="px-6 py-4">Ventas ($)</th>
+<th class="px-6 py-4 text-center">% Erosión</th>
+<th class="px-6 py-4 text-center">Margen Neto (%)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 text-sm">
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-semibold text-slate-800">Minera Pacífico</td>
+<td class="px-6 py-4 text-slate-600">$450.000.000</td>
+<td class="px-6 py-4 text-center">
+<span class="px-2 py-1 bg-green-100 text-green-700 rounded-md text-xs font-bold">8%</span>
+</td>
+<td class="px-6 py-4 text-center text-slate-600 font-medium">9.5%</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-semibold text-slate-800">Constructora Andina</td>
+<td class="px-6 py-4 text-slate-600">$320.000.000</td>
+<td class="px-6 py-4 text-center">
+<span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-md text-xs font-bold">14%</span>
+</td>
+<td class="px-6 py-4 text-center text-slate-600 font-medium">5.1%</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors bg-red-50/30">
+<td class="px-6 py-4 font-semibold text-slate-800">Industrias Varias</td>
+<td class="px-6 py-4 text-slate-600">$210.000.000</td>
+<td class="px-6 py-4 text-center">
+<span class="px-2 py-1 bg-red-100 text-red-700 rounded-md text-xs font-bold">19%</span>
+</td>
+<td class="px-6 py-4 text-center text-red-600 font-bold">2.4%</td>
+</tr>
+<!-- Placeholder rows for "Top 10" visualization -->
+<tr class="hover:bg-slate-50 transition-colors opacity-60">
+<td class="px-6 py-4 font-semibold text-slate-800">Aceros Global S.A.</td>
+<td class="px-6 py-4 text-slate-600">$185.000.000</td>
+<td class="px-6 py-4 text-center">11%</td>
+<td class="px-6 py-4 text-center text-slate-600 font-medium">6.8%</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors opacity-60">
+<td class="px-6 py-4 font-semibold text-slate-800">Distribuidora Norte</td>
+<td class="px-6 py-4 text-slate-600">$142.000.000</td>
+<td class="px-6 py-4 text-center">10%</td>
+<td class="px-6 py-4 text-center text-slate-600 font-medium">7.2%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- END: Detailed Table Section -->
+<!-- BEGIN: Action Section Footer -->
+<footer class="bg-slate-900 text-white p-8 rounded-eight shadow-xl" data-purpose="action-disparada-section">
+<div class="flex items-start gap-6">
+<div class="bg-primary p-3 rounded-lg hidden sm:block">
+<!-- Icon placeholder for Action -->
+<svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<h4 class="text-xl font-extrabold flex items-center gap-2">
+<span class="inline-block sm:hidden text-primary">●</span>
+            Acción Disparada
+          </h4>
+<p class="mt-3 text-slate-300 leading-relaxed max-w-3xl">
+            Implementar política de aprobaciones para descuentos <span class="text-white font-bold">&gt;15% (Nivel B)</span>. 
+            Auditar inmediatamente las excepciones de <span class="text-white font-bold underline decoration-danger underline-offset-4 cursor-pointer">'Industrias Varias'</span> para regularizar márgenes críticos.
+          </p>
+<div class="mt-6 flex gap-4">
+<button class="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-eight text-sm font-bold transition-all shadow-md">
+              Generar Protocolo de Aprobación
+            </button>
+<button class="bg-transparent border border-slate-700 hover:bg-slate-800 text-slate-300 px-5 py-2.5 rounded-eight text-sm font-bold transition-all">
+              Ver Detalle Cliente
+            </button>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: Action Section Footer -->
+</main>
+<!-- JavaScript for minor interactivity -->
+<script data-purpose="event-handlers">
+    // Simple alert simulation for table rows
+    document.querySelectorAll('#erosion-table tbody tr').forEach(row => {
+      row.addEventListener('click', () => {
+        console.log('Fila de cliente seleccionada para mayor análisis');
+      });
+    });
+  </script>
+</body></html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SKU Rationalization Optimizer - Aceros del Sur SpA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#ec5b13",
+              "background-light": "#f8f6f6",
+              "background-dark": "#221610",
+              "steel-blue": "#1F4E78",
+              "success-green": "#28A745",
+              "danger-red": "#DC3545",
+            },
+            fontFamily: {
+              "display": ["Public Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .matrix-grid {
+            background-image: radial-gradient(circle, #3d2c24 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-gray-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between border-b border-white/10 bg-background-dark/95 backdrop-blur-md px-6 md:px-12 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-white">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">architecture</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-white text-md font-bold leading-tight tracking-tight">Aceros del Sur SpA</h2>
+<span class="text-[10px] uppercase tracking-widest text-primary font-bold">Caro Consulting Style</span>
+</div>
+</div>
+<nav class="hidden lg:flex items-center gap-6 ml-8">
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors border-b-2 border-primary pb-1" href="#">Modelamiento</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="#">Portafolio</a>
+<a class="text-white/70 hover:text-primary text-sm font-medium transition-colors" href="#">Reportes</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center bg-white/5 rounded-xl px-3 py-1.5 border border-white/10">
+<span class="material-symbols-outlined text-gray-400 text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-white placeholder:text-gray-500 w-40" placeholder="Buscar SKU..." type="text"/>
+</div>
+<button class="p-2 text-gray-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary/20 border border-primary/40 overflow-hidden" data-alt="Profile picture of a project manager">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD35FhGTSnRdSr5Q5inXl40yCRgIWlLZO-MMMfavl_0Eik3P_Wjrs2Y7iC-Eq2DMKIJ5YH7eF5rKb8Pa9cKQ_aIbYmfrn3m9WlBRX8SigyTEl_Bayrn81-YbZ8aLv8pYw1RjqOCS_i6aApL_fqs1e5HWcZ3HKHy3GT5R4Z5O3gYBts6b1EbHDELjBrCuokZXzXwnEKekVu7QJA574C_-wjjDdOGfrqhjN5Bg0kHVW4KcWhUGShSZSgAuIDFZSOaGzUTHc4xTOx-qUY0"/>
+</div>
+</div>
+</header>
+<main class="flex-1 p-6 md:p-10 max-w-[1600px] mx-auto w-full">
+<!-- Breadcrumbs & Title -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+<div>
+<div class="flex items-center gap-2 text-xs font-semibold text-primary uppercase tracking-widest mb-2">
+<span>PM-A Auditoria</span>
+<span class="text-gray-600">/</span>
+<span>Fase 3: Modelamiento Analítico</span>
+</div>
+<h1 class="text-3xl md:text-4xl font-black text-white tracking-tight">SKU Rationalization Optimizer</h1>
+<p class="text-gray-400 mt-1">Gestión Estratégica de Portafolio para Optimización de Margen.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white text-sm font-bold transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+                        Exportar PDF
+                    </button>
+<button class="flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-xl text-sm font-bold shadow-lg shadow-primary/20 transition-all">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+                        Ejecutar Simulación
+                    </button>
+</div>
+</div>
+<!-- KPI Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+<div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-primary/40 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-500/10 rounded-lg text-blue-400">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<span class="text-success-green text-xs font-bold flex items-center">
+<span class="material-symbols-outlined text-xs mr-1">trending_up</span> +5%
+                        </span>
+</div>
+<p class="text-gray-400 text-sm font-medium">SKUs Totales Analizados</p>
+<h3 class="text-3xl font-black text-white mt-1">320</h3>
+</div>
+<div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-danger-red/40 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-danger-red/10 rounded-lg text-danger-red">
+<span class="material-symbols-outlined">delete_sweep</span>
+</div>
+<span class="text-danger-red text-xs font-bold flex items-center">
+<span class="material-symbols-outlined text-xs mr-1">warning</span> Crítico
+                        </span>
+</div>
+<p class="text-gray-400 text-sm font-medium">SKUs para Racionalizar</p>
+<h3 class="text-3xl font-black text-white mt-1">38</h3>
+</div>
+<div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-success-green/40 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-success-green/10 rounded-lg text-success-green">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-success-green text-xs font-bold flex items-center">
+<span class="material-symbols-outlined text-xs mr-1">add</span> Potencial
+                        </span>
+</div>
+<p class="text-gray-400 text-sm font-medium">Recuperación de Utilidad</p>
+<h3 class="text-3xl font-black text-white mt-1">$12.5M</h3>
+</div>
+<div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-primary/40 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">pie_chart</span>
+</div>
+<span class="text-gray-400 text-xs font-bold uppercase tracking-tighter">Pareto 80/20</span>
+</div>
+<p class="text-gray-400 text-sm font-medium">Concentración de Margen</p>
+<h3 class="text-3xl font-black text-white mt-1">85%</h3>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<!-- Matrix Chart Section -->
+<div class="xl:col-span-2 flex flex-col gap-6">
+<div class="bg-white/5 border border-white/10 rounded-3xl p-8 h-full">
+<div class="flex justify-between items-center mb-10">
+<div>
+<h3 class="text-xl font-bold text-white">Matriz de Portafolio Estratégico</h3>
+<p class="text-sm text-gray-400">Volumen de Venta vs. Margen Bruto %</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-success-green"></span>
+<span class="text-[10px] text-gray-400 font-bold uppercase">Estrellas</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-danger-red"></span>
+<span class="text-[10px] text-gray-400 font-bold uppercase">Racionalización</span>
+</div>
+</div>
+</div>
+<!-- 2x2 Matrix Placeholder -->
+<div class="relative w-full aspect-video md:aspect-[21/9] matrix-grid border-l-2 border-b-2 border-gray-600 mb-4">
+<!-- Y-axis Label -->
+<div class="absolute -left-12 top-1/2 -rotate-90 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Margen Bruto (%)</div>
+<!-- X-axis Label -->
+<div class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Volumen de Ventas (Ton)</div>
+<!-- Quadrant Dividers -->
+<div class="absolute left-1/2 top-0 bottom-0 border-l border-white/10 border-dashed"></div>
+<div class="absolute top-1/2 left-0 right-0 border-t border-white/10 border-dashed"></div>
+<!-- Quadrant Labels -->
+<div class="absolute top-4 right-4 text-success-green/40 font-black text-xl uppercase tracking-tighter">Estrellas</div>
+<div class="absolute top-4 left-4 text-steel-blue/40 font-black text-xl uppercase tracking-tighter">Estratégicos</div>
+<div class="absolute bottom-4 left-4 text-danger-red/40 font-black text-xl uppercase tracking-tighter">Candidatos a Racionalización</div>
+<div class="absolute bottom-4 right-4 text-primary/40 font-black text-xl uppercase tracking-tighter">Commodities</div>
+<!-- Bubbles -->
+<div class="absolute top-[20%] right-[25%] size-12 bg-success-green/40 border-2 border-success-green rounded-full flex items-center justify-center backdrop-blur-sm cursor-help hover:scale-110 transition-transform">
+<span class="text-[10px] font-bold text-white">SKU-88</span>
+</div>
+<div class="absolute top-[15%] right-[10%] size-8 bg-success-green/40 border-2 border-success-green rounded-full flex items-center justify-center backdrop-blur-sm"></div>
+<div class="absolute top-[65%] left-[15%] size-14 bg-danger-red/60 border-2 border-danger-red rounded-full flex items-center justify-center backdrop-blur-sm cursor-help hover:scale-110 transition-transform shadow-lg shadow-danger-red/20">
+<span class="text-[10px] font-bold text-white text-center px-1 leading-tight">CRÍTICO<br/>SKU-102</span>
+</div>
+<div class="absolute top-[80%] left-[30%] size-6 bg-danger-red/40 border-2 border-danger-red rounded-full"></div>
+<div class="absolute top-[25%] left-[20%] size-10 bg-steel-blue/40 border-2 border-steel-blue rounded-full"></div>
+<div class="absolute top-[75%] right-[20%] size-10 bg-primary/40 border-2 border-primary rounded-full"></div>
+</div>
+</div>
+<!-- Bottom 10 Table -->
+<div class="bg-white/5 border border-white/10 rounded-3xl overflow-hidden">
+<div class="p-6 border-b border-white/10 flex justify-between items-center">
+<h3 class="text-lg font-bold text-white">Bottom 10 SKUs para Racionalización</h3>
+<span class="text-xs bg-danger-red/20 text-danger-red px-2 py-1 rounded font-bold">Acción Requerida</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-white/5 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+<tr>
+<th class="px-6 py-4">Código SKU</th>
+<th class="px-6 py-4">Descripción Producto</th>
+<th class="px-6 py-4">Margen %</th>
+<th class="px-6 py-4">Días sin Venta</th>
+<th class="px-6 py-4 text-right">Recomendación</th>
+</tr>
+</thead>
+<tbody class="text-sm divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-mono text-gray-300">AS-9022-X</td>
+<td class="px-6 py-4 text-white">Viga Acero H-Beam 12" Estándar</td>
+<td class="px-6 py-4 text-danger-red font-bold">-2.4%</td>
+<td class="px-6 py-4 text-gray-400">182 días</td>
+<td class="px-6 py-4 text-right">
+<span class="px-3 py-1 bg-danger-red text-white text-[10px] font-black rounded-full uppercase tracking-tighter">Eliminar</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-mono text-gray-300">AS-1140-B</td>
+<td class="px-6 py-4 text-white">Pletina 50x5mm SAE 1020</td>
+<td class="px-6 py-4 text-gray-300 font-bold">1.8%</td>
+<td class="px-6 py-4 text-gray-400">145 días</td>
+<td class="px-6 py-4 text-right">
+<span class="px-3 py-1 bg-primary text-white text-[10px] font-black rounded-full uppercase tracking-tighter">Liquidar Stock</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-mono text-gray-300">AS-7731-K</td>
+<td class="px-6 py-4 text-white">Plancha Zincada 0.4mm acanalada</td>
+<td class="px-6 py-4 text-gray-300 font-bold">4.2%</td>
+<td class="px-6 py-4 text-gray-400">98 días</td>
+<td class="px-6 py-4 text-right">
+<span class="px-3 py-1 bg-steel-blue text-white text-[10px] font-black rounded-full uppercase tracking-tighter">Revisar Precio</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-mono text-gray-300">AS-0021-M</td>
+<td class="px-6 py-4 text-white">Tubular Cuadrado 100x100x4mm</td>
+<td class="px-6 py-4 text-danger-red font-bold">-0.5%</td>
+<td class="px-6 py-4 text-gray-400">210 días</td>
+<td class="px-6 py-4 text-right">
+<span class="px-3 py-1 bg-danger-red text-white text-[10px] font-black rounded-full uppercase tracking-tighter">Eliminar</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-white/5 text-center">
+<button class="text-xs font-bold text-primary hover:underline">Ver todos los SKUs críticos (38)</button>
+</div>
+</div>
+</div>
+<!-- Governance Section (Sidebar) -->
+<div class="flex flex-col gap-8">
+<!-- Acción Disparada Box -->
+<div class="bg-primary/10 border-2 border-primary/30 rounded-3xl p-8 relative overflow-hidden group">
+<div class="absolute -right-8 -top-8 size-32 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/40 transition-all"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">bolt</span>
+<h3 class="text-xl font-black text-white uppercase tracking-tight">Acción Disparada</h3>
+</div>
+<h4 class="text-lg font-bold text-white mb-2">Plan de Limpieza de Portafolio</h4>
+<p class="text-sm text-gray-400 mb-8 leading-relaxed">Se ha detectado una oportunidad de recuperación de capital de trabajo por descontinuación de productos obsoletos.</p>
+<div class="space-y-3">
+<button class="w-full flex items-center justify-center gap-3 bg-primary hover:bg-primary/90 text-white font-black py-4 rounded-xl transition-all shadow-xl shadow-primary/20">
+<span class="material-symbols-outlined">file_export</span>
+                                    Exportar Listado
+                                </button>
+<button class="w-full flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 text-white font-bold py-4 rounded-xl border border-white/10 transition-all">
+<span class="material-symbols-outlined text-sm">mail</span>
+                                    Notificar a Compras
+                                </button>
+</div>
+</div>
+</div>
+<!-- Ritual Box -->
+<div class="bg-white/5 border border-white/10 rounded-3xl p-8">
+<div class="flex items-center gap-4 mb-6">
+<div class="size-12 bg-steel-blue/20 rounded-2xl flex items-center justify-center text-steel-blue">
+<span class="material-symbols-outlined">event_repeat</span>
+</div>
+<div>
+<h4 class="text-md font-bold text-white">Ritual de Gobernanza</h4>
+<p class="text-xs text-gray-500 font-bold uppercase tracking-widest">Q3 Protocol</p>
+</div>
+</div>
+<div class="p-5 bg-background-dark/50 rounded-2xl border border-white/5 mb-6">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold text-gray-400 uppercase tracking-tighter">Próximo Evento</span>
+<span class="text-[10px] bg-success-green/20 text-success-green px-2 py-0.5 rounded-full font-bold">Confirmado</span>
+</div>
+<h5 class="text-white font-bold text-lg leading-tight">Comité de Racionalización Trimestral</h5>
+<div class="flex items-center gap-4 mt-4 text-xs text-gray-400 font-medium">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                                    15 Oct, 2023
+                                </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span>
+                                    10:00 AM
+                                </div>
+</div>
+</div>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5">check_circle</span>
+<span class="text-xs text-gray-300 leading-relaxed">Revisión de impacto financiero por categoría.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5">check_circle</span>
+<span class="text-xs text-gray-300 leading-relaxed">Validación de SKUs "Estratégicos" con área comercial.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5">check_circle</span>
+<span class="text-xs text-gray-300 leading-relaxed">Firma de acta de descontinuación masiva.</span>
+</li>
+</ul>
+</div>
+<!-- Team Status -->
+<div class="bg-white/5 border border-white/10 rounded-3xl p-6 flex items-center justify-between">
+<div class="flex -space-x-3 overflow-hidden" data-alt="Avatars of the rationalization committee members">
+<img alt="User 1" class="inline-block h-8 w-8 rounded-full ring-2 ring-background-dark object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-L-a4oZ_mVvFJkuBtdN_TuPmnaSWKb1U9EHVxpZr6vVQNkoJD2W9p1AserNXDtjrfGOvrnJABp4aQkDaibfS5IQbmqfICXvCL2g7iosB_BI3bHRsdISSD_8Urfm9XZvgc8CAYovzjacgE_OxFDJlMWN29E438zQhHOYFchuvauIriQCW5yjW4aUWooh1zTc_CBJK2g1WKJ-lrIxgK0BffCbsF7KZrH1YKd4OBWa9axFYI1W5g_BVPjplFTimfABFB_tbSBl-DGkdp"/>
+<img alt="User 2" class="inline-block h-8 w-8 rounded-full ring-2 ring-background-dark object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeVsqVjByzptw7E6dI6T8wYCHzpJmRAaUERAeM-nTFef_VD9seWLBZH7TJq7EJlhvYa8P_je96etTS7GchfpV4WEVl01RBCH_HSIg7NaHa4fIAowTVIB4eQxYiFrI1H6Qa8poZ6HNQoRUQea4fQe7xQ5JXqBN3HBlxRL0KNGfLpi1ECgVyGfNPslMogYleMSm57TwEAaHav_RFHQtKlxkVo6SQf3F-_gXLXcllagf80AteOK33xsiLj0Zw3nleuKMAo0nFdBbZi88J"/>
+<img alt="User 3" class="inline-block h-8 w-8 rounded-full ring-2 ring-background-dark object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUY1Pd5gULHT7FOKwuzUhs3hOT34N4SvTBISPlbCKfQnSUP-Qsb2U2hC6o89awJm_J9Sx92AAchWFBZHX1Ft89xQiPIGNvB46RqobJCo-7Vmrk1dMXWAF05D-fiSck3yWMlymoOIYLYAHlklfxjAjBJwOLKsKrHjk6ATuF98CA6ESwqUkcrMOhhfsUisN80_T78AM9gzT6Z0wKq4gt8Molt9IicYTkA154xbpx3JI_V-55WA6GyrKY1owmmcoPAfwyxLJgdG43xtQh"/>
+<div class="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-[10px] font-bold text-white ring-2 ring-background-dark">+5</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold text-gray-500 uppercase">Estado Comité</p>
+<p class="text-xs font-bold text-success-green">Quorum Alcanzado</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer / System Info -->
+<footer class="mt-auto px-10 py-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 bg-background-dark">
+<div class="flex items-center gap-6 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+<span class="text-primary">System Online</span>
+<span>Last Sync: 10 mins ago</span>
+<span>Database: SAP HANA ERP</span>
+</div>
+<p class="text-[10px] text-gray-600 font-medium">© 2023 Aceros del Sur SpA. Auditoría Analítica Caro Consulting.</p>
+</footer>
+</div>
+</body></html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Executive Dashboard - Aceros del Sur SpA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 min-h-screen">
+<!-- Header / Navbar -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-16">
+<!-- Brand -->
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-2xl">leaderboard</span>
+</div>
+<div>
+<h1 class="text-lg font-black tracking-tight text-slate-900 dark:text-white leading-none">CARO CONSULTING</h1>
+<p class="text-[10px] font-bold uppercase tracking-widest text-primary">FP&amp;A Advisory</p>
+</div>
+</div>
+<!-- Center: View Title -->
+<div class="hidden md:block">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                        CEO / CFO Executive View
+                    </span>
+</div>
+<!-- Profile & Actions -->
+<div class="flex items-center gap-4">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-slate-900 dark:text-white">Aceros del Sur SpA</p>
+<p class="text-[10px] text-slate-500">Actualizado: Oct 2024</p>
+</div>
+<div class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile picture of an executive" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMf5s8MiyHhbenUhVoxDhd7TY_X9DAr-jVKKigIywPFYNgyaPWpIgJDNXzoLdb9rZVldtQ5z2s6W51mS0AI25Py_9aIgi5mL_zYWRxK7SWuoL_hJJSg_4pJA2tu5OJm8k139oSgW-e8MwvfTKJMoPTiGG0uFEePVcHRlciZesuFxMLbpVRkEcwvvJvsHb0KtOjLZLL2dXyE67mbsgm6aDBD6iygBmmDAdrFIV7G-9vyaHhSt2ZsjyP0i_Jru5v2Pfs7Q1Dc_1Hay9z"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<!-- Dashboard Intro -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Control de Gestión</h2>
+<p class="text-slate-500 dark:text-slate-400 max-w-lg">Implementación Nivel CG-B: Monitoreo estratégico de rentabilidad y liquidez operativa.</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-sm">calendar_month</span>
+                    YTD 2024
+                </button>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 hover:opacity-90 transition-opacity shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">download</span>
+                    Reporte PDF
+                </button>
+</div>
+</div>
+<!-- Section 1: Main Scorecard -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<!-- EBITDA Card -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Margen EBITDA</p>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">finance_chip</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-black text-slate-900 dark:text-white">18.5%</h3>
+<span class="text-red-500 text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-xs">arrow_downward</span> 3.5%
+                    </span>
+</div>
+<p class="text-xs text-slate-400 mt-1 italic">Meta: 22.0%</p>
+<div class="mt-4 w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-red-500 h-full w-[84%]"></div>
+</div>
+</div>
+<!-- Working Capital Card -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Capital de Trabajo</p>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">account_balance_wallet</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-black text-slate-900 dark:text-white">$4.2M</h3>
+<span class="text-slate-500 text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-xs">remove</span> 1.2%
+                    </span>
+</div>
+<p class="text-xs text-slate-400 mt-1 italic">Presupuesto: $4.15M</p>
+<div class="mt-4 w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[98%]"></div>
+</div>
+</div>
+<!-- Revenue Card -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Ingresos vs Presup.</p>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">monetization_on</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-black text-slate-900 dark:text-white">$12.8M</h3>
+<span class="text-green-500 text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-xs">arrow_upward</span> 5.0%
+                    </span>
+</div>
+<p class="text-xs text-slate-400 mt-1 italic">Presupuesto: $12.2M</p>
+<div class="mt-4 w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full w-full"></div>
+</div>
+</div>
+<!-- Cash Flow Card -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<p class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Flujo de Caja Op.</p>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">payments</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-black text-slate-900 dark:text-white">$1.1M</h3>
+<span class="text-red-500 text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-xs">arrow_downward</span> 8.0%
+                    </span>
+</div>
+<p class="text-xs text-slate-400 mt-1 italic">Alerta: Bajo Umbral</p>
+<div class="mt-4 w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-red-500 h-full w-[65%] animate-pulse"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+<!-- Chart 1: Revenue vs Budget -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h4 class="text-lg font-bold text-slate-900 dark:text-white">Ingresos vs Presupuesto Mensual</h4>
+<div class="flex items-center gap-4 text-xs font-semibold uppercase tracking-tighter">
+<div class="flex items-center gap-1.5">
+<span class="size-2 rounded-full bg-slate-300 dark:bg-slate-700"></span> Presupuesto
+                        </div>
+<div class="flex items-center gap-1.5">
+<span class="size-2 rounded-full bg-primary"></span> Actual
+                        </div>
+</div>
+</div>
+<div class="h-64 flex items-end justify-between gap-4 px-2">
+<!-- Simple bar representation for prototype -->
+<div class="flex flex-col items-center flex-1 h-full justify-end gap-1">
+<div class="w-full bg-primary rounded-t-sm" style="height: 60%"></div>
+<div class="w-full bg-slate-200 dark:bg-slate-800 rounded-t-sm" style="height: 55%"></div>
+<span class="text-[10px] font-bold text-slate-400 mt-2">ENE</span>
+</div>
+<div class="flex flex-col items-center flex-1 h-full justify-end gap-1">
+<div class="w-full bg-primary rounded-t-sm" style="height: 75%"></div>
+<div class="w-full bg-slate-200 dark:bg-slate-800 rounded-t-sm" style="height: 70%"></div>
+<span class="text-[10px] font-bold text-slate-400 mt-2">FEB</span>
+</div>
+<div class="flex flex-col items-center flex-1 h-full justify-end gap-1">
+<div class="w-full bg-primary rounded-t-sm" style="height: 65%"></div>
+<div class="w-full bg-slate-200 dark:bg-slate-800 rounded-t-sm" style="height: 72%"></div>
+<span class="text-[10px] font-bold text-slate-400 mt-2">MAR</span>
+</div>
+<div class="flex flex-col items-center flex-1 h-full justify-end gap-1">
+<div class="w-full bg-primary rounded-t-sm" style="height: 85%"></div>
+<div class="w-full bg-slate-200 dark:bg-slate-800 rounded-t-sm" style="height: 80%"></div>
+<span class="text-[10px] font-bold text-slate-400 mt-2">ABR</span>
+</div>
+<div class="flex flex-col items-center flex-1 h-full justify-end gap-1">
+<div class="w-full bg-primary rounded-t-sm" style="height: 95%"></div>
+<div class="w-full bg-slate-200 dark:bg-slate-800 rounded-t-sm" style="height: 90%"></div>
+<span class="text-[10px] font-bold text-slate-400 mt-2">MAY</span>
+</div>
+<div class="flex flex-col items-center flex-1 h-full justify-end gap-1">
+<div class="w-full bg-primary rounded-t-sm" style="height: 50%"></div>
+<div class="w-full bg-slate-200 dark:bg-slate-800 rounded-t-sm" style="height: 60%"></div>
+<span class="text-[10px] font-bold text-slate-400 mt-2">JUN</span>
+</div>
+</div>
+</div>
+<!-- Acción Disparada Section -->
+<div class="bg-primary/5 dark:bg-primary/10 border-2 border-primary/20 p-6 rounded-xl relative">
+<div class="absolute -top-3 left-6 bg-primary text-white text-[10px] font-black uppercase px-2 py-0.5 rounded">
+                    Acción Disparada
+                </div>
+<div class="flex items-center gap-3 mb-6 mt-2">
+<span class="material-symbols-outlined text-primary text-3xl">notifications_active</span>
+<h4 class="text-xl font-black text-slate-900 dark:text-white">Alerta de Liquidez</h4>
+</div>
+<div class="space-y-4">
+<div class="bg-white dark:bg-slate-800 p-4 rounded-lg shadow-sm border-l-4 border-red-500">
+<p class="text-xs font-bold text-red-500 uppercase tracking-tighter mb-1">Detección</p>
+<p class="text-sm font-medium text-slate-700 dark:text-slate-200">El Flujo de Caja Operativo YTD es 8.0% menor al presupuesto.</p>
+</div>
+<div class="bg-white dark:bg-slate-800 p-4 rounded-lg shadow-sm border-l-4 border-primary">
+<p class="text-xs font-bold text-primary uppercase tracking-tighter mb-1">Ritual Financiero Sugerido</p>
+<p class="text-base font-bold text-slate-900 dark:text-white leading-tight">Revisión de Flujo de Caja Semanal</p>
+<p class="text-sm text-slate-500 mt-2">Convocar a Tesorería para análisis de cobranza y priorización de pagos a proveedores de acero.</p>
+</div>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 mt-4 hover:shadow-lg transition-all">
+<span class="material-symbols-outlined">event</span>
+                        Agendar Sesión de Control
+                    </button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Chart 2: Working Capital Components -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-6">Componentes Capital de Trabajo</h4>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-slate-500 uppercase">Inventario (Acero)</span>
+<span class="text-slate-900 dark:text-white">$2.1M</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-6 rounded-lg overflow-hidden flex">
+<div class="bg-primary h-full w-[50%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-slate-500 uppercase">Cuentas por Cobrar (AR)</span>
+<span class="text-slate-900 dark:text-white">$1.8M</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-6 rounded-lg overflow-hidden flex">
+<div class="bg-primary/60 h-full w-[43%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-slate-500 uppercase">Cuentas por Pagar (AP)</span>
+<span class="text-slate-900 dark:text-white">($0.3M)</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-6 rounded-lg overflow-hidden flex justify-end">
+<div class="bg-red-400 h-full w-[7%]"></div>
+</div>
+</div>
+</div>
+<p class="text-[10px] text-slate-400 mt-8 italic text-center">* Datos expresados en USD (Millones). Ciclo de conversión de efectivo: 42 días.</p>
+</div>
+<!-- Chart 3: BU Profitability -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-6">Rentabilidad por Unidad de Negocio (EBITDA %)</h4>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="w-24 text-right text-xs font-bold text-slate-500 uppercase">Minería</div>
+<div class="flex-1 h-10 bg-slate-100 dark:bg-slate-800 rounded-lg relative overflow-hidden">
+<div class="absolute inset-y-0 left-0 bg-green-500 flex items-center pl-3 text-[10px] font-black text-white" style="width: 24%">24%</div>
+</div>
+<div class="w-12 text-xs font-bold text-green-500">+2%</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-24 text-right text-xs font-bold text-slate-500 uppercase">Construcción</div>
+<div class="flex-1 h-10 bg-slate-100 dark:bg-slate-800 rounded-lg relative overflow-hidden">
+<div class="absolute inset-y-0 left-0 bg-primary flex items-center pl-3 text-[10px] font-black text-white" style="width: 16%">16%</div>
+</div>
+<div class="w-12 text-xs font-bold text-red-500">-5%</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-24 text-right text-xs font-bold text-slate-500 uppercase">Infraestructura</div>
+<div class="flex-1 h-10 bg-slate-100 dark:bg-slate-800 rounded-lg relative overflow-hidden">
+<div class="absolute inset-y-0 left-0 bg-primary/70 flex items-center pl-3 text-[10px] font-black text-white" style="width: 19%">19%</div>
+</div>
+<div class="w-12 text-xs font-bold text-slate-400">0%</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-24 text-right text-xs font-bold text-slate-500 uppercase">Retail</div>
+<div class="flex-1 h-10 bg-slate-100 dark:bg-slate-800 rounded-lg relative overflow-hidden">
+<div class="absolute inset-y-0 left-0 bg-red-500 flex items-center pl-3 text-[10px] font-black text-white" style="width: 12%">12%</div>
+</div>
+<div class="w-12 text-xs font-bold text-red-500">-8%</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex justify-around">
+<div class="text-center">
+<p class="text-xs font-bold text-slate-400 uppercase">Mejor BU</p>
+<p class="text-sm font-black text-green-500">Minería</p>
+</div>
+<div class="text-center border-x border-slate-100 dark:border-slate-800 px-8">
+<p class="text-xs font-bold text-slate-400 uppercase">Promedio</p>
+<p class="text-sm font-black text-slate-900 dark:text-white">18.5%</p>
+</div>
+<div class="text-center">
+<p class="text-xs font-bold text-slate-400 uppercase">En Riesgo</p>
+<p class="text-sm font-black text-red-500">Retail</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-200 dark:border-slate-800 mt-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<p class="text-xs font-bold text-slate-500">Sistema de Control de Gestión Validado - CARO CONSULTING © 2024</p>
+</div>
+<div class="flex gap-4">
+<a class="text-xs font-semibold text-slate-400 hover:text-primary transition-colors" href="#">Glosario Financiero</a>
+<a class="text-xs font-semibold text-slate-400 hover:text-primary transition-colors" href="#">Soporte FP&amp;A</a>
+<a class="text-xs font-semibold text-slate-400 hover:text-primary transition-colors" href="#">Configuración</a>
+</div>
+</div>
+</footer>
+</body></html>

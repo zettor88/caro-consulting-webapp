@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portfolio Strategic Map (BCG 2.0) - Aceros del Sur SpA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                        "steel-blue": "#1F4E78",
+                        "steel-green": "#28A745",
+                        "steel-yellow": "#FFC107",
+                        "steel-red": "#DC3545",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .bg-grid { background-size: 40px 40px; background-image: radial-gradient(circle, #333 1px, transparent 1px); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-white/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="bg-primary p-1.5 rounded-lg text-white">
+<span class="material-symbols-outlined block">analytics</span>
+</div>
+<div>
+<h2 class="text-lg font-bold leading-tight tracking-tight uppercase">Caro Consulting</h2>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium tracking-[0.1em] uppercase">Portfolio Intelligence</p>
+</div>
+</div>
+<div class="hidden md:flex flex-1 justify-center">
+<h1 class="text-sm font-semibold text-slate-700 dark:text-slate-200 uppercase tracking-wider">Portfolio Strategic Map (BCG 2.0)</h1>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex flex-col items-end mr-4 border-r border-slate-200 dark:border-white/10 pr-4">
+<span class="text-xs font-bold text-steel-blue dark:text-blue-400">Aceros del Sur SpA</span>
+<span class="text-[10px] text-slate-500">Visualización Ejecutiva</span>
+</div>
+<div class="flex gap-2">
+<span class="bg-steel-blue/10 text-steel-blue dark:text-blue-300 px-3 py-1 rounded-full text-xs font-bold uppercase border border-steel-blue/20">PM-A Auditoría</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto p-6 space-y-6">
+<!-- KPI Row -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-white dark:bg-white/5 p-5 rounded-xl border border-slate-200 dark:border-white/10 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">SKUs Activos</p>
+<span class="material-symbols-outlined text-primary text-xl">inventory_2</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold">320</h3>
+<span class="text-xs font-medium text-steel-green flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+                        2.4%
+                    </span>
+</div>
+<p class="text-[10px] text-slate-400 mt-2">Total ítems con movimiento Q4</p>
+</div>
+<div class="bg-white dark:bg-white/5 p-5 rounded-xl border border-slate-200 dark:border-white/10 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Contribución Top 20%</p>
+<span class="material-symbols-outlined text-steel-green text-xl">leaderboard</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold">85%</h3>
+<span class="text-xs font-medium text-slate-400">del margen</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-white/10 h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-steel-green h-full rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-white/5 p-5 rounded-xl border border-slate-200 dark:border-white/10 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">SKU Rationalization Target</p>
+<span class="material-symbols-outlined text-steel-red text-xl">auto_delete</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold">12%</h3>
+<span class="text-xs font-medium text-steel-red">Objetivo</span>
+</div>
+<p class="text-[10px] text-slate-400 mt-2">Identificado para descontinuación</p>
+</div>
+<div class="bg-white dark:bg-white/5 p-5 rounded-xl border border-slate-200 dark:border-white/10 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Margen Bruto Portafolio</p>
+<span class="material-symbols-outlined text-steel-blue text-xl">payments</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold">18%</h3>
+<span class="text-xs font-medium text-slate-400">Promedio</span>
+</div>
+<div class="flex gap-1 mt-3">
+<div class="h-1 flex-1 bg-steel-green rounded-full"></div>
+<div class="h-1 flex-1 bg-steel-green rounded-full"></div>
+<div class="h-1 flex-1 bg-slate-200 dark:bg-white/10 rounded-full"></div>
+<div class="h-1 flex-1 bg-slate-200 dark:bg-white/10 rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- Main Dashboard Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Matrix BCG Chart (7/12 columns) -->
+<div class="lg:col-span-8 bg-white dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 p-6">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="text-lg font-bold">Matriz BCG 2.0: Crecimiento vs Rentabilidad</h2>
+<p class="text-sm text-slate-500">Burbujas: Tamaño por Facturación total</p>
+</div>
+<div class="flex gap-4 text-xs">
+<div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-steel-blue"></span> Carbono</div>
+<div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-primary"></span> Inox</div>
+<div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-steel-green"></span> Tubos</div>
+</div>
+</div>
+<div class="relative h-[450px] w-full bg-grid border-l border-b border-slate-300 dark:border-white/20">
+<!-- Labels Axes -->
+<div class="absolute -left-12 top-1/2 -rotate-90 text-[10px] font-bold uppercase tracking-widest text-slate-400">Rentabilidad Neta (%)</div>
+<div class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Crecimiento / Volumen</div>
+<!-- Quadrant Labels -->
+<div class="absolute top-4 left-4 text-xs font-bold text-slate-400/50 uppercase italic">Interrogantes</div>
+<div class="absolute top-4 right-4 text-xs font-bold text-steel-green/60 uppercase italic">Estrellas</div>
+<div class="absolute bottom-4 left-4 text-xs font-bold text-steel-red/60 uppercase italic">Perros</div>
+<div class="absolute bottom-4 right-4 text-xs font-bold text-steel-yellow/60 uppercase italic">Vacas</div>
+<!-- Chart Grid Divider -->
+<div class="absolute top-1/2 left-0 w-full h-px border-t border-dashed border-slate-400/30"></div>
+<div class="absolute left-1/2 top-0 w-px h-full border-l border-dashed border-slate-400/30"></div>
+<!-- Simulated Bubbles -->
+<!-- Carbono (Big) -->
+<div class="absolute bottom-[20%] right-[30%] group">
+<div class="w-16 h-16 rounded-full bg-steel-blue/80 border-2 border-steel-blue flex items-center justify-center text-[10px] text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-xl">
+                            Carbono
+                        </div>
+</div>
+<!-- Inox (Medium) -->
+<div class="absolute top-[25%] right-[15%] group">
+<div class="w-12 h-12 rounded-full bg-primary/80 border-2 border-primary flex items-center justify-center text-[10px] text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-xl">
+                            Inox
+                        </div>
+</div>
+<!-- Tubos (Small-Medium) -->
+<div class="absolute bottom-[35%] left-[20%] group">
+<div class="w-10 h-10 rounded-full bg-steel-green/80 border-2 border-steel-green flex items-center justify-center text-[10px] text-white font-bold cursor-pointer hover:scale-110 transition-transform shadow-xl">
+                            Tubos
+                        </div>
+</div>
+<!-- Otros (Small) -->
+<div class="absolute bottom-[10%] left-[10%] group">
+<div class="w-6 h-6 rounded-full bg-slate-500/80 border-2 border-slate-400 flex items-center justify-center text-[8px] text-white font-bold cursor-pointer hover:scale-110 transition-transform">
+                            -
+                        </div>
+</div>
+</div>
+</div>
+<!-- Table Details (5/12 columns) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="bg-white dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 overflow-hidden flex-1 shadow-sm">
+<div class="p-5 border-b border-slate-100 dark:border-white/10">
+<h2 class="text-sm font-bold uppercase tracking-wider">Detalle de Portafolio</h2>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-white/5 text-[10px] font-bold uppercase text-slate-500 tracking-wider">
+<tr>
+<th class="px-4 py-3">Familia</th>
+<th class="px-4 py-3 text-right">Ventas ($)</th>
+<th class="px-4 py-3 text-center">Rol</th>
+</tr>
+</thead>
+<tbody class="text-sm divide-y divide-slate-100 dark:divide-white/10">
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-4 py-3 font-medium">Acero Carbono</td>
+<td class="px-4 py-3 text-right">4.2M</td>
+<td class="px-4 py-3 text-center">
+<span class="px-2 py-1 rounded bg-steel-yellow/10 text-steel-yellow text-[10px] font-bold uppercase">Ordeñar</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-4 py-3 font-medium">Acero Inox</td>
+<td class="px-4 py-3 text-right">2.1M</td>
+<td class="px-4 py-3 text-center">
+<span class="px-2 py-1 rounded bg-steel-green/10 text-steel-green text-[10px] font-bold uppercase">Invertir</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-4 py-3 font-medium">Tubería Galva</td>
+<td class="px-4 py-3 text-right">0.8M</td>
+<td class="px-4 py-3 text-center">
+<span class="px-2 py-1 rounded bg-slate-500/10 text-slate-500 text-[10px] font-bold uppercase">Reestruc.</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-4 py-3 font-medium">Perfiles Especiales</td>
+<td class="px-4 py-3 text-right">0.3M</td>
+<td class="px-4 py-3 text-center">
+<span class="px-2 py-1 rounded bg-steel-red/10 text-steel-red text-[10px] font-bold uppercase">Eliminar</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-slate-50/50 dark:bg-transparent text-center">
+<button class="text-[10px] font-bold text-primary uppercase hover:underline">Ver reporte completo</button>
+</div>
+</div>
+<!-- Governance Section -->
+<div class="bg-white dark:bg-white/5 rounded-xl border-2 border-steel-red/30 p-5 shadow-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 -mr-8 -mt-8 bg-steel-red/10 rounded-full"></div>
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-steel-red animate-pulse">error</span>
+<h2 class="text-sm font-bold uppercase tracking-wider text-steel-red">Gobernanza: Alerta Zombie</h2>
+</div>
+<div class="space-y-3">
+<div class="p-3 bg-steel-red/5 border border-steel-red/10 rounded-lg">
+<p class="text-xs leading-relaxed">
+<span class="font-bold">Detección de productos Zombie:</span> 
+                                Se han identificado productos en el cuadrante 'Perros' que no registran facturación en los últimos 90 días.
+                            </p>
+</div>
+<div class="flex items-center justify-between text-xs py-2">
+<span class="text-slate-500 font-medium">Impacto detectado:</span>
+<span class="font-bold text-steel-red">38 ítems críticos</span>
+</div>
+<div class="pt-2">
+<button class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md active:scale-95">
+<span class="material-symbols-outlined text-lg">download</span>
+                                Descargar Plan de Racionalización
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Map Info (Optional/Visual) -->
+<footer class="flex flex-col md:flex-row justify-between items-center gap-4 pt-4 border-t border-slate-200 dark:border-white/10 opacity-60">
+<div class="flex items-center gap-4 text-[10px] font-medium uppercase tracking-widest">
+<span>© 2024 Caro Consulting</span>
+<span class="w-1 h-1 bg-slate-400 rounded-full"></span>
+<span>Auditoría Nivel PM-A</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-32 h-1 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4"></div>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest">Fase 4 - 75% completado</span>
+</div>
+</footer>
+</main>
+<!-- Map Context Element -->
+<div class="hidden" data-location="Santiago, Chile" style=""></div>
+</body></html>

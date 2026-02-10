@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CARO CONSULTING - Profitability Map</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                        "success": "#28A745",
+                        "warning": "#FFC107",
+                        "danger": "#DC3545",
+                        "neutral-gray": "#6C757D",
+                        "corporate-blue": "#1F4E78"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "Arial", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', 'Arial', sans-serif; }
+        .scatter-bg {
+            background-image: 
+                linear-gradient(to right, rgba(108, 117, 125, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(108, 117, 125, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-200">
+<div class="min-h-screen flex flex-col">
+<!-- Header -->
+<header class="bg-white dark:bg-[#2d1e16] border-b border-slate-200 dark:border-primary/20 px-6 py-4 sticky top-0 z-50 shadow-sm">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="bg-primary p-2 rounded-lg">
+<span class="material-symbols-outlined text-white text-3xl">insights</span>
+</div>
+<div>
+<h1 class="text-xl font-black tracking-tight text-slate-900 dark:text-white">CARO CONSULTING</h1>
+<p class="text-[10px] font-bold uppercase tracking-widest text-primary">Pricing &amp; Rentabilidad</p>
+</div>
+</div>
+<div class="flex flex-col md:items-end">
+<div class="flex items-center gap-3 text-sm font-semibold text-slate-500 dark:text-primary/70">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">analytics</span> FASE 3: MODELAMIENTO ANALÍTICO</span>
+<span class="h-4 w-px bg-slate-300 dark:bg-primary/30"></span>
+<span class="text-slate-900 dark:text-white">Aceros del Sur SpA</span>
+</div>
+<h2 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Customer &amp; Product Profitability Map</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3 border-l pl-4 dark:border-primary/20">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold">CEO / CFO</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Executive Access</p>
+</div>
+<div class="size-10 rounded-full bg-slate-200 dark:bg-primary/20 border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaR6hFZJIqsaoy2H0qSjStqSu5l3RiIy-aKUBktbAbk1TlTT2zZgCixeUWr49j2vMwGcuPb4G6cif5-ek6jAgm4nZ-K4kZFXjXNL1V-1EvvOr94OFkmavJ39ZotlrlR17VWkQv1E4Q02vZyCVTwDS5Cq8QeGDLwmC4bCC829JmxPwmuBR75nbtIUSfLVzZM_TvFPaYXgGL6Mpd4LbDaVTw3zqr1p1br0UE3arXIYQyUkpk-Q2MyOW_oM2JnIdBLt_k9BqOsqjt42nv"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 p-6 lg:p-10 max-w-[1440px] mx-auto w-full space-y-8">
+<!-- KPI Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- KPI 1 -->
+<div class="bg-white dark:bg-[#2d1e16] p-6 rounded-xl shadow-sm border border-slate-200 dark:border-primary/10">
+<div class="flex justify-between items-start mb-2">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Margen Neto Promedio</p>
+<span class="material-symbols-outlined text-danger">trending_down</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-black text-slate-900 dark:text-white">12.4%</p>
+<p class="text-xs font-bold text-slate-400">vs 15.0% Meta</p>
+</div>
+<div class="mt-4 w-full bg-slate-100 dark:bg-white/5 h-1.5 rounded-full overflow-hidden">
+<div class="bg-danger h-full" style="width: 82.6%"></div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-white dark:bg-[#2d1e16] p-6 rounded-xl shadow-sm border border-slate-200 dark:border-primary/10">
+<div class="flex justify-between items-start mb-2">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Clientes Margen Crítico</p>
+<span class="material-symbols-outlined text-warning">warning</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-black text-slate-900 dark:text-white">18.0%</p>
+<p class="text-xs font-bold text-warning">&lt; 5% Margen</p>
+</div>
+<div class="mt-4 flex gap-1">
+<span class="h-2 w-full rounded-full bg-danger"></span>
+<span class="h-2 w-full rounded-full bg-danger/20"></span>
+<span class="h-2 w-full rounded-full bg-danger/20"></span>
+<span class="h-2 w-full rounded-full bg-danger/20"></span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-white dark:bg-[#2d1e16] p-6 rounded-xl shadow-sm border border-slate-200 dark:border-primary/10">
+<div class="flex justify-between items-start mb-2">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Concentración (Pareto)</p>
+<span class="material-symbols-outlined text-corporate-blue">groups</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-black text-slate-900 dark:text-white">12%</p>
+<p class="text-xs font-bold text-slate-400">Clientes = 80% Margen</p>
+</div>
+<p class="text-[10px] mt-4 font-bold text-primary uppercase tracking-tighter">Alta Dependencia Estratégica</p>
+</div>
+<!-- KPI 4 -->
+<div class="bg-white dark:bg-[#2d1e16] p-6 rounded-xl shadow-sm border border-slate-200 dark:border-primary/10">
+<div class="flex justify-between items-start mb-2">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Venta Total Mensual</p>
+<span class="material-symbols-outlined text-success">payments</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-black text-slate-900 dark:text-white">$1.200MM</p>
+<p class="text-xs font-bold text-success">+5.5% YoY</p>
+</div>
+<p class="text-[10px] mt-4 font-bold text-slate-400 uppercase tracking-tighter">Moneda: CLP</p>
+</div>
+</div>
+<!-- Main Scatter Plot Visual -->
+<div class="bg-white dark:bg-[#2d1e16] rounded-xl shadow-lg border border-slate-200 dark:border-primary/10 overflow-hidden">
+<div class="p-6 border-b border-slate-100 dark:border-primary/10 flex justify-between items-center">
+<div>
+<h3 class="text-lg font-bold">Mapa de Rentabilidad vs Volumen</h3>
+<p class="text-sm text-slate-500">Diagnóstico de cartera por cuadrantes de valor</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-slate-100 dark:bg-white/5 rounded-lg text-sm font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">filter_list</span> Filtros Avanzados
+                        </button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span> Exportar
+                        </button>
+</div>
+</div>
+<div class="p-8 relative min-h-[500px] scatter-bg">
+<!-- Quadrant Labels -->
+<div class="absolute inset-0 grid grid-cols-2 grid-rows-2 opacity-10 pointer-events-none">
+<div class="border-r border-b border-slate-400 flex items-center justify-center"><span class="text-4xl font-black">OPORTUNIDAD AJUSTE</span></div>
+<div class="border-b border-slate-400 flex items-center justify-center"><span class="text-4xl font-black">CUENTAS ESTRATÉGICAS</span></div>
+<div class="border-r border-slate-400 flex items-center justify-center"><span class="text-4xl font-black">RACIONALIZACIÓN</span></div>
+<div class="flex items-center justify-center"><span class="text-4xl font-black">DRENAJE DE VALOR</span></div>
+</div>
+<!-- Explicit Quadrant Badges -->
+<div class="absolute top-10 left-10 bg-corporate-blue/10 text-corporate-blue px-3 py-1 rounded-full text-xs font-black border border-corporate-blue/20">OPORTUNIDAD DE AJUSTE</div>
+<div class="absolute top-10 right-10 bg-success/10 text-success px-3 py-1 rounded-full text-xs font-black border border-success/20">CUENTAS ESTRATÉGICAS</div>
+<div class="absolute bottom-10 left-10 bg-neutral-gray/10 text-neutral-gray px-3 py-1 rounded-full text-xs font-black border border-neutral-gray/20">CANDIDATOS A RACIONALIZACIÓN</div>
+<div class="absolute bottom-10 right-10 bg-danger/10 text-danger px-3 py-1 rounded-full text-xs font-black border border-danger/20">DRENAJE DE VALOR</div>
+<!-- Y Axis Label -->
+<div class="absolute left-4 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] font-bold tracking-[0.3em] text-slate-400">MARGEN NETO (%)</div>
+<!-- X Axis Label -->
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-bold tracking-[0.3em] text-slate-400">VOLUMEN DE VENTA ($ CLP)</div>
+<!-- Bubbles (Visual Representation) -->
+<!-- Strategic -->
+<div class="absolute top-[15%] right-[20%] size-12 bg-success/60 rounded-full border-2 border-success flex items-center justify-center text-[10px] text-white font-bold text-center">Constructora Horizon</div>
+<div class="absolute top-[25%] right-[10%] size-16 bg-success/60 rounded-full border-2 border-success flex items-center justify-center text-[10px] text-white font-bold text-center">Ingeniería Central</div>
+<!-- Value Drain -->
+<div class="absolute bottom-[15%] right-[15%] size-20 bg-danger/60 rounded-full border-2 border-danger flex items-center justify-center text-[10px] text-white font-bold text-center animate-pulse">Distribuidora Sur S.A.</div>
+<div class="absolute bottom-[20%] right-[30%] size-14 bg-danger/60 rounded-full border-2 border-danger flex items-center justify-center text-[10px] text-white font-bold text-center">Logística Austral</div>
+<!-- Rationalization -->
+<div class="absolute bottom-[10%] left-[15%] size-8 bg-neutral-gray/60 rounded-full border-2 border-neutral-gray flex items-center justify-center text-[10px] text-white font-bold text-center">Taller Pyme A</div>
+<div class="absolute bottom-[20%] left-[25%] size-6 bg-neutral-gray/60 rounded-full border-2 border-neutral-gray"></div>
+<!-- Adjustment -->
+<div class="absolute top-[20%] left-[20%] size-10 bg-warning/60 rounded-full border-2 border-warning flex items-center justify-center text-[10px] text-slate-800 font-bold text-center">Boutique Metales</div>
+</div>
+</div>
+<!-- Tables Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Top 5 Profitable -->
+<div class="bg-white dark:bg-[#2d1e16] rounded-xl shadow-sm border border-slate-200 dark:border-primary/10 overflow-hidden">
+<div class="p-4 border-b border-slate-100 dark:border-primary/10 flex items-center gap-2">
+<span class="material-symbols-outlined text-success">verified</span>
+<h4 class="font-bold">Top 5: Lideres de Rentabilidad</h4>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 dark:bg-white/5 text-slate-500 uppercase text-[10px] font-bold">
+<tr>
+<th class="px-4 py-3">Cliente</th>
+<th class="px-4 py-3">Volumen ($)</th>
+<th class="px-4 py-3">Margen ($)</th>
+<th class="px-4 py-3">Margen %</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-primary/5">
+<tr>
+<td class="px-4 py-3 font-semibold">Constructora Horizon</td>
+<td class="px-4 py-3">$145.000.000</td>
+<td class="px-4 py-3">$32.000.000</td>
+<td class="px-4 py-3"><span class="px-2 py-0.5 bg-success/20 text-success rounded text-xs font-bold">22.1%</span></td>
+</tr>
+<tr>
+<td class="px-4 py-3 font-semibold">Ingeniería Central</td>
+<td class="px-4 py-3">$210.000.000</td>
+<td class="px-4 py-3">$41.000.000</td>
+<td class="px-4 py-3"><span class="px-2 py-0.5 bg-success/20 text-success rounded text-xs font-bold">19.5%</span></td>
+</tr>
+<tr>
+<td class="px-4 py-3 font-semibold">Boutique Metales</td>
+<td class="px-4 py-3">$45.000.000</td>
+<td class="px-4 py-3">$8.200.000</td>
+<td class="px-4 py-3"><span class="px-2 py-0.5 bg-success/20 text-success rounded text-xs font-bold">18.2%</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Bottom 5 Laggards -->
+<div class="bg-white dark:bg-[#2d1e16] rounded-xl shadow-sm border border-slate-200 dark:border-primary/10 overflow-hidden">
+<div class="p-4 border-b border-slate-100 dark:border-primary/10 flex items-center gap-2">
+<span class="material-symbols-outlined text-danger">report</span>
+<h4 class="font-bold">Bottom 5: Fuga de Valor</h4>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 dark:bg-white/5 text-slate-500 uppercase text-[10px] font-bold">
+<tr>
+<th class="px-4 py-3">Cliente</th>
+<th class="px-4 py-3">Volumen ($)</th>
+<th class="px-4 py-3">Margen ($)</th>
+<th class="px-4 py-3">Margen %</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-primary/5">
+<tr>
+<td class="px-4 py-3 font-semibold">Distribuidora Sur S.A.</td>
+<td class="px-4 py-3">$380.000.000</td>
+<td class="px-4 py-3">($2.400.000)</td>
+<td class="px-4 py-3"><span class="px-2 py-0.5 bg-danger/20 text-danger rounded text-xs font-bold">-0.6%</span></td>
+</tr>
+<tr>
+<td class="px-4 py-3 font-semibold">Logística Austral</td>
+<td class="px-4 py-3">$290.000.000</td>
+<td class="px-4 py-3">$6.380.000</td>
+<td class="px-4 py-3"><span class="px-2 py-0.5 bg-danger/20 text-danger rounded text-xs font-bold">2.2%</span></td>
+</tr>
+<tr>
+<td class="px-4 py-3 font-semibold">Acero Masivo Ltda</td>
+<td class="px-4 py-3">$155.000.000</td>
+<td class="px-4 py-3">$5.115.000</td>
+<td class="px-4 py-3"><span class="px-2 py-0.5 bg-danger/20 text-danger rounded text-xs font-bold">3.3%</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Action / Governance Section -->
+<div class="bg-primary/10 dark:bg-primary/5 border-2 border-primary rounded-xl p-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">gavel</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-4">
+<div class="bg-primary text-white p-2 rounded-lg">
+<span class="material-symbols-outlined">priority_high</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white uppercase tracking-tighter">Acción Disparada: Alerta de Política de Precios</h3>
+</div>
+<p class="text-lg text-slate-700 dark:text-slate-200 max-w-4xl mb-8">
+                        Los clientes en el cuadrante <span class="font-black text-danger">"Drenaje de Valor"</span> representan el 25% del volumen de venta total pero contribuyen negativamente al EBITDA consolidado. <br class="hidden md:block"/>
+<strong>Se requiere revisión inmediata de la política de descuentos.</strong> Programar Comité de Rentabilidad Extraordinario.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="flex items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">description</span>
+                            Generar Reporte de Cuentas Críticas
+                        </button>
+<button class="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-bold hover:scale-[1.02] transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">calculate</span>
+                            Simular Ajuste de Precios
+                        </button>
+<button class="flex items-center gap-2 border-2 border-slate-300 dark:border-primary/30 px-6 py-3 rounded-lg font-bold">
+<span class="material-symbols-outlined">calendar_today</span>
+                            Agendar Comité
+                        </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-100 dark:bg-black/20 py-8 border-t border-slate-200 dark:border-primary/10 px-6">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="text-xs font-bold uppercase tracking-widest">Caro Consulting © 2024 - Proprietary Analytic Framework</span>
+</div>
+<div class="flex gap-6">
+<a class="text-xs font-bold text-slate-500 hover:text-primary" href="#">Soporte Técnico</a>
+<a class="text-xs font-bold text-slate-500 hover:text-primary" href="#">Gobernanza de Datos</a>
+<a class="text-xs font-bold text-slate-500 hover:text-primary" href="#">Metodología</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

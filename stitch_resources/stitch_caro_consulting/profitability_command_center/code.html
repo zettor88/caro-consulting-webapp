@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profitability Command Center - CARO CONSULTING</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                        "brand-blue": "#1F4E78",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .status-glow-red { box-shadow: 0 0 15px rgba(239, 68, 68, 0.2); border-left: 4px solid #ef4444; }
+        .status-glow-yellow { box-shadow: 0 0 15px rgba(234, 179, 8, 0.2); border-left: 4px solid #eab308; }
+        .status-glow-green { box-shadow: 0 0 15px rgba(34, 197, 94, 0.2); border-left: 4px solid #22c55e; }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-white dark:bg-[#1a110c] border-r border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg text-white">
+<span class="material-symbols-outlined block">insights</span>
+</div>
+<h2 class="font-black text-lg tracking-tight text-brand-blue dark:text-white">CARO CONSULTING</h2>
+</div>
+<nav class="flex-1 px-4 space-y-1 mt-4">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-2">Comando</p>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-xl font-semibold" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">waterfall_chart</span>
+<span class="text-sm">Waterfall</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm">Análisis PVM</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="text-sm">Mapa Estratégico</span>
+</a>
+<div class="pt-6">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-2">Gestión</p>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-sm">Gobernanza</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm">Reportes</span>
+</a>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2 bg-slate-50 dark:bg-white/5 rounded-xl">
+<div class="size-10 rounded-full bg-slate-300 dark:bg-slate-700 overflow-hidden">
+<img alt="User avatar" class="w-full h-full object-cover" data-alt="Professional portrait of an executive businessman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg67BvvzfwLxwygMjUCRB0M5fLkXdRInpPWLXSjIzMOIwclU527C3z_XW2VFx6USg2TGTugzafaeZK8R4Q9drwlVLMo2cqwastxJKRAtSKFmlfJfHyOTomHJlsI2Ak4E_8OFpWq47KLHHejp3DaUd8Xb6l_zwboVgxQl9wdUmE0uGbVpo5eMMGxY_mxsvohO34rt8XCRa3Hb1XgoD4t2dvTgqohmkNV4Zs8hfQhwgw6M0XOcPz8SPkHZPkfrNMm65hebyPBy7vVfe6"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold truncate">CFO Office</p>
+<p class="text-[10px] text-slate-500">Aceros del Sur SpA</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">settings</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-8">
+<!-- Top Bar -->
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div>
+<nav class="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">
+<span>Fase 4</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Visualización Ejecutiva</span>
+</nav>
+<h1 class="text-3xl font-black tracking-tight text-brand-blue dark:text-white">
+                        Centro de Comando de Rentabilidad
+                    </h1>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-bold shadow-sm hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+                        Compartir
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-xl text-sm font-bold shadow-lg shadow-primary/20 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+                        Exportar PDF
+                    </button>
+</div>
+</header>
+<!-- Alerts Section -->
+<div class="mb-8 p-4 bg-primary/10 border border-primary/20 rounded-2xl flex items-start gap-4">
+<div class="bg-primary text-white p-2 rounded-xl">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-bold text-primary">ALERTA: Umbral Crítico de Margen Excedido</h4>
+<span class="text-[10px] font-black uppercase bg-primary text-white px-2 py-0.5 rounded">Prioridad Alta</span>
+</div>
+<p class="text-sm text-slate-700 dark:text-slate-300 mt-1">
+                        Se requiere acción inmediata en el segmento de Aceros Estructurales. La erosión de precios netos supera el 4.2% mensual.
+                    </p>
+<div class="mt-3 flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-sm">event</span>
+<span class="text-xs font-bold">Comité de Precios: Próximo Jueves 09:00</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-sm">person</span>
+<span class="text-xs font-bold">Responsable: CFO Office</span>
+</div>
+</div>
+</div>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-xs font-black uppercase tracking-wider">Agendar</button>
+</div>
+<!-- Executive KPIs Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+<!-- Margen EBITDA -->
+<div class="bg-white dark:bg-white/5 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 status-glow-red relative overflow-hidden">
+<div class="flex items-center justify-between mb-4">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Margen EBITDA Actual</p>
+<span class="material-symbols-outlined text-red-500">trending_down</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-4xl font-black tracking-tight">12.4%</p>
+<p class="text-xs font-bold text-red-500 bg-red-50 dark:bg-red-500/10 px-2 py-0.5 rounded">-2.6% vs Meta</p>
+</div>
+<p class="text-[10px] text-slate-400 mt-2 font-medium">Meta Corporativa: 15.0%</p>
+</div>
+<!-- Fuga de Margen -->
+<div class="bg-white dark:bg-white/5 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 status-glow-yellow relative overflow-hidden">
+<div class="flex items-center justify-between mb-4">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Fuga de Margen Total</p>
+<span class="material-symbols-outlined text-yellow-500">leak_remove</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-4xl font-black tracking-tight">$65.4MM</p>
+<p class="text-xs font-bold text-yellow-600 bg-yellow-50 dark:bg-yellow-500/10 px-2 py-0.5 rounded">Atención</p>
+</div>
+<p class="text-[10px] text-slate-400 mt-2 font-medium">Acumulado Año Fiscal Actual</p>
+</div>
+<!-- Variación PVM -->
+<div class="bg-white dark:bg-white/5 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 status-glow-green relative overflow-hidden">
+<div class="flex items-center justify-between mb-4">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Variación PVM</p>
+<span class="material-symbols-outlined text-green-500">expand</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-4xl font-black tracking-tight">+$16.0MM</p>
+<p class="text-xs font-bold text-green-600 bg-green-50 dark:bg-green-500/10 px-2 py-0.5 rounded">Saludable</p>
+</div>
+<p class="text-[10px] text-slate-400 mt-2 font-medium">Impacto Neto Precio/Volumen/Mix</p>
+</div>
+<!-- Cumplimiento Índice -->
+<div class="bg-white dark:bg-white/5 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 status-glow-yellow relative overflow-hidden">
+<div class="flex items-center justify-between mb-4">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Cumplimiento Índice</p>
+<span class="material-symbols-outlined text-yellow-500">task_alt</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-4xl font-black tracking-tight">92%</p>
+<p class="text-xs font-bold text-yellow-600 bg-yellow-50 dark:bg-yellow-500/10 px-2 py-0.5 rounded">En Observación</p>
+</div>
+<p class="text-[10px] text-slate-400 mt-2 font-medium">Apego a Política de Precios</p>
+</div>
+</div>
+<!-- Strategic Focus Areas -->
+<h3 class="text-xl font-black tracking-tight mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">strategy</span>
+                Enfoque Estratégico
+            </h3>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-12">
+<!-- Pricing Integrity -->
+<div class="bg-white dark:bg-white/5 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h4 class="font-black text-slate-900 dark:text-white">Integridad de Precios</h4>
+<p class="text-xs text-slate-500">Tendencia de erosión Price Waterfall</p>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">open_in_new</span>
+</button>
+</div>
+<div class="flex-1 min-h-[160px] flex items-end gap-1 relative">
+<!-- Simplified bar chart representation -->
+<div class="flex-1 bg-slate-100 dark:bg-white/5 rounded-t h-[60%] hover:bg-primary/20 transition-colors cursor-help" title="Ene: 85%"></div>
+<div class="flex-1 bg-slate-100 dark:bg-white/5 rounded-t h-[55%] hover:bg-primary/20 transition-colors cursor-help" title="Feb: 82%"></div>
+<div class="flex-1 bg-slate-100 dark:bg-white/5 rounded-t h-[48%] hover:bg-primary/20 transition-colors cursor-help" title="Mar: 75%"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-[42%] transition-colors cursor-help" title="Abr: 70% (Alerta)"></div>
+<div class="flex-1 bg-primary rounded-t h-[35%] transition-colors cursor-help" title="May: 64% (Crítico)"></div>
+<div class="absolute inset-x-0 bottom-0 h-px bg-slate-200 dark:bg-slate-700"></div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800/50 flex justify-between">
+<span class="text-[10px] font-bold text-slate-400 uppercase">Q1 Tendencia</span>
+<span class="text-[10px] font-black text-red-500 uppercase">-12% Erosión</span>
+</div>
+</div>
+<!-- Portfolio Health -->
+<div class="bg-white dark:bg-white/5 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h4 class="font-black text-slate-900 dark:text-white">Salud del Portafolio</h4>
+<p class="text-xs text-slate-500">Impacto Mix de Productos</p>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">open_in_new</span>
+</button>
+</div>
+<div class="flex flex-col gap-4 flex-1 justify-center">
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] font-bold">
+<span>Premium Steels</span>
+<span class="text-green-500">+4.5%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-white/5 h-2 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full w-[75%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] font-bold">
+<span>Commodities</span>
+<span class="text-red-500">-2.1%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-white/5 h-2 rounded-full overflow-hidden">
+<div class="bg-red-500 h-full w-[45%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] font-bold">
+<span>Special Alloys</span>
+<span class="text-yellow-500">+0.8%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-white/5 h-2 rounded-full overflow-hidden">
+<div class="bg-yellow-500 h-full w-[60%]"></div>
+</div>
+</div>
+</div>
+<p class="mt-4 text-[11px] text-slate-500 italic">"Canibalización detectada en segmento estructural"</p>
+</div>
+<!-- Customer Quality -->
+<div class="bg-white dark:bg-white/5 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-black text-slate-900 dark:text-white">Calidad de Clientes</h4>
+<p class="text-xs text-slate-500">Top 5 Destructores de Valor</p>
+</div>
+<span class="text-[10px] font-black bg-red-100 dark:bg-red-900/30 text-red-600 px-2 py-1 rounded">Alta Fuga</span>
+</div>
+<div class="flex-1 space-y-3 mt-2">
+<div class="flex items-center justify-between p-2 hover:bg-slate-50 dark:hover:bg-white/5 rounded-lg transition-colors border-l-2 border-red-500">
+<div class="min-w-0">
+<p class="text-[11px] font-black truncate">Constructora del Pacifico</p>
+<p class="text-[9px] text-slate-400">Volumen Alto / Margen Negativo</p>
+</div>
+<p class="text-[11px] font-black text-red-500">-$2.4MM</p>
+</div>
+<div class="flex items-center justify-between p-2 hover:bg-slate-50 dark:hover:bg-white/5 rounded-lg transition-colors border-l-2 border-red-500">
+<div class="min-w-0">
+<p class="text-[11px] font-black truncate">Metales Industriales SpA</p>
+<p class="text-[9px] text-slate-400">Descuentos Fuera de Matriz</p>
+</div>
+<p class="text-[11px] font-black text-red-500">-$1.8MM</p>
+</div>
+<div class="flex items-center justify-between p-2 hover:bg-slate-50 dark:hover:bg-white/5 rounded-lg transition-colors border-l-2 border-yellow-500">
+<div class="min-w-0">
+<p class="text-[11px] font-black truncate">Logística Minera S.A.</p>
+<p class="text-[9px] text-slate-400">Costo de Servicio Elevado</p>
+</div>
+<p class="text-[11px] font-black text-yellow-500">-$1.2MM</p>
+</div>
+</div>
+<button class="mt-4 text-center py-2 text-[10px] font-black uppercase text-slate-400 hover:text-primary transition-colors tracking-widest">Ver Listado Completo</button>
+</div>
+</div>
+<!-- Quick Access Navigation -->
+<div class="mt-12">
+<h3 class="text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-6">Acceso Rápido a Artefactos</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<a class="group bg-white dark:bg-white/5 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all text-center" href="#">
+<div class="size-10 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">waterfall_chart</span>
+</div>
+<p class="text-xs font-bold tracking-tight">Price Waterfall</p>
+</a>
+<a class="group bg-white dark:bg-white/5 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all text-center" href="#">
+<div class="size-10 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">bar_chart_4_bars</span>
+</div>
+<p class="text-xs font-bold tracking-tight">PVM Bridge</p>
+</a>
+<a class="group bg-white dark:bg-white/5 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all text-center" href="#">
+<div class="size-10 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">map</span>
+</div>
+<p class="text-xs font-bold tracking-tight">Mapa Dinámico</p>
+<div class="hidden" data-location="Santiago, Chile" style=""></div>
+</a>
+<a class="group bg-white dark:bg-white/5 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all text-center" href="#">
+<div class="size-10 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<p class="text-xs font-bold tracking-tight">Mix Optimizer</p>
+</a>
+<a class="group bg-white dark:bg-white/5 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all text-center col-span-2 md:col-span-1" href="#">
+<div class="size-10 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">history</span>
+</div>
+<p class="text-xs font-bold tracking-tight">Historico Metas</p>
+</a>
+</div>
+</div>
+</main>
+</div>
+</body></html>

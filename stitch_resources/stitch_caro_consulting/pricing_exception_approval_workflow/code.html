@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pricing Exception Approval Workflow | Caro Consulting</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13", // Theme Primary
+                        "caro-navy": "#1F4E78", // Caro Identity
+                        "caro-green": "#28A745", // Caro Identity
+                        "caro-yellow": "#FFC107", // Caro Identity
+                        "caro-red": "#DC3545", // Caro Identity
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined { vertical-align: middle; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 min-h-screen">
+<div class="flex flex-col min-h-screen">
+<!-- Header -->
+<header class="bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 px-6 py-4 sticky top-0 z-50">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-8">
+<!-- Logo Section -->
+<div class="flex items-center gap-3">
+<div class="bg-caro-navy text-white p-2 rounded-lg">
+<span class="material-symbols-outlined text-2xl">account_balance</span>
+</div>
+<div>
+<h2 class="text-caro-navy dark:text-white text-lg font-bold leading-none">Caro Consulting</h2>
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold">Pricing &amp; Rentabilidad</p>
+</div>
+</div>
+<!-- Breadcrumbs -->
+<nav class="hidden md:flex items-center gap-2 text-sm">
+<span class="text-slate-400">Proyectos</span>
+<span class="material-symbols-outlined text-xs text-slate-400">chevron_right</span>
+<span class="text-slate-400">Fase 5: Gobernanza</span>
+<span class="material-symbols-outlined text-xs text-slate-400">chevron_right</span>
+<span class="font-semibold text-caro-navy dark:text-white">Aceros del Sur SpA</span>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex flex-col items-end mr-2">
+<span class="text-sm font-bold text-slate-900 dark:text-white">Gerente Comercial</span>
+<span class="text-[10px] text-slate-500 uppercase">Nivel B - Implementación</span>
+</div>
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center text-primary border-2 border-primary/30 overflow-hidden">
+<img alt="User Profile" class="size-full" data-alt="Corporate professional user avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfCSD7TsXaaQCFO-FdXob5JEwyXBi7e4x2HRUdiwdT5VdrmvOJh2qXouhpDOYkZxdTFsq05akaK_oYSQT9lFpwLZt1zH8bh04tBv0ftTsUcjctlDB9d0k_8S2tSlFbJuZiC_Z0VwTbkSsbFtBpT6EuCLP9h2Y7Fxybw0_GAUErZogs28bBzsN-dcRR7Lf5MnwySG53K8QngHt-3czja2Mhy_JzYOFaUJl_12WvXI1fHz3_qnSKNkQ7mPP3FyzFYvEPr87hVC7Z-msV"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-[1440px] mx-auto w-full p-6 space-y-6">
+<!-- Title Section -->
+<div class="flex justify-between items-end">
+<div>
+<h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Pricing Exception Approval Workflow</h1>
+<p class="text-slate-500 mt-1">Gestión estratégica de rentabilidad y gobernanza de descuentos comerciales.</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-sm">download</span> Descargar Protocolo
+                    </button>
+<button class="bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:opacity-90 transition-opacity shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">history</span> Historial Global
+                    </button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden">
+<div class="flex justify-between items-start mb-2">
+<p class="text-slate-500 text-sm font-medium">Pendientes de Aprobación</p>
+<span class="material-symbols-outlined text-caro-yellow">pending_actions</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-black text-slate-900 dark:text-white">14</p>
+<span class="text-caro-red text-xs font-bold">+2 hoy</span>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-caro-yellow w-full opacity-30"></div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<p class="text-slate-500 text-sm font-medium">Monto Total en Disputa</p>
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-black text-slate-900 dark:text-white">$45.2M</p>
+<span class="text-caro-green text-xs font-bold">15% del total</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<p class="text-slate-500 text-sm font-medium">Margen Promedio Solicitudes</p>
+<span class="material-symbols-outlined text-caro-green">bar_chart</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-black text-slate-900 dark:text-white">18.4%</p>
+<span class="text-caro-red text-xs font-bold">-1.2% vs Plan</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<p class="text-slate-500 text-sm font-medium">Tiempo Respuesta (SLA)</p>
+<span class="material-symbols-outlined text-slate-400">timer</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-black text-slate-900 dark:text-white">2.4 hrs</p>
+<span class="text-caro-green text-xs font-bold">Meta: 4.0 hrs</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Main Workflow List -->
+<div class="lg:col-span-8 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
+<h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">list_alt</span> 
+                            Solicitudes Pendientes
+                        </h3>
+<div class="flex gap-2 text-xs">
+<span class="px-2 py-1 rounded bg-caro-red/10 text-caro-red font-bold">URGENTE (3)</span>
+<span class="px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 text-slate-500">Normal (11)</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-[11px] uppercase tracking-wider text-slate-400 border-b border-slate-100 dark:border-slate-700">
+<th class="px-6 py-3 font-bold">Cliente / SKU</th>
+<th class="px-6 py-3 font-bold">Dscto Solicitado</th>
+<th class="px-6 py-3 font-bold">Delta vs Política</th>
+<th class="px-6 py-3 font-bold">Impacto Margen</th>
+<th class="px-6 py-3 font-bold text-right">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+<!-- Row 1 - Alert -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group bg-caro-red/[0.02]">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-slate-900 dark:text-white">Constructora Andes SpA</span>
+<span class="text-xs text-slate-500">Viga H-800 SAE 1045</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-caro-red font-black">
+                                            12.5%
+                                            <span class="material-symbols-outlined text-sm">trending_up</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-slate-700 dark:text-slate-300 font-medium">+7.5% s/política</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="bg-caro-red h-full w-[85%]"></div>
+</div>
+<span class="text-xs font-bold text-caro-red">-3.2pp</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="bg-primary text-white text-[10px] uppercase tracking-widest px-3 py-1.5 rounded font-black hover:scale-105 transition-transform">Ver Detalles</button>
+</td>
+</tr>
+<!-- Row 2 - Warning -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group bg-white dark:bg-slate-800">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-slate-900 dark:text-white">Maestranza Maipo</span>
+<span class="text-xs text-slate-500">Plancha 10mm ASTM A36</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-caro-yellow font-black">
+                                            8.0%
+                                            <span class="material-symbols-outlined text-sm">trending_flat</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-slate-700 dark:text-slate-300 font-medium">+3.0% s/política</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="bg-caro-yellow h-full w-[40%]"></div>
+</div>
+<span class="text-xs font-bold text-caro-yellow">-1.1pp</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 - OK -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group bg-white dark:bg-slate-800">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-slate-900 dark:text-white">Inmobiliaria del Pacífico</span>
+<span class="text-xs text-slate-500">Barra Corrugada 12mm</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-caro-green font-black">
+                                            4.5%
+                                            <span class="material-symbols-outlined text-sm">trending_down</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-slate-700 dark:text-slate-300 font-medium">-0.5% s/política</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="bg-caro-green h-full w-[10%]"></div>
+</div>
+<span class="text-xs font-bold text-caro-green">-0.2pp</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- More rows... -->
+<tr class="bg-slate-50/50 dark:bg-slate-900/50">
+<td class="px-6 py-3 text-center text-[10px] text-slate-400 uppercase tracking-[0.2em] font-bold" colspan="5">Cargar 11 solicitudes adicionales</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Detailed Approval Panel -->
+<aside class="lg:col-span-4 space-y-6">
+<div class="bg-caro-navy text-white rounded-xl shadow-xl overflow-hidden">
+<!-- Panel Header -->
+<div class="p-5 border-b border-white/10 flex justify-between items-center bg-white/5">
+<div>
+<h3 class="font-black text-lg">Simulación de Impacto</h3>
+<p class="text-[10px] uppercase opacity-60">ID: REQ-2024-0892</p>
+</div>
+<span class="px-3 py-1 bg-caro-red rounded-full text-[10px] font-black uppercase shadow-lg shadow-caro-red/30">Nivel Riesgo: Alto</span>
+</div>
+<!-- Simulación Content -->
+<div class="p-6 space-y-6">
+<!-- Comparison Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white/10 p-4 rounded-lg">
+<p class="text-[10px] uppercase opacity-70 mb-1">Margen Actual (Min)</p>
+<p class="text-2xl font-black">21.5%</p>
+</div>
+<div class="bg-primary p-4 rounded-lg shadow-inner">
+<p class="text-[10px] uppercase text-white/70 mb-1">Margen Propuesto</p>
+<p class="text-2xl font-black">18.3%</p>
+</div>
+</div>
+<!-- Customer History -->
+<div class="space-y-3">
+<h4 class="text-xs font-black uppercase text-white/60 tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">history_edu</span> Historial del Cliente
+                                </h4>
+<div class="space-y-2">
+<div class="flex justify-between text-xs items-center p-2 rounded bg-white/5 border border-white/10">
+<span class="opacity-80">Pedido Oct-23</span>
+<span class="font-bold text-caro-green">22.1% Mgn</span>
+</div>
+<div class="flex justify-between text-xs items-center p-2 rounded bg-white/5 border border-white/10">
+<span class="opacity-80">Pedido Nov-23</span>
+<span class="font-bold text-caro-green">21.8% Mgn</span>
+</div>
+<div class="flex justify-between text-xs items-center p-2 rounded bg-white/5 border border-white/10">
+<span class="opacity-80">Pedido Dic-23</span>
+<span class="font-bold text-caro-yellow">19.4% Mgn</span>
+</div>
+</div>
+<p class="text-[10px] text-caro-yellow flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-xs">warning</span> Tendencia a la baja en rentabilidad acumulada.
+                                </p>
+</div>
+<!-- Justification -->
+<div class="space-y-2">
+<h4 class="text-xs font-black uppercase text-white/60 tracking-widest">Justificación del Vendedor</h4>
+<div class="bg-white/5 p-4 rounded-lg italic text-sm text-slate-200 leading-relaxed border-l-4 border-primary">
+                                    "El cliente Constructora Andes está en proceso de licitación para la Etapa 3 del puente Chacao. La competencia (Aceros Global) está ofertando un 15% de descuento base. Se requiere igualar para mantener la fidelidad de cuenta estratégica."
+                                </div>
+<div class="flex items-center gap-2 mt-2">
+<img class="size-6 rounded-full" data-alt="Sales representative avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjSs4YvlHuBTUMDAqY8DAjfGrAWMVl1j-S9SvXZ7wMQSvitpzBflPnaQmcRr-kJ8QlVbM2GaLLuv3Of6f5l_Nkxgl8gKh8jgYaQiW-KBRv6wqeYZFLPc1QStXOFO2u_Bp0ZQv3mLZtLQakHMOH7mUc9qSAU8zz5Kbd8f2UZ7LJT4659t4E5nBE8NPHwv2qMEx8FST8B4IWsid_5JF35yTj4lKiI60SWIHoCD8Nr8gT5T9jXRSV29n692tzONL8trfsT2CPnJOzaM0o"/>
+<span class="text-[10px] font-bold">Solicitado por: Javier Morales (KAM Senior)</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="p-6 bg-white/5 space-y-3">
+<button class="w-full bg-caro-green text-white py-3 rounded-xl font-black text-sm hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 shadow-xl shadow-caro-green/20">
+<span class="material-symbols-outlined">check_circle</span> APROBAR (DENTRO DE ATRIBUCIÓN)
+                            </button>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-caro-red/20 text-caro-red border border-caro-red/30 py-2 rounded-xl font-bold text-xs hover:bg-caro-red/30 transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm">cancel</span> RECHAZAR
+                                </button>
+<button class="bg-slate-700/50 text-white border border-white/10 py-2 rounded-xl font-bold text-xs hover:bg-slate-600 transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm">groups</span> ESCALAR
+                                </button>
+</div>
+</div>
+</div>
+<!-- Additional Context -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+<h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Acciones Disparadas</h4>
+<ul class="space-y-2 text-xs">
+<li class="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-primary text-sm">mail</span> Notificación automática a KAM vía Email
+                            </li>
+<li class="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-primary text-sm">sync</span> Actualización de precio neto en ERP (SAP S/4HANA)
+                            </li>
+<li class="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-primary text-sm">task_alt</span> Registro en Log de Auditoría Gobernanza
+                            </li>
+</ul>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-900 text-slate-400 py-8 px-6 mt-12">
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+<div>
+<h5 class="text-white font-black text-sm uppercase tracking-widest mb-4">Caro Consulting Protocol</h5>
+<p class="text-xs leading-relaxed opacity-70">
+                        Este workflow cumple con la política de gobernanza establecida en la Fase 5. Todas las excepciones que superen el 10% de delta respecto a la política base deben ser visadas obligatoriamente por el CFO o Gerente Comercial.
+                    </p>
+</div>
+<div>
+<h5 class="text-white font-black text-sm uppercase tracking-widest mb-4">SLA de Respuesta</h5>
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] border-b border-white/10 pb-1">
+<span>Prioridad Alta</span>
+<span class="text-caro-red font-bold">2 Horas</span>
+</div>
+<div class="flex justify-between text-[10px] border-b border-white/10 pb-1">
+<span>Prioridad Media</span>
+<span class="text-caro-yellow font-bold">8 Horas</span>
+</div>
+<div class="flex justify-between text-[10px] border-b border-white/10 pb-1">
+<span>Prioridad Baja</span>
+<span class="text-caro-green font-bold">24 Horas</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<img alt="Caro Consulting Logo" class="opacity-50 mb-4" data-alt="Caro Consulting minimalist brand logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZN3-eAwFGw4kiZESntuTd-3ZLIKZ3ZISVESMkAvLbyN81uyCMn1b8uxjGrPQ3MROsTpp7gT1THFGsWtbOG-7rhZLfcoWUprPiBFP-AE6_sx942ioTy6gKR9aO9iGK1wwFJuK4XbdDXQ-Utqpn-ID3TTlXGrQrgiBGQ_XqjT8iMLygrmulKR_IUkuc0XgBLlnKTlWLWBWlgRxFgQVW2oXldv8T2T4tTfSUNQK7viiPQOJpCbqK_XO9ZolJXWgytkuj5SSH4TGHgwqP"/>
+<p class="text-[10px] text-right italic">© 2024 Caro Consulting. Implementación de Estrategia de Precios para Aceros del Sur SpA.</p>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

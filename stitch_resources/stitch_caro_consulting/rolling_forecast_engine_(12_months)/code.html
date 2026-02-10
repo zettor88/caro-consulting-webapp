@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rolling Forecast Engine - Aceros del Sur SpA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1F4E78", // Actualizado al color corporativo solicitado
+                        "secondary": "#28A745",
+                        "warning": "#FFC107",
+                        "danger": "#DC3545",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#121212",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-300">
+<div class="min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-3 sticky top-0 z-50 shadow-sm">
+<div class="max-w-[1600px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg text-white">
+<span class="material-symbols-outlined block">monitoring</span>
+</div>
+<div>
+<h2 class="text-lg font-bold leading-tight text-primary dark:text-blue-400">Aceros del Sur SpA</h2>
+<p class="text-[10px] font-bold tracking-widest uppercase text-slate-500">CARO CONSULTING • Gestión Financiera</p>
+</div>
+</div>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-800 hidden md:block"></div>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-sm font-semibold text-primary border-b-2 border-primary pb-1" href="#">Dashboard</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Escenarios</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Reportes</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Gobernanza</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex flex-col items-end mr-2">
+<span class="text-xs font-bold text-secondary">Nivel B - Implementación</span>
+<span class="text-[10px] text-slate-400">Fase 4 - Visualización Ejecutiva</span>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-blue-900 text-white rounded-lg text-sm font-bold transition-all shadow-md">
+<span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+<span>Exportar PDF</span>
+</button>
+<div class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 border-2 border-white dark:border-slate-700 flex items-center justify-center overflow-hidden">
+<img alt="Avatar Usuario" data-alt="Profile picture of a corporate executive" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgBrlTtbrhaFDzO-oJe5yx-kzRnHEyYIyBGFbmyQueXocUM087oIvVdASfezd5v0S3eTmry1FxhyRrd2AsBt3MpkUM8xwmnHTUBjArJ9zw_WxsjsKcIuHJAeV_pjfwb4Wqxx3GSME7BvObEOIc9_AKX86C1UDqwnaD58THZZQyUQ9aFJY8g7_c9aIP8ly7YS662AUlOx9xc5ewv7dvcuUfazMZhoIMjczeoByQSNwcFPd_3MvmDvnEY-4TEbfBzOfq2N46_ZVdQO87"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-[1600px] mx-auto w-full p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left Side: Simulation Panel -->
+<aside class="lg:col-span-3 flex flex-col gap-6">
+<!-- Simulation Sidebar Card -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">tune</span>
+<h3 class="font-bold text-slate-800 dark:text-slate-100">Simulación de Escenarios</h3>
+</div>
+<div class="space-y-8">
+<div>
+<div class="flex justify-between mb-2">
+<label class="text-xs font-bold text-slate-500 uppercase">Crecimiento Volumen (%)</label>
+<span class="text-sm font-bold text-primary">+4.5%</span>
+</div>
+<input class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary" max="20" min="-10" type="range" value="4.5"/>
+<div class="flex justify-between text-[10px] text-slate-400 mt-1">
+<span>-10%</span>
+<span>0%</span>
+<span>+20%</span>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<label class="text-xs font-bold text-slate-500 uppercase">Variación Precio (%)</label>
+<span class="text-sm font-bold text-primary">+2.0%</span>
+</div>
+<input class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary" max="15" min="-5" type="range" value="2.0"/>
+<div class="flex justify-between text-[10px] text-slate-400 mt-1">
+<span>-5%</span>
+<span>0%</span>
+<span>+15%</span>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+<button class="w-full py-3 bg-secondary hover:bg-green-700 text-white rounded-xl font-bold text-sm transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">refresh</span>
+                                Recalcular Forecast
+                            </button>
+</div>
+</div>
+</div>
+<!-- Governance Alert -->
+<div class="bg-danger/10 border border-danger/20 p-5 rounded-xl">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-danger mt-1">error</span>
+<div>
+<h4 class="text-danger font-black text-sm uppercase tracking-tight">ACCIÓN DISPARADA: Ritual de Ajuste</h4>
+<p class="text-xs text-danger/80 mt-1 leading-relaxed">Brecha vs Presupuesto es &gt;10%. Citar a Comité de Operaciones para plan de mitigación inmediato.</p>
+</div>
+</div>
+</div>
+<!-- Countdown -->
+<div class="bg-primary/5 dark:bg-primary/10 border border-primary/20 p-5 rounded-xl flex items-center justify-between">
+<div>
+<p class="text-[10px] font-bold text-primary/70 uppercase">Cierre de Mes</p>
+<p class="text-2xl font-black text-primary">4 Días</p>
+</div>
+<div class="size-10 bg-primary/20 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+</div>
+</aside>
+<!-- Main Content: KPI and Charts -->
+<div class="lg:col-span-9 flex flex-col gap-6">
+<!-- Header Info -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl font-black tracking-tight text-slate-800 dark:text-white leading-none">Rolling Forecast Engine (12 months)</h1>
+<p class="text-slate-500 mt-1 text-sm">Proyección Dinámica de Resultados y Simulación de Escenarios Financieros</p>
+</div>
+<div class="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-600 dark:text-slate-400">
+<span class="size-2 rounded-full bg-secondary"></span>
+                        Última Actualización: Hoy, 09:45 AM
+                    </div>
+</div>
+<!-- KPI Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all group">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Forecast EBITDA (%)</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-slate-800 dark:text-white">19.2%</span>
+<span class="text-xs font-bold text-secondary flex items-center">
+<span class="material-symbols-outlined text-xs">arrow_upward</span> 0.7%
+                            </span>
+</div>
+<p class="text-[10px] text-slate-400 mt-1">vs Presupuesto (18.5%)</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all group">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Variación Absoluta</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-slate-800 dark:text-white">+$45.2M</span>
+<span class="text-xs font-bold text-secondary flex items-center">
+<span class="material-symbols-outlined text-xs">arrow_upward</span> 5.2%
+                            </span>
+</div>
+<p class="text-[10px] text-slate-400 mt-1">CLP Proyectado Anual</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all group">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Exactitud (Bias)</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-slate-800 dark:text-white">2.1%</span>
+<span class="text-xs font-bold text-warning flex items-center">
+<span class="material-symbols-outlined text-xs">trending_down</span> -0.3%
+                            </span>
+</div>
+<p class="text-[10px] text-slate-400 mt-1">Variación histórica media</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all group">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Estado Presupuesto</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-danger">Crítico</span>
+</div>
+<p class="text-[10px] text-slate-400 mt-1">Requiere ajuste en Q3-Q4</p>
+</div>
+</div>
+<!-- Main Chart Area -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="font-bold text-slate-800 dark:text-slate-100">Real vs Forecast vs Presupuesto</h3>
+<p class="text-xs text-slate-400">Proyección 12 meses (Ene - Dic)</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-sm bg-primary"></span>
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Real</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-sm bg-primary/40"></span>
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Forecast</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="h-0.5 w-4 bg-warning"></span>
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Presupuesto</span>
+</div>
+</div>
+</div>
+<!-- Mockup Chart -->
+<div class="relative h-64 w-full flex items-end justify-between px-2 pb-6 border-b border-slate-100 dark:border-slate-800">
+<!-- Budget Line (Overlay) -->
+<div class="absolute top-1/2 left-0 w-full h-px border-t-2 border-dashed border-warning opacity-50 z-10"></div>
+<!-- Month Bars -->
+<div class="flex flex-col items-center gap-2 w-full max-w-[40px]">
+<div class="w-full bg-primary rounded-t-sm" style="height: 60%"></div>
+<span class="text-[10px] font-bold text-slate-400">Ene</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full max-w-[40px]">
+<div class="w-full bg-primary rounded-t-sm" style="height: 65%"></div>
+<span class="text-[10px] font-bold text-slate-400">Feb</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full max-w-[40px]">
+<div class="w-full bg-primary rounded-t-sm" style="height: 75%"></div>
+<span class="text-[10px] font-bold text-slate-400">Mar</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full max-w-[40px]">
+<div class="w-full bg-primary rounded-t-sm" style="height: 70%"></div>
+<span class="text-[10px] font-bold text-slate-400">Abr</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full max-w-[40px]">
+<div class="w-full bg-primary rounded-t-sm" style="height: 80%"></div>
+<span class="text-[10px] font-bold text-primary font-black">May</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full max-w-[40px]">
+<div class="w-full bg-primary/40 rounded-t-sm" style="height: 85%"></div>
+<span class="text-[10px] font-bold text-slate-400">Jun</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full max-w-[40px]">
+<div class="w-full bg-primary/40 rounded-t-sm" style="height: 90%"></div>
+<span class="text-[10px] font-bold text-slate-400">Jul</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full max-w-[40px]">
+<div class="w-full bg-primary/40 rounded-t-sm" style="height: 82%"></div>
+<span class="text-[10px] font-bold text-slate-400">Ago</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full max-w-[40px]">
+<div class="w-full bg-primary/40 rounded-t-sm" style="height: 78%"></div>
+<span class="text-[10px] font-bold text-slate-400">Sep</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full max-w-[40px]">
+<div class="w-full bg-primary/40 rounded-t-sm" style="height: 85%"></div>
+<span class="text-[10px] font-bold text-slate-400">Oct</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full max-w-[40px]">
+<div class="w-full bg-primary/40 rounded-t-sm" style="height: 95%"></div>
+<span class="text-[10px] font-bold text-slate-400">Nov</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full max-w-[40px]">
+<div class="w-full bg-primary/40 rounded-t-sm" style="height: 100%"></div>
+<span class="text-[10px] font-bold text-slate-400">Dic</span>
+</div>
+</div>
+</div>
+<!-- Detailed Table -->
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h3 class="font-bold text-slate-800 dark:text-slate-100">Detalle de Resultados Mensuales</h3>
+<div class="flex gap-2">
+<span class="text-[10px] font-bold bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Valores en kCLP</span>
+</div>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-sm text-left">
+<thead class="bg-slate-50 dark:bg-slate-800/50 text-[10px] font-black uppercase text-slate-500 tracking-wider">
+<tr>
+<th class="px-6 py-3">Mes</th>
+<th class="px-6 py-3 text-right">Ingresos</th>
+<th class="px-6 py-3 text-right">Costos</th>
+<th class="px-6 py-3 text-right">Margen</th>
+<th class="px-6 py-3 text-right">EBITDA %</th>
+<th class="px-6 py-3 text-right">Var vs Budget</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-bold text-slate-400">Abril (Real)</td>
+<td class="px-6 py-4 text-right font-medium">1.450.000</td>
+<td class="px-6 py-4 text-right">980.000</td>
+<td class="px-6 py-4 text-right">470.000</td>
+<td class="px-6 py-4 text-right font-bold text-slate-800 dark:text-white">18.2%</td>
+<td class="px-6 py-4 text-right font-bold text-secondary">+2.1%</td>
+</tr>
+<tr class="bg-primary/5 dark:bg-primary/10 border-l-4 border-primary">
+<td class="px-6 py-4 font-black text-primary">Mayo (Proy)</td>
+<td class="px-6 py-4 text-right font-medium">1.520.000</td>
+<td class="px-6 py-4 text-right">1.020.000</td>
+<td class="px-6 py-4 text-right">500.000</td>
+<td class="px-6 py-4 text-right font-black text-primary">19.2%</td>
+<td class="px-6 py-4 text-right font-bold text-secondary">+0.7%</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-bold text-slate-400">Junio (Proy)</td>
+<td class="px-6 py-4 text-right font-medium">1.480.000</td>
+<td class="px-6 py-4 text-right">1.100.000</td>
+<td class="px-6 py-4 text-right">380.000</td>
+<td class="px-6 py-4 text-right font-bold text-slate-800 dark:text-white">14.5%</td>
+<td class="px-6 py-4 text-right font-bold text-danger">-3.2%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto border-t border-slate-200 dark:border-slate-800 p-6 bg-white dark:bg-slate-900">
+<div class="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-4 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer">
+<img alt="Logo Caro Consulting" data-alt="Corporate logo of CARO CONSULTING management firm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG23j2uZ5fmFL_JJNdAiUVGb7nr62vYkksVPE11JvFLjrRS3DRlKVtc8rllD4Z9XPWSuLIf1E9JjFgCeZj0ri31WEt558DwEO_vSn6O0UyflmctXXycUoT1MQ4gZok31OE2oMPR3prP7CtOQhob3Kul9VizhiUn1COS-X3Vt-W-PflwmJHBOF1KTWLtPFc4-SWaabG4ueksrWEOxECJw86ueqspQvYgyxS5Dz8W7MZLtD9rwBxSE6ivMD7YGwK6N2NLZ6ofeu7tA1D"/>
+</div>
+<div class="text-[10px] text-slate-400 font-medium text-center md:text-right">
+                    © 2024 ACEROS DEL SUR SpA - Todos los derechos reservados.<br/>
+                    Propulsado por CARO CONSULTING - Business Intelligence &amp; FP&amp;A.
+                </div>
+</div>
+</footer>
+</div>
+</body></html>
