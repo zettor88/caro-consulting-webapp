@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, BarChart3, PieChart, TrendingUp, CheckCircle, Linkedin, Mail, Calendar } from "lucide-react";
+import { ArrowRight, BarChart3, PieChart, TrendingUp, CheckCircle, Linkedin, Mail, Calendar, MonitorPlay } from "lucide-react";
 import supabase from "@/lib/supabase";
 
 // Fallback content if DB is empty
@@ -32,6 +32,12 @@ const defaultContent = {
             title: "FP&A Avanzado",
             description: "Modelos financieros predictivos y control de gestión para la toma de decisiones ejecutivas.",
             items: ["Modelado de escenarios", "Control OPEX/CAPEX"]
+        },
+        {
+            icon: "MonitorPlay",
+            title: "Business Intelligence",
+            description: "Implementación de dashboards a medida en Power BI, Looker Studio y Excel avanzado.",
+            items: ["Reportes Automatizados", "Dashboards Interactivos"]
         }
     ],
     cases: [
@@ -75,6 +81,7 @@ export default function Home() {
         if (name === 'TrendingUp') return <TrendingUp className="w-8 h-8" />;
         if (name === 'PieChart') return <PieChart className="w-8 h-8" />;
         if (name === 'BarChart3') return <BarChart3 className="w-8 h-8" />;
+        if (name === 'MonitorPlay') return <BarChart3 className="w-8 h-8" />; // Using BarChart3 as fallback or import MonitorPlay if available
         return <BarChart3 className="w-8 h-8" />;
     };
 
@@ -156,7 +163,7 @@ export default function Home() {
                         <div className="h-1 flex-1 bg-white/5 ml-8 rounded-full hidden md:block"></div>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
+                    <div className="grid md:grid-cols-2 gap-8">
                         {content.services.map((service: any, idx: number) => (
                             <div key={idx} className="group p-8 rounded border border-white/5 bg-white/5 hover:bg-white/[0.08] hover:border-primary/30 transition-all duration-300">
                                 <div className="w-14 h-14 bg-primary/10 rounded flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
