@@ -42,18 +42,18 @@ const defaultContent = {
     ],
     cases: [
         {
-            title: "Tubexa",
-            description: "Implementación de una nueva estructura de descuentos y optimización del mix de productos, logrando un incremento sostenido en el margen EBITDA del 15% en 6 meses.",
+            title: "Trayectoria Corporativa",
+            description: "Como líder de Pricing y Producto en Tubexa, diseñé e implementé la nueva arquitectura de precios y racionalización de SKUs, logrando una mejora estructural en la rentabilidad.",
             metric_value: "+15%",
-            metric_label: "EBITDA",
-            time_value: "6 Meses",
-            time_label: "Tiempo Ejecución"
+            metric_label: "EBITDA Anual",
+            time_value: "+10 Años",
+            time_label: "Experiencia"
         }
     ],
     bio: {
         name: "Sebastian Caro",
         role: "Expert Pricing & Financial Strategy",
-        description: "Con más de 10 años de experiencia liderando transformaciones financieras. Mi enfoque combina el rigor analítico de la ingeniería financiera con una visión estratégica de negocio, asegurando impacto directo en la última línea del P&L.",
+        description: "Contador Auditor e Ingeniero Comercial con más de 10 años de experiencia ejecutiva en Pricing, Product Management, Control de Gestión e Inteligencia de Negocios. He liderado estrategias comerciales y financieras en empresas industriales de alto volumen, combinando visión de negocio con analítica avanzada de datos.",
         linkedin: "https://www.linkedin.com/in/sebastiancaroalvarado/",
         email: "sebastian@caroconsulting.com",
         initials: "SC"
@@ -101,7 +101,7 @@ export default function Home() {
                         </div>
                         <div className="hidden md:flex items-center gap-10">
                             <a href="#servicios" className="text-sm font-semibold text-slate-300 hover:text-primary transition-colors">Servicios</a>
-                            <a href="#casos" className="text-sm font-semibold text-slate-300 hover:text-primary transition-colors">Casos de Éxito</a>
+                            <a href="#casos" className="text-sm font-semibold text-slate-300 hover:text-primary transition-colors">Trayectoria</a>
                             <a href="#nosotros" className="text-sm font-semibold text-slate-300 hover:text-primary transition-colors">Consultor</a>
                             <Link href="/login" className="text-sm font-semibold text-slate-300 hover:text-white transition-colors">
                                 Acceso Clientes
