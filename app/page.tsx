@@ -138,7 +138,7 @@ export default function Home() {
                     />
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
-                            href="/agendar"
+                            href="/formularios"
                             className="bg-primary hover:bg-primary/90 text-white font-bold py-4 px-8 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:translate-y-[-2px]"
                         >
                             {content.hero.cta_primary} <ArrowRight className="w-5 h-5" />
@@ -369,10 +369,10 @@ export default function Home() {
                                 Agenda un diagnóstico inicial de 30 minutos sin costo para identificar oportunidades inmediatas.
                             </p>
                             <Link
-                                href="/agendar"
+                                href="/formularios"
                                 className="inline-flex bg-white text-primary hover:bg-emerald-50 font-bold py-4 px-10 rounded-lg transition shadow-xl text-lg items-center gap-2"
                             >
-                                <Calendar className="w-5 h-5" /> Agendar Diagnóstico Ahora
+                                <Calendar className="w-5 h-5" /> Iniciar Evaluación Ahora
                             </Link>
                         </div>
                     </div>
