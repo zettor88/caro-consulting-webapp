@@ -43,7 +43,7 @@ const defaultContent = {
     cases: [
         {
             title: "Trayectoria Corporativa",
-            description: "Como líder de Pricing y Producto en Tubexa, diseñé e implementé la nueva arquitectura de precios y racionalización de SKUs, logrando una mejora estructural en la rentabilidad.",
+            description: "Como líder de Pricing y Producto en una empresa líder del sector industrial, diseñé e implementé la nueva arquitectura de precios y racionalización de SKUs, logrando una mejora estructural en la rentabilidad.",
             metric_value: "+15%",
             metric_label: "EBITDA Anual",
             time_value: "+10 Años",
@@ -56,7 +56,8 @@ const defaultContent = {
         description: "Contador Auditor e Ingeniero Comercial con más de 10 años de experiencia ejecutiva en Pricing, Product Management, Control de Gestión e Inteligencia de Negocios. He liderado estrategias comerciales y financieras en empresas industriales de alto volumen, combinando visión de negocio con analítica avanzada de datos.",
         linkedin: "https://www.linkedin.com/in/sebastiancaroalvarado/",
         email: "sebastian@caroconsulting.com",
-        initials: "SC"
+        initials: "SC",
+        image: "/profile_placeholder.png"
     }
 };
 
@@ -320,10 +321,18 @@ export default function Home() {
                     <div className="flex flex-col md:flex-row items-center gap-12 text-left">
                         <div className="w-48 h-48 bg-[#0c0c1b] rounded-full flex-shrink-0 border-4 border-white/10 overflow-hidden relative group">
                             <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors"></div>
-                            {/* Placeholder for Profile Photo */}
-                            <div className="w-full h-full flex items-center justify-center text-slate-500 text-4xl font-bold bg-white/5">
-                                {content.bio.initials}
-                            </div>
+                            {/* Profile Photo with Fallback */}
+                            {content.bio.image ? (
+                                <img
+                                    src={content.bio.image}
+                                    alt={content.bio.name}
+                                    className="w-full h-full object-cover"
+                                />
+                            ) : (
+                                <div className="w-full h-full flex items-center justify-center text-slate-500 text-4xl font-bold bg-white/5">
+                                    {content.bio.initials}
+                                </div>
+                            )}
                         </div>
                         <div>
                             <h3 className="text-3xl font-bold text-white mb-2">{content.bio.name}</h3>
