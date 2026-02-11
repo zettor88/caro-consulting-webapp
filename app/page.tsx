@@ -218,13 +218,61 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Success Cases Section */}
+            {/* Methodology / Process Section */}
+            <section className="py-24 bg-[#0a0a16] border-y border-white/5">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                    <div className="mb-16 text-center max-w-3xl mx-auto">
+                        <h2 className="text-3xl font-black text-white mb-6">Metodología Ágil y Directa</h2>
+                        <p className="text-lg text-slate-400">Sin burocracia. Tres pasos para transformar tu rentabilidad.</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8 relative">
+                        {/* Connector Line (Desktop) */}
+                        <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-primary/0 via-primary/30 to-primary/0 z-0"></div>
+
+                        {/* Step 1 */}
+                        <div className="relative z-10 text-center group">
+                            <div className="w-24 h-24 mx-auto bg-[#101022] border-2 border-primary/20 rounded-full flex items-center justify-center mb-6 group-hover:border-primary transition-colors shadow-[0_0_20px_rgba(16,185,129,0.1)]">
+                                <span className="text-3xl font-bold text-white">1</span>
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-3">Diagnóstico Flash</h3>
+                            <p className="text-sm text-slate-400 leading-relaxed max-w-xs mx-auto">
+                                En 1 semana auditamos tus datos y precios. Identificamos las fugas de margen inmediatas.
+                            </p>
+                        </div>
+
+                        {/* Step 2 */}
+                        <div className="relative z-10 text-center group">
+                            <div className="w-24 h-24 mx-auto bg-[#101022] border-2 border-primary/20 rounded-full flex items-center justify-center mb-6 group-hover:border-primary transition-colors shadow-[0_0_20px_rgba(16,185,129,0.1)]">
+                                <span className="text-3xl font-bold text-white">2</span>
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-3">Estrategia & Diseño</h3>
+                            <p className="text-sm text-slate-400 leading-relaxed max-w-xs mx-auto">
+                                Co-diseñamos la nueva política de precios y el roadmap de producto. Sin teorías, puro plan de acción.
+                            </p>
+                        </div>
+
+                        {/* Step 3 */}
+                        <div className="relative z-10 text-center group">
+                            <div className="w-24 h-24 mx-auto bg-[#101022] border-2 border-primary/20 rounded-full flex items-center justify-center mb-6 group-hover:border-primary transition-colors shadow-[0_0_20px_rgba(16,185,129,0.1)]">
+                                <span className="text-3xl font-bold text-white">3</span>
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-3">Ejecución & Control</h3>
+                            <p className="text-sm text-slate-400 leading-relaxed max-w-xs mx-auto">
+                                Implementamos los dashboards (BI) para que monitorees el impacto en tiempo real.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Trajectory / Cases Section */}
             <section id="casos" className="py-24">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     {content.cases.map((caso: any, idx: number) => (
                         <div key={idx} className="grid md:grid-cols-2 gap-16 items-center mb-24 last:mb-0">
                             <div>
-                                <h2 className="text-4xl font-black mb-6">Caso de Éxito: {caso.title}</h2>
+                                <h2 className="text-4xl font-black mb-6">{caso.title}</h2>
                                 <p className="text-slate-400 text-lg mb-8 leading-relaxed">
                                     {caso.description}
                                 </p>
