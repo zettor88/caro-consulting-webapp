@@ -18,25 +18,25 @@ const defaultContent = {
         {
             icon: "TrendingUp",
             title: "Pricing Strategy",
-            description: "Diseño de arquitecturas de precios que maximizan la captura de valor sin sacrificar volumen.",
+            description: "Deja de dejar dinero en la mesa. Captura el valor real de tus productos sin sacrificar volumen de venta.",
             items: ["Análisis de elasticidad", "Dynamic Pricing B2B"]
         },
         {
             icon: "PieChart",
             title: "Product Management",
-            description: "Alineación del roadmap de producto con los objetivos financieros de la compañía.",
+            description: "Elimina la complejidad no rentable. Racionaliza tu portafolio para enfocarte en los SKUs ganadores.",
             items: ["Racionalización SKU", "Roadmap de innovación"]
         },
         {
             icon: "BarChart3",
             title: "FP&A Avanzado",
-            description: "Modelos financieros predictivos y control de gestión para la toma de decisiones ejecutivas.",
+            description: "Toma decisiones, no adivinanzas. Modelos predictivos y control de gestión para cerrar el mes con certeza.",
             items: ["Modelado de escenarios", "Control OPEX/CAPEX"]
         },
         {
             icon: "MonitorPlay",
             title: "Business Intelligence",
-            description: "Implementación de dashboards a medida en Power BI, Looker Studio y Excel avanzado.",
+            description: "Visualiza tu negocio en tiempo real. Dashboards interactivos en Power BI para anticiparte a los problemas.",
             items: ["Reportes Automatizados", "Dashboards Interactivos"]
         }
     ],
@@ -81,7 +81,7 @@ export default function Home() {
         if (name === 'TrendingUp') return <TrendingUp className="w-8 h-8" />;
         if (name === 'PieChart') return <PieChart className="w-8 h-8" />;
         if (name === 'BarChart3') return <BarChart3 className="w-8 h-8" />;
-        if (name === 'MonitorPlay') return <BarChart3 className="w-8 h-8" />; // Using BarChart3 as fallback or import MonitorPlay if available
+        if (name === 'MonitorPlay') return <MonitorPlay className="w-8 h-8" />;
         return <BarChart3 className="w-8 h-8" />;
     };
 
@@ -152,13 +152,45 @@ export default function Home() {
                 </div>
             </section>
 
+            {/* Pain Points / Problem Agitation Section */}
+            <section className="py-20 border-y border-white/5 bg-[#0a0a16]">
+                <div className="max-w-5xl mx-auto px-6 lg:px-8 text-center">
+                    <h2 className="text-2xl md:text-3xl font-bold mb-12 text-white">
+                        ¿Te suenan familiares estos desafíos?
+                    </h2>
+                    <div className="grid md:grid-cols-3 gap-8">
+                        <div className="p-6 rounded bg-red-500/5 border border-red-500/10">
+                            <div className="w-12 h-12 mx-auto bg-red-500/10 rounded-full flex items-center justify-center mb-4">
+                                <span className="text-2xl">📉</span>
+                            </div>
+                            <h3 className="font-bold text-white mb-2">Erosión de Márgenes</h3>
+                            <p className="text-sm text-slate-400">Tus vendedores otorgan descuentos agresivos para cerrar tratos, sacrificando la rentabilidad real.</p>
+                        </div>
+                        <div className="p-6 rounded bg-red-500/5 border border-red-500/10">
+                            <div className="w-12 h-12 mx-auto bg-red-500/10 rounded-full flex items-center justify-center mb-4">
+                                <span className="text-2xl">📦</span>
+                            </div>
+                            <h3 className="font-bold text-white mb-2">Complejidad Operativa</h3>
+                            <p className="text-sm text-slate-400">Manejas miles de SKUs y clientes, pero no sabes cuáles realmente generan valor y cuáles destruyen caja.</p>
+                        </div>
+                        <div className="p-6 rounded bg-red-500/5 border border-red-500/10">
+                            <div className="w-12 h-12 mx-auto bg-red-500/10 rounded-full flex items-center justify-center mb-4">
+                                <span className="text-2xl">🐢</span>
+                            </div>
+                            <h3 className="font-bold text-white mb-2">Cierres Lentos</h3>
+                            <p className="text-sm text-slate-400">Tu equipo financiero tarda semanas en obtener reportes, tomando decisiones con datos del mes pasado.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Services Section */}
-            <section id="servicios" className="py-24 bg-white/[0.02] border-y border-white/5">
+            <section id="servicios" className="py-24 bg-white/[0.02]">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="flex flex-col md:flex-row items-end justify-between gap-8 mb-20">
                         <div className="max-w-2xl">
-                            <h2 className="text-4xl font-black text-white mb-6">Nuestras Especialidades</h2>
-                            <p className="text-lg text-slate-400">Soluciones estratégicas de alto impacto.</p>
+                            <h2 className="text-4xl font-black text-white mb-6">Nuestras Soluciones</h2>
+                            <p className="text-lg text-slate-400">Transformamos complejidad financiera en estrategia simple.</p>
                         </div>
                         <div className="h-1 flex-1 bg-white/5 ml-8 rounded-full hidden md:block"></div>
                     </div>
