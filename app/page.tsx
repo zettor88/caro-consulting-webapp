@@ -1,117 +1,33 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, BarChart3, PieChart, TrendingUp, CheckCircle, Linkedin, Mail, Calendar, MonitorPlay } from "lucide-react";
-import supabase from "@/lib/supabase";
-
-// Fallback content if DB is empty
-const defaultContent = {
-    hero: {
-        tagline: "Consultoría Industrial B2B",
-        title: "Impulsa tu rentabilidad con <br /> <span class=\"text-primary\">decisiones basadas en datos</span>",
-        subtitle: "Optimización estratégica con el respaldo de Sebastián Caro: más de <span class=\"text-white font-bold\">+332MM</span> en mejoras generadas para líderes del sector.",
-        cta_primary: "Solicitar Auditoría Express",
-        cta_secondary: "Ver Casos de Éxito"
-    },
-    services: [
-        {
-            icon: "TrendingUp",
-            title: "Pricing Strategy",
-            description: "Deja de dejar dinero en la mesa. Captura el valor real de tus productos sin sacrificar volumen de venta.",
-            items: ["Análisis de elasticidad", "Dynamic Pricing B2B"]
-        },
-        {
-            icon: "PieChart",
-            title: "Product Management",
-            description: "Elimina la complejidad no rentable. Racionaliza tu portafolio para enfocarte en los SKUs ganadores.",
-            items: ["Racionalización SKU", "Roadmap de innovación"]
-        },
-        {
-            icon: "BarChart3",
-            title: "FP&A Avanzado",
-            description: "Toma decisiones, no adivinanzas. Modelos predictivos y control de gestión para cerrar el mes con certeza.",
-            items: ["Modelado de escenarios", "Control OPEX/CAPEX"]
-        },
-        {
-            icon: "MonitorPlay",
-            title: "Business Intelligence",
-            description: "Visualiza tu negocio en tiempo real. Dashboards interactivos en Power BI para anticiparte a los problemas.",
-            items: ["Reportes Automatizados", "Dashboards Interactivos"]
-        }
-    ],
-    cases: [
-        {
-            title: "Trayectoria Corporativa",
-            description: "Como líder de Pricing y Producto en una empresa líder del sector industrial, diseñé e implementé la nueva arquitectura de precios y racionalización de SKUs, logrando una mejora estructural en la rentabilidad.",
-            metric_value: "+15%",
-            metric_label: "EBITDA Anual",
-            time_value: "+10 Años",
-            time_label: "Experiencia"
-        }
-    ],
-    bio: {
-        name: "Sebastian Caro",
-        role: "Expert Pricing & Financial Strategy",
-        description: "Contador Auditor e Ingeniero Comercial con más de 10 años de experiencia ejecutiva en Pricing, Product Management, Control de Gestión e Inteligencia de Negocios. He liderado estrategias comerciales y financieras en empresas industriales de alto volumen, combinando visión de negocio con analítica avanzada de datos.",
-        linkedin: "https://www.linkedin.com/in/sebastiancaroalvarado/",
-        email: "sebastian@caroconsulting.com",
-        initials: "SC",
-        image: "/profile_placeholder.png"
-    }
-};
+import { ArrowRight, BarChart3, PieChart, TrendingUp, CheckCircle, Linkedin, Calendar, MonitorPlay, ChevronRight, Mail, Target, Layers } from "lucide-react";
 
 export default function Home() {
-    const [content, setContent] = useState<any>(defaultContent);
-
-    useEffect(() => {
-        const fetchContent = async () => {
-            const { data } = await supabase.from('site_content').select('*');
-            if (data && data.length > 0) {
-                const contentMap: any = { ...defaultContent };
-                data.forEach(item => {
-                    contentMap[item.key] = item.content;
-                });
-                setContent(contentMap);
-            }
-        };
-        fetchContent();
-    }, []);
-
-    const getIcon = (name: string) => {
-        if (name === 'TrendingUp') return <TrendingUp className="w-8 h-8" />;
-        if (name === 'PieChart') return <PieChart className="w-8 h-8" />;
-        if (name === 'BarChart3') return <BarChart3 className="w-8 h-8" />;
-        if (name === 'MonitorPlay') return <MonitorPlay className="w-8 h-8" />;
-        return <BarChart3 className="w-8 h-8" />;
-    };
-
     return (
-        <div className="min-h-screen bg-[#101022] text-white font-sans selection:bg-primary selection:text-white">
-            {/* Navigation */}
-            <nav className="glass-nav sticky top-0 z-50">
+        <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-slate-900 selection:text-white">
+            {/* Navegación - Estilo Premium Minimalista */}
+            <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
                         <div className="flex items-center gap-3">
-                            <div className="bg-primary/10 p-1.5 rounded border border-primary/20">
-                                <BarChart3 className="w-6 h-6 text-primary" />
+                            <div className="bg-slate-900 p-2 rounded text-white shadow-sm border border-slate-700">
+                                <BarChart3 className="w-5 h-5 flex-shrink-0" />
                             </div>
-                            <span className="text-xl font-bold tracking-tight uppercase">
-                                Caro <span className="text-primary">Consulting</span>
+                            <span className="text-xl font-bold tracking-tight text-slate-900">
+                                Caro <span className="font-light">Consulting</span>
                             </span>
                         </div>
-                        <div className="hidden md:flex items-center gap-10">
-                            <a href="#servicios" className="text-sm font-semibold text-slate-300 hover:text-primary transition-colors">Servicios</a>
-                            <a href="#casos" className="text-sm font-semibold text-slate-300 hover:text-primary transition-colors">Trayectoria</a>
-                            <a href="#nosotros" className="text-sm font-semibold text-slate-300 hover:text-primary transition-colors">Consultor</a>
-                            <Link href="/login" className="text-sm font-semibold text-slate-300 hover:text-white transition-colors">
-                                Acceso Clientes
+                        <div className="hidden md:flex items-center gap-8">
+                            <a href="#servicios" className="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Ejes de Intervención</a>
+                            <a href="#metodologia" className="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Nuestro Enfoque</a>
+                            <a href="#consultor" className="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">El Consultor</a>
+                            <Link href="/login" className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+                                Acceso Plataforma
                             </Link>
                             <Link
                                 href="/agendar"
-                                className="bg-primary hover:bg-primary/90 text-white text-sm font-bold py-2.5 px-6 rounded shadow-lg shadow-primary/20 transition-all flex items-center gap-2"
+                                className="bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold py-2.5 px-6 rounded-md transition-all flex items-center gap-2 shadow-md shadow-slate-200"
                             >
-                                <Calendar className="w-4 h-4" /> Agendar
+                                <Calendar className="w-4 h-4" /> Solicitar Auditoría Express
                             </Link>
                         </div>
                     </div>
@@ -119,306 +35,394 @@ export default function Home() {
             </nav>
 
             {/* Hero Section */}
-            <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-hero-glow">
+            <section className="relative pt-24 pb-32 overflow-hidden bg-slate-900 text-white">
                 <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-                    <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+                    <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:40px_40px]"></div>
                 </div>
 
-                <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-8">
-                        {content.hero.tagline}
-                    </div>
-                    <h1
-                        className="text-5xl md:text-7xl font-black tracking-tight mb-8 leading-tight"
-                        dangerouslySetInnerHTML={{ __html: content.hero.title }}
-                    />
-                    <p
-                        className="text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed"
-                        dangerouslySetInnerHTML={{ __html: content.hero.subtitle }}
-                    />
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link
-                            href="/formularios"
-                            className="bg-primary hover:bg-primary/90 text-white font-bold py-4 px-8 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:translate-y-[-2px]"
-                        >
-                            {content.hero.cta_primary} <ArrowRight className="w-5 h-5" />
-                        </Link>
-                        <a
-                            href="#casos"
-                            className="bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-8 rounded-lg transition border border-white/10"
-                        >
-                            {content.hero.cta_secondary}
-                        </a>
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center text-center">
+                    <div className="max-w-4xl">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-slate-200 text-xs font-semibold uppercase tracking-wider mb-8">
+                            Control de Gestión & Rentabilidad B2B
+                        </div>
+                        <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-8 leading-tight text-balance">
+                            Impulsa tu rentabilidad con pricing, control de gestión e <span className="text-blue-400">indicadores claros</span>.
+                        </h1>
+                        <p className="text-xl text-slate-300 mb-8 leading-relaxed max-w-3xl mx-auto text-pretty">
+                            Externaliza el análisis y la reportería crítica de tu negocio. Implementamos pricing, KPIs y BI para que decidas con datos, no con intuición.
+                        </p>
+
+                        <div className="inline-flex items-center gap-2 bg-blue-900/40 border border-blue-500/30 px-5 py-3 rounded-lg text-blue-100 text-sm font-medium mb-12 shadow-inner">
+                            <TrendingUp className="w-5 h-5 text-blue-400" />
+                            <strong>Respaldo con resultados:</strong> +332MM en mejoras de contribución en 6 meses mediante rediseño de pricing y rentabilidad.
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <Link
+                                href="/agendar"
+                                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-md transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
+                            >
+                                Solicitar Auditoría Express <ArrowRight className="w-5 h-5 flex-shrink-0" />
+                            </Link>
+                            <a
+                                href="#servicios"
+                                className="bg-transparent hover:bg-white/10 text-white font-semibold py-4 px-8 rounded-md transition-all border border-white/20 flex items-center justify-center gap-2"
+                            >
+                                Ver Servicios
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* Pain Points / Problem Agitation Section */}
-            <section className="py-20 border-y border-white/5 bg-[#0a0a16]">
-                <div className="max-w-5xl mx-auto px-6 lg:px-8 text-center">
-                    <h2 className="text-2xl md:text-3xl font-bold mb-12 text-white">
-                        ¿Te suenan familiares estos desafíos?
-                    </h2>
-                    <div className="grid md:grid-cols-3 gap-8">
-                        <div className="p-6 rounded bg-red-500/5 border border-red-500/10">
-                            <div className="w-12 h-12 mx-auto bg-red-500/10 rounded-full flex items-center justify-center mb-4">
-                                <span className="text-2xl">📉</span>
+            {/* Pain Points / Desafíos */}
+            <section id="dolores" className="py-24 bg-white border-b border-slate-200 relative">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                    <div className="mb-16 text-center max-w-2xl mx-auto">
+                        <h2 className="text-3xl font-bold text-slate-900 mb-4">¿Te suenan familiares estos desafíos?</h2>
+                        <p className="text-slate-600 text-lg">La falta de información frena el crecimiento y destruye valor corporativo.</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                        {/* Dolor 1 */}
+                        <div className="bg-slate-50 border border-slate-200 p-8 rounded-xl hover:shadow-md transition">
+                            <div className="w-12 h-12 bg-white border border-slate-200 rounded-lg flex items-center justify-center mb-6">
+                                <span className="text-2xl">💸</span>
                             </div>
-                            <h3 className="font-bold text-white mb-2">Erosión de Márgenes</h3>
-                            <p className="text-sm text-slate-400">Tus vendedores otorgan descuentos agresivos para cerrar tratos, sacrificando la rentabilidad real.</p>
+                            <h3 className="text-lg font-bold text-slate-900 mb-3 leading-tight">Precios y descuentos sin gobernanza</h3>
+                            <p className="text-slate-600 text-sm leading-relaxed">Se negocia caso a caso, se pierde margen sin visibilidad y el equipo vende "por presión".</p>
                         </div>
-                        <div className="p-6 rounded bg-red-500/5 border border-red-500/10">
-                            <div className="w-12 h-12 mx-auto bg-red-500/10 rounded-full flex items-center justify-center mb-4">
+
+                        {/* Dolor 2 */}
+                        <div className="bg-slate-50 border border-slate-200 p-8 rounded-xl hover:shadow-md transition">
+                            <div className="w-12 h-12 bg-white border border-slate-200 rounded-lg flex items-center justify-center mb-6">
                                 <span className="text-2xl">📦</span>
                             </div>
-                            <h3 className="font-bold text-white mb-2">Complejidad Operativa</h3>
-                            <p className="text-sm text-slate-400">Manejas miles de SKUs y clientes, pero no sabes cuáles realmente generan valor y cuáles destruyen caja.</p>
+                            <h3 className="text-lg font-bold text-slate-900 mb-3 leading-tight">Rentabilidad desconocida</h3>
+                            <p className="text-slate-600 text-sm leading-relaxed">No está claro qué clientes o SKUs (productos) generan valor real y cuáles simplemente destruyen contribución.</p>
                         </div>
-                        <div className="p-6 rounded bg-red-500/5 border border-red-500/10">
-                            <div className="w-12 h-12 mx-auto bg-red-500/10 rounded-full flex items-center justify-center mb-4">
+
+                        {/* Dolor 3 */}
+                        <div className="bg-slate-50 border border-slate-200 p-8 rounded-xl hover:shadow-md transition">
+                            <div className="w-12 h-12 bg-white border border-slate-200 rounded-lg flex items-center justify-center mb-6">
                                 <span className="text-2xl">🐢</span>
                             </div>
-                            <h3 className="font-bold text-white mb-2">Cierres Lentos</h3>
-                            <p className="text-sm text-slate-400">Tu equipo financiero tarda semanas en obtener reportes, tomando decisiones con datos del mes pasado.</p>
+                            <h3 className="text-lg font-bold text-slate-900 mb-3 leading-tight">Reportería lenta o manual</h3>
+                            <p className="text-slate-600 text-sm leading-relaxed">Los reportes llegan tarde, operando con archivos Excel manuales frágiles y sin un "número único" confiable en toda la empresa.</p>
                         </div>
-                    </div>
-                </div>
-            </section>
 
-            {/* Services Section */}
-            <section id="servicios" className="py-24 bg-white/[0.02]">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="flex flex-col md:flex-row items-end justify-between gap-8 mb-20">
-                        <div className="max-w-2xl">
-                            <h2 className="text-4xl font-black text-white mb-6">Nuestras Soluciones</h2>
-                            <p className="text-lg text-slate-400">Transformamos complejidad financiera en estrategia simple.</p>
-                        </div>
-                        <div className="h-1 flex-1 bg-white/5 ml-8 rounded-full hidden md:block"></div>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-8">
-                        {content.services.map((service: any, idx: number) => (
-                            <div key={idx} className="group p-8 rounded border border-white/5 bg-white/5 hover:bg-white/[0.08] hover:border-primary/30 transition-all duration-300">
-                                <div className="w-14 h-14 bg-primary/10 rounded flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
-                                    {getIcon(service.icon)}
-                                </div>
-                                <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-                                <p className="text-slate-400 leading-relaxed mb-6">
-                                    {service.description}
-                                </p>
-                                <ul className="space-y-3">
-                                    {service.items.map((item: string, i: number) => (
-                                        <li key={i} className="flex items-center gap-2 text-sm text-slate-300">
-                                            <CheckCircle className="w-4 h-4 text-primary" /> {item}
-                                        </li>
-                                    ))}
-                                </ul>
+                        {/* Dolor 4 */}
+                        <div className="bg-slate-50 border border-slate-200 p-8 rounded-xl hover:shadow-md transition">
+                            <div className="w-12 h-12 bg-white border border-slate-200 rounded-lg flex items-center justify-center mb-6">
+                                <span className="text-2xl">📊</span>
                             </div>
-                        ))}
+                            <h3 className="text-lg font-bold text-slate-900 mb-3 leading-tight">Falta de KPIs para gestionar</h3>
+                            <p className="text-slate-600 text-sm leading-relaxed">Se mide la actividad diaria, pero no la performance clave: margen, mix, contribución, rotación de inventario o cumplimiento normativo.</p>
+                        </div>
+                    </div>
+
+                    <div className="text-center bg-blue-50 border border-blue-100 rounded-lg py-6 px-8 max-w-3xl mx-auto">
+                        <p className="text-blue-900 font-medium">
+                            <span className="font-bold">Si esto te pasa, necesitas estructura de control</span> — sin necesariamente contratar un equipo interno complejo.
+                        </p>
                     </div>
                 </div>
             </section>
 
-            {/* Methodology / Process Section */}
-            <section className="py-24 bg-[#0a0a16] border-y border-white/5">
+            {/* Soluciones & Servicios */}
+            <section id="servicios" className="py-28 bg-slate-50 relative">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="mb-16 text-center max-w-3xl mx-auto">
-                        <h2 className="text-3xl font-black text-white mb-6">Metodología Ágil y Directa</h2>
-                        <p className="text-lg text-slate-400">Sin burocracia. Tres pasos para transformar tu rentabilidad.</p>
+                    <div className="text-center max-w-2xl mx-auto mb-16">
+                        <div className="text-blue-600 font-bold tracking-wide uppercase text-sm mb-4">Nuestras Soluciones Externas</div>
+                        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">Intervenimos los ejes decisivos para la última línea</h2>
+                        <p className="text-xl text-slate-600 leading-relaxed">
+                            No despachamos teorías. Entregamos políticas, estructuras de datos y reportería profesional para medianas y grandes empresas.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-8 lg:grid-cols-3 mb-12">
+                        {/* Servicio 1 */}
+                        <div className="bg-white p-10 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+                            <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-800 mb-6">
+                                <TrendingUp className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-900 mb-2">Pricing Estratégico & Gobernanza Comercial</h3>
+                            <p className="text-slate-600 mb-6 text-sm font-medium">Aumentar contribución sin perder competitividad.</p>
+                            <ul className="space-y-3 mt-auto pt-6 border-t border-slate-100">
+                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Política de precios y descuentos</li>
+                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Segmentación de clientes</li>
+                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Modelo de rentabilidad / contribución</li>
+                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Reglas de aprobación y control de fugas</li>
+                            </ul>
+                        </div>
+
+                        {/* Servicio 2 */}
+                        <div className="bg-white p-10 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+                            <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-800 mb-6">
+                                <BarChart3 className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-900 mb-2">Control de Gestión Externo (PYMEs)</h3>
+                            <p className="text-slate-600 mb-6 text-sm font-medium">Control mensual y visibilidad ejecutiva sin sumar estructura fija.</p>
+                            <ul className="space-y-3 mt-auto pt-6 border-t border-slate-100">
+                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> KPIs financieros y comerciales</li>
+                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Tablero gerencial mensual</li>
+                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Análisis de desviaciones y planes</li>
+                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Modelo de presupuesto/forecast</li>
+                            </ul>
+                        </div>
+
+                        {/* Servicio 3 */}
+                        <div className="bg-white p-10 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+                            <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-800 mb-6">
+                                <Target className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-900 mb-2">Implementación de KPIs e Indicadores</h3>
+                            <p className="text-slate-600 mb-6 text-sm font-medium">Medir lo que importa para mejorar performance.</p>
+                            <ul className="space-y-3 mt-auto pt-6 border-t border-slate-100">
+                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Definición de KPIs (margen, mix, OPEX)</li>
+                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Diccionario de métricas estandarizado</li>
+                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Rituales de seguimiento (semanal/mensual)</li>
+                            </ul>
+                        </div>
+
+                        {/* Servicio 4 */}
+                        <div className="bg-slate-900 text-white p-10 rounded-2xl border border-slate-800 shadow-lg flex flex-col lg:col-span-1 md:col-span-2 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
+                                <MonitorPlay className="w-32 h-32" />
+                            </div>
+                            <div className="relative z-10 w-14 h-14 bg-white/10 border border-white/20 rounded-xl flex items-center justify-center text-white mb-6">
+                                <MonitorPlay className="w-6 h-6" />
+                            </div>
+                            <h3 className="relative z-10 text-xl font-bold text-white mb-2">Business Intelligence (Power BI)</h3>
+                            <p className="relative z-10 text-slate-300 mb-6 text-sm font-medium">Reportería automatizada para decidir a tiempo.</p>
+                            <ul className="relative z-10 space-y-3 mt-auto pt-6 border-t border-white/10">
+                                <li className="flex gap-2 text-slate-200 text-sm"><CheckCircle className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" /> Dashboards ejecutivos interactivos</li>
+                                <li className="flex gap-2 text-slate-200 text-sm"><CheckCircle className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" /> Automatización de reportes manuales</li>
+                                <li className="flex gap-2 text-slate-200 text-sm"><CheckCircle className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" /> Modelo de datos centralizado listo para gestión</li>
+                            </ul>
+                        </div>
+
+                        {/* Servicio 5 */}
+                        <div className="bg-white p-10 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col lg:col-span-2 md:col-span-2">
+                            <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-800 mb-6">
+                                <Layers className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-900 mb-2">Control Financiero de Proyectos</h3>
+                            <p className="text-slate-600 mb-6 text-sm font-medium">Evitar desviaciones y sobrecostos en obras o proyectos complejos.</p>
+                            <div className="mt-auto pt-6 border-t border-slate-100 grid sm:grid-cols-2 gap-3">
+                                <div className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Presupuesto base vs Avance real</div>
+                                <div className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Estimación al término (Forecast / EAC)</div>
+                                <div className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Seguimiento de obras adicionales y variaciones</div>
+                                <div className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> KPIs de disciplina y avance financiero</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="text-center mt-12">
+                        <Link
+                            href="/agendar"
+                            className="inline-flex items-center gap-2 bg-white text-slate-900 hover:bg-slate-50 border border-slate-300 px-8 py-3.5 rounded-md text-sm font-bold shadow-sm transition-all"
+                        >
+                            Quiero externalizar mi reportería <ChevronRight className="w-4 h-4" />
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            {/* Metodología */}
+            <section id="metodologia" className="py-24 bg-white border-y border-slate-200">
+                <div className="max-w-6xl mx-auto px-6 lg:px-8">
+                    <div className="text-center max-w-2xl mx-auto mb-16">
+                        <h2 className="text-3xl font-bold text-slate-900 mb-4">Nuestro Enfoque Operativo</h2>
+                        <p className="text-slate-600 text-lg">Metodología ágil en 3 pasos orientada a producir rentabilidad mes a mes.</p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8 relative">
                         {/* Connector Line (Desktop) */}
-                        <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-primary/0 via-primary/30 to-primary/0 z-0"></div>
+                        <div className="hidden md:block absolute top-8 left-[16%] right-[16%] h-px bg-slate-200 z-0"></div>
 
                         {/* Step 1 */}
-                        <div className="relative z-10 text-center group">
-                            <div className="w-24 h-24 mx-auto bg-[#101022] border-2 border-primary/20 rounded-full flex items-center justify-center mb-6 group-hover:border-primary transition-colors shadow-[0_0_20px_rgba(16,185,129,0.1)]">
-                                <span className="text-3xl font-bold text-white">1</span>
+                        <div className="relative z-10">
+                            <div className="w-16 h-16 mx-auto bg-white border-2 border-slate-200 rounded-full flex items-center justify-center mb-6 shadow-sm">
+                                <span className="text-lg font-bold text-slate-900">1</span>
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Diagnóstico Flash</h3>
-                            <p className="text-sm text-slate-400 leading-relaxed max-w-xs mx-auto">
-                                En 1 semana auditamos tus datos y precios. Identificamos las fugas de margen inmediatas.
+                            <h3 className="text-lg text-center font-bold text-slate-900 mb-3">Diagnóstico Inicial</h3>
+                            <p className="text-sm text-center text-slate-600 leading-relaxed max-w-xs mx-auto">
+                                Revisamos datos, precios, márgenes y reportería para detectar fugas y oportunidades rápidamente.
                             </p>
                         </div>
 
                         {/* Step 2 */}
-                        <div className="relative z-10 text-center group">
-                            <div className="w-24 h-24 mx-auto bg-[#101022] border-2 border-primary/20 rounded-full flex items-center justify-center mb-6 group-hover:border-primary transition-colors shadow-[0_0_20px_rgba(16,185,129,0.1)]">
-                                <span className="text-3xl font-bold text-white">2</span>
+                        <div className="relative z-10">
+                            <div className="w-16 h-16 mx-auto bg-white border-2 border-blue-500 rounded-full flex items-center justify-center mb-6 shadow-md">
+                                <span className="text-lg font-bold text-blue-600">2</span>
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Estrategia & Diseño</h3>
-                            <p className="text-sm text-slate-400 leading-relaxed max-w-xs mx-auto">
-                                Co-diseñamos la nueva política de precios y el roadmap de producto. Sin teorías, puro plan de acción.
+                            <h3 className="text-lg text-center font-bold text-slate-900 mb-3">Diseño del Modelo</h3>
+                            <p className="text-sm text-center text-slate-600 leading-relaxed max-w-xs mx-auto">
+                                Definimos reglas, KPIs escalables y tableros con foco puramente en impacto financiero real.
                             </p>
                         </div>
 
                         {/* Step 3 */}
-                        <div className="relative z-10 text-center group">
-                            <div className="w-24 h-24 mx-auto bg-[#101022] border-2 border-primary/20 rounded-full flex items-center justify-center mb-6 group-hover:border-primary transition-colors shadow-[0_0_20px_rgba(16,185,129,0.1)]">
-                                <span className="text-3xl font-bold text-white">3</span>
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-3">Ejecución & Control</h3>
-                            <p className="text-sm text-slate-400 leading-relaxed max-w-xs mx-auto">
-                                Implementamos los dashboards (BI) para que monitorees el impacto en tiempo real.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Trajectory / Cases Section */}
-            <section id="casos" className="py-24">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    {content.cases.map((caso: any, idx: number) => (
-                        <div key={idx} className="grid md:grid-cols-2 gap-16 items-center mb-24 last:mb-0">
-                            <div>
-                                <h2 className="text-4xl font-black mb-6">{caso.title}</h2>
-                                <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-                                    {caso.description}
-                                </p>
-                                <div className="flex gap-4">
-                                    <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 flex-1">
-                                        <span className="block text-3xl font-bold text-white">{caso.metric_value}</span>
-                                        <span className="text-xs text-primary uppercase font-bold tracking-wider">{caso.metric_label}</span>
-                                    </div>
-                                    <div className="bg-white/5 border border-white/10 rounded-lg p-4 flex-1">
-                                        <span className="block text-3xl font-bold text-white">{caso.time_value}</span>
-                                        <span className="text-xs text-slate-400 uppercase font-bold tracking-wider">{caso.time_label}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="relative">
-                                <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full opacity-50"></div>
-                                <div className="glass-card p-1 border border-white/10 relative">
-                                    {/* Using the CSS Chart for visual flair, keeping it static for now as it helps sales */}
-                                    <div className="bg-[#0c0c1b] rounded-lg p-6 h-80 flex flex-col justify-between">
-                                        <div className="flex justify-between items-center mb-8">
-                                            <span className="text-slate-400 font-medium">{caso.metric_label} Impact</span>
-                                            <span className="text-primary font-bold">{caso.metric_value}</span>
-                                        </div>
-                                        <div className="flex items-end justify-between gap-2 h-full">
-                                            {[35, 45, 40, 60, 55, 75, 85].map((h, i) => (
-                                                <div key={i} className="w-full bg-primary/20 rounded-t hover:bg-primary/40 transition-all relative group" style={{ height: `${h}%` }}>
-                                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white text-black text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                                                        {h}%
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* About Consultant Section */}
-            <section id="nosotros" className="py-24 bg-white/[0.02] border-y border-white/5">
-                <div className="max-w-5xl mx-auto px-6 lg:px-8 text-center">
-                    <h2 className="text-4xl font-black mb-12">El Consultor</h2>
-                    <div className="flex flex-col md:flex-row items-center gap-12 text-left">
-                        <div className="w-48 h-48 bg-[#0c0c1b] rounded-full flex-shrink-0 border-4 border-white/10 overflow-hidden relative group">
-                            <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors"></div>
-                            {/* Profile Photo with Fallback */}
-                            {content.bio.image ? (
-                                <img
-                                    src={content.bio.image}
-                                    alt={content.bio.name}
-                                    className="w-full h-full object-cover"
-                                />
-                            ) : (
-                                <div className="w-full h-full flex items-center justify-center text-slate-500 text-4xl font-bold bg-white/5">
-                                    {content.bio.initials}
-                                </div>
-                            )}
-                        </div>
-                        <div>
-                            <h3 className="text-3xl font-bold text-white mb-2">{content.bio.name}</h3>
-                            <p className="text-primary font-bold tracking-wide uppercase text-sm mb-6">{content.bio.role}</p>
-                            <p className="text-slate-400 mb-8 leading-relaxed text-lg">
-                                {content.bio.description}
-                            </p>
-                            <div className="flex gap-4">
-                                <a href={content.bio.linkedin} target="_blank" className="flex items-center gap-2 text-white hover:text-primary transition font-medium">
-                                    <Linkedin className="w-5 h-5" /> LinkedIn Profile
-                                </a>
-                                <a href={`mailto:${content.bio.email}`} className="flex items-center gap-2 text-white hover:text-primary transition font-medium">
-                                    <Mail className="w-5 h-5" /> Email Directo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* CTA Footer Section */}
-            <section className="py-24">
-                <div className="max-w-5xl mx-auto px-6 lg:px-8 text-center">
-                    <div className="bg-primary rounded-2xl p-12 md:p-16 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-primary to-emerald-700"></div>
-
-                        {/* Decorative circles */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
-
                         <div className="relative z-10">
-                            <h2 className="text-3xl md:text-5xl font-black mb-6 text-white">¿Listo para transformar tus márgenes?</h2>
-                            <p className="text-emerald-100 text-lg md:text-xl max-w-2xl mx-auto mb-10">
-                                Agenda un diagnóstico inicial de 30 minutos sin costo para identificar oportunidades inmediatas.
+                            <div className="w-16 h-16 mx-auto bg-slate-900 border-2 border-slate-900 text-white rounded-full flex items-center justify-center mb-6 shadow-md">
+                                <span className="text-lg font-bold">3</span>
+                            </div>
+                            <h3 className="text-lg text-center font-bold text-slate-900 mb-3">Implementación</h3>
+                            <p className="text-sm text-center text-slate-600 leading-relaxed max-w-xs mx-auto">
+                                Dejamos la operación andando: reportes instalados, dashboards interactivos y rutina de control ejecutivo.
                             </p>
-                            <Link
-                                href="/formularios"
-                                className="inline-flex bg-white text-primary hover:bg-emerald-50 font-bold py-4 px-10 rounded-lg transition shadow-xl text-lg items-center gap-2"
-                            >
-                                <Calendar className="w-5 h-5" /> Iniciar Evaluación Ahora
-                            </Link>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Footer */}
-            <footer className="bg-black/40 border-t border-white/5 pt-20 pb-10">
+            {/* El Consultor & Resultados */}
+            <section id="consultor" className="py-24 bg-slate-900 border-y border-slate-800 text-white overflow-hidden">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                        <div className="col-span-1 md:col-span-1">
-                            <div className="flex items-center gap-3 mb-6">
-                                <div className="bg-primary/20 p-1.5 rounded">
-                                    <BarChart3 className="w-5 h-5 text-primary" />
+                    <div className="flex flex-col md:flex-row gap-16">
+
+                        {/* Stats / Resultados Column */}
+                        <div className="w-full md:w-5/12 order-2 md:order-1 flex flex-col justify-center">
+                            <h3 className="text-xl font-bold mb-8 text-blue-400">Trayectoria & Resultados Demostrables</h3>
+                            <div className="space-y-6">
+                                <div className="bg-white/5 border border-white/10 p-6 rounded-xl">
+                                    <div className="text-4xl font-black text-white mb-1">+10 Años</div>
+                                    <div className="text-sm text-slate-400 font-medium">Experiencia en pricing, rentabilidad y control</div>
                                 </div>
-                                <span className="text-lg font-black tracking-tight text-white uppercase">Caro Consulting</span>
+                                <div className="bg-white/5 border border-white/10 p-6 rounded-xl">
+                                    <div className="text-4xl font-black text-white mb-1">+332MM</div>
+                                    <div className="text-sm text-slate-400 font-medium">En contribución en 6 meses (rediseño Pricing & Rentabilidad)</div>
+                                </div>
+                                <div className="bg-white/5 border border-white/10 p-6 rounded-xl">
+                                    <div className="text-4xl font-black text-white mb-1">$200MM</div>
+                                    <div className="text-sm text-slate-400 font-medium">Ahorros generados en 6 meses (optimización costos)</div>
+                                </div>
+                                <div className="bg-white/5 border border-white/10 p-6 rounded-xl relative overflow-hidden">
+                                    <div className="absolute right-0 bottom-0 opacity-10 translate-x-4 translate-y-4">
+                                        <PieChart className="w-32 h-32" />
+                                    </div>
+                                    <div className="text-3xl font-black text-white mb-2 leading-none relative z-10">AMB (~$20.000MM)</div>
+                                    <div className="text-sm text-slate-400 font-medium relative z-10">Proyectos controlados (Gestión financiera integral)</div>
+                                </div>
                             </div>
-                            <p className="text-slate-500 text-sm leading-relaxed">
-                                Liderando la transformación financiera del sector industrial a través de datos y estrategia.
+                        </div>
+
+                        {/* Bio Column */}
+                        <div className="w-full md:w-7/12 order-1 md:order-2">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 text-xs font-bold uppercase tracking-widest mb-6">
+                                El Consultor
+                            </div>
+                            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Sebastián Caro</h2>
+                            <p className="text-blue-400 text-lg font-semibold mb-8 border-b border-white/10 pb-6">
+                                Pricing Estratégico | Rentabilidad | Control de Gestión | BI (Power BI) | Gestión de Proyectos
+                            </p>
+
+                            <p className="text-slate-300 leading-relaxed text-lg mb-6">
+                                Soy Ingeniero Civil Industrial y MBA(c), con más de 10 años liderando estrategia comercial,
+                                pricing y gestión de rentabilidad en negocios B2B de alta escala.
+                            </p>
+                            <p className="text-slate-300 leading-relaxed text-lg mb-8">
+                                Diseño e implemento modelos de pricing, control de gestión e inteligencia de negocios
+                                (Power BI/Python) para mejorar márgenes, optimizar mix y profesionalizar la toma de decisiones.
+                                He liderado gobernanza comercial, KPIs accionables y análisis de alto impacto para
+                                gerencias comerciales y financieras.
+                            </p>
+
+                            <div className="space-y-4 mb-10 pl-4 border-l-2 border-primary/40 bg-white/5 p-4 rounded-r-lg">
+                                <ul className="space-y-3">
+                                    <li className="flex text-slate-200 text-sm items-start gap-2">
+                                        <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />
+                                        <span>+332MM en contribución en 6 meses tras rediseño de pricing y rentabilidad.</span>
+                                    </li>
+                                    <li className="flex text-slate-200 text-sm items-start gap-2">
+                                        <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />
+                                        <span>Reducción de pérdidas de margen de 5,4% a 2,8%.</span>
+                                    </li>
+                                    <li className="flex text-slate-200 text-sm items-start gap-2">
+                                        <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />
+                                        <span>Ahorros por $200MM en 6 meses optimizando estructuras de costos.</span>
+                                    </li>
+                                    <li className="flex text-slate-200 text-sm items-start gap-2">
+                                        <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />
+                                        <span>Control financiero de proyecto Aeropuerto AMB (~$20.000MM).</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div className="flex flex-wrap gap-4">
+                                <Link href="/agendar" className="inline-flex items-center gap-2 bg-blue-600 text-white hover:bg-blue-700 px-6 py-3.5 rounded-md text-sm font-bold shadow-lg shadow-blue-900/50 transition">
+                                    Solicitar Auditoría Express
+                                </Link>
+                                <a href="https://www.linkedin.com/in/sebastiancaroalvarado/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-6 py-3.5 rounded-md text-sm font-semibold transition">
+                                    <Linkedin className="w-5 h-5" /> Ver LinkedIn
+                                </a>
+                                <a href="mailto:director@caro-consulting.cl" className="inline-flex items-center gap-2 bg-transparent hover:bg-white/5 border border-white/20 text-white px-6 py-3.5 rounded-md text-sm font-semibold transition">
+                                    <Mail className="w-5 h-5" /> Escribir por Email
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA Final */}
+            <section className="py-24 bg-white relative">
+                <div className="absolute inset-0 bg-slate-50/50"></div>
+                <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-10 text-center">
+                    <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">Es momento de tomar posesión real del margen.</h2>
+                    <p className="text-xl text-slate-600 mb-12 max-w-2xl mx-auto">
+                        Agenda un diagnóstico inicial de 30 minutos para identificar oportunidades directas en pricing, rentabilidad y control estructurado.
+                    </p>
+                    <Link
+                        href="/agendar"
+                        className="inline-flex bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-10 rounded-md transition shadow-2xl shadow-slate-900/10 text-lg items-center gap-3"
+                    >
+                        <Calendar className="w-5 h-5 flex-shrink-0" /> Agendar diagnóstico inicial (30 min)
+                    </Link>
+                </div>
+            </section>
+
+            {/* Footer Sobrio Corporativo */}
+            <footer className="bg-slate-950 text-slate-400 py-16 border-t border-slate-800">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                    <div className="grid md:grid-cols-4 gap-12 mb-16">
+                        <div className="md:col-span-2">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="bg-slate-800 p-2 rounded text-white border border-slate-700">
+                                    <BarChart3 className="w-5 h-5" />
+                                </div>
+                                <span className="text-xl font-bold tracking-tight text-white uppercase">Caro Consulting</span>
+                            </div>
+                            <p className="text-slate-500 leading-relaxed max-w-sm">
+                                Transformación ejecutiva enfocada exclusivamente en rentabilidad B2B, pricing paramétrico y ecosistemas de inteligencia de negocios para medianas y grandes empresas.
                             </p>
                         </div>
                         <div>
-                            <h4 className="text-white font-bold mb-6">Servicios</h4>
+                            <h4 className="text-white font-bold mb-6 uppercase text-sm tracking-wider">Expertise</h4>
                             <ul className="space-y-4 text-sm text-slate-500">
-                                <li><a href="#" className="hover:text-primary transition">Pricing Strategy</a></li>
-                                <li><a href="#" className="hover:text-primary transition">Product Management</a></li>
-                                <li><a href="#" className="hover:text-primary transition">FP&A Avanzado</a></li>
+                                <li><a href="#servicios" className="hover:text-white transition">Pricing Estratégico</a></li>
+                                <li><a href="#servicios" className="hover:text-white transition">Control de Gestión B2B</a></li>
+                                <li><a href="#servicios" className="hover:text-white transition">Desarrollo KPIs</a></li>
+                                <li><a href="#servicios" className="hover:text-white transition">Business Intelligence</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h4 className="text-white font-bold mb-6">Compañía</h4>
+                            <h4 className="text-white font-bold mb-6 uppercase text-sm tracking-wider">Contacto Directo</h4>
                             <ul className="space-y-4 text-sm text-slate-500">
-                                <li><a href="#nosotros" className="hover:text-primary transition">Sobre Nosotros</a></li>
-                                <li><a href="#casos" className="hover:text-primary transition">Casos de Éxito</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="text-white font-bold mb-6">Legal</h4>
-                            <ul className="space-y-4 text-sm text-slate-500">
-                                <li><Link href="/legal/terminos" className="hover:text-primary transition">Términos y Condiciones</Link></li>
-                                <li><Link href="/legal/privacidad" className="hover:text-primary transition">Políticas de Privacidad</Link></li>
+                                <li><Link href="/agendar" className="hover:text-white transition text-blue-400 font-semibold">Agendar Auditoría Express</Link></li>
+                                <li><Link href="/login" className="hover:text-white transition">Portal de Clientes</Link></li>
+                                <li className="pt-4"><a href="mailto:director@caro-consulting.cl" className="hover:text-white transition underline underline-offset-4">director@caro-consulting.cl</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div className="border-t border-white/5 pt-10 text-center">
-                        <p className="text-xs text-slate-600">© {new Date().getFullYear()} Caro Consulting. Todos los derechos reservados.</p>
+
+                    <div className="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium tracking-wide">
+                        <p>© {new Date().getFullYear()} Caro Consulting SPA. Todos los derechos reservados.</p>
+                        <div className="flex gap-6">
+                            <span className="hover:text-white cursor-pointer transition">Políticas de Privacidad</span>
+                            <span className="hover:text-white cursor-pointer transition">Términos de Servicio</span>
+                        </div>
                     </div>
                 </div>
             </footer>
