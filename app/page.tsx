@@ -59,10 +59,10 @@ export default function Home() {
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Link
-                                href="/agendar"
+                                href="/formularios/diagnostico"
                                 className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-md transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
                             >
-                                Solicitar Auditoría Express <ArrowRight className="w-5 h-5 flex-shrink-0" />
+                                Realizar Diagnóstico Gratuito <ArrowRight className="w-5 h-5 flex-shrink-0" />
                             </Link>
                             <a
                                 href="#servicios"
@@ -374,12 +374,20 @@ export default function Home() {
                     <p className="text-xl text-slate-600 mb-12 max-w-2xl mx-auto">
                         Agenda un diagnóstico inicial de 30 minutos para identificar oportunidades directas en pricing, rentabilidad y control estructurado.
                     </p>
-                    <Link
-                        href="/agendar"
-                        className="inline-flex bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-10 rounded-md transition shadow-2xl shadow-slate-900/10 text-lg items-center gap-3"
-                    >
-                        <Calendar className="w-5 h-5 flex-shrink-0" /> Agendar diagnóstico inicial (30 min)
-                    </Link>
+                    <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+                        <Link
+                            href="/formularios/diagnostico"
+                            className="inline-flex bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-md transition shadow-2xl shadow-blue-500/20 text-lg items-center justify-center gap-3 w-full md:w-auto"
+                        >
+                            <BarChart3 className="w-5 h-5 flex-shrink-0" /> Iniciar Diagnóstico Gratuito
+                        </Link>
+                        <Link
+                            href="/agendar"
+                            className="inline-flex bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-10 rounded-md transition shadow-2xl shadow-slate-900/10 text-lg items-center justify-center gap-3 w-full md:w-auto"
+                        >
+                            <Calendar className="w-5 h-5 flex-shrink-0" /> Agendar auditoría (30 min)
+                        </Link>
+                    </div>
                 </div>
             </section>
 
