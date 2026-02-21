@@ -315,7 +315,7 @@ export default function Home() {
                                 {/* Profile Image */}
                                 <div className="w-32 h-32 md:w-48 md:h-48 shrink-0 relative rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-600">
                                     <Image
-                                        src="/sebastian-caro.png"
+                                        src="/foto-perfil-1.png"
                                         alt="Sebastián Caro - Consultor B2B"
                                         fill
                                         className="object-cover object-top"
