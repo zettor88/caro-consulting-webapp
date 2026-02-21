@@ -71,8 +71,8 @@ export default function DiagnosticoPage() {
     const [loadingInitial, setLoadingInitial] = useState(true);
     const [userAuth, setUserAuth] = useState<any>(null);
 
-    // Lead Capture State (Paso 0 - No longer default start point)
-    const [step, setStep] = useState<'lead_capture' | 'questions' | 'results'>('questions');
+    // Lead Capture State (Always start with Lead Capture)
+    const [step, setStep] = useState<'lead_capture' | 'questions' | 'results'>('lead_capture');
     const [leadData, setLeadData] = useState({ nombre: "", email: "", empresa: "", industria: "", cargo: "", tamaño_empresa: "" });
 
     // Form State
@@ -105,6 +105,7 @@ export default function DiagnosticoPage() {
                     if (parsed.desafio) setDesafio(parsed.desafio);
                     if (parsed.leadData) setLeadData(parsed.leadData);
                     if (parsed.step) setStep(parsed.step);
+                    if (parsed.resultsData) setResultsData(parsed.resultsData);
                 } catch (e) { }
             }
             setLoadingInitial(false);
@@ -114,8 +115,8 @@ export default function DiagnosticoPage() {
 
     // Guardar en localStorage al cambiar respuestas
     useEffect(() => {
-        if (!loadingInitial && !resultsData) {
-            localStorage.setItem("diag_progress", JSON.stringify({ answers, currentSection, desafio, leadData, step }));
+        if (!loadingInitial) {
+            localStorage.setItem("diag_progress", JSON.stringify({ answers, currentSection, desafio, leadData, step, resultsData }));
         }
     }, [answers, currentSection, desafio, leadData, step, loadingInitial, resultsData]);
 
@@ -146,88 +147,76 @@ export default function DiagnosticoPage() {
         if (!isCurrentSectionComplete()) return;
         setSubmitting(true);
 
-        // Calcular Scores
-        const calculateAvg = (keys: string[]) => {
-            const sum = keys.reduce((acc, k) => acc + (answers[k] || 0), 0);
-            return parseFloat((sum / keys.length).toFixed(2));
-        };
-
-        const sPricing = calculateAvg(["P01", "P02", "P03", "P04", "P05"]);
-        const sRentab = calculateAvg(["R01", "R02", "R03", "R04", "R05"]);
-        const sControl = calculateAvg(["C01", "C02", "C03", "C04", "C05"]);
-        const sBI = calculateAvg(["B01", "B02", "B03", "B04", "B05"]);
-        const sProy = calculateAvg(["G01", "G02", "G03", "G04", "G05"]);
-
-        const global = parseFloat(((sPricing + sRentab + sControl + sBI + sProy) / 5).toFixed(2));
-
-        let nivel = "optimizado";
-        if (global <= 2.0) nivel = "critico";
-        else if (global <= 3.0) nivel = "reactivo";
-        else if (global <= 4.0) nivel = "controlado";
-
-        // Preparar para guardar (Hold off on submitting to DB untill we capture lead info)
-        const dataToSave = {
-            usuario_id: userAuth?.id || null,
-            estado: "completado",
-            fecha_completado: new Date().toISOString(),
-            score_pricing: sPricing,
-            score_rentabilidad: sRentab,
-            score_control: sControl,
-            score_bi: sBI,
-            score_proyectos: sProy,
-            score_global: global,
-            nivel_madurez: nivel,
-            respuestas_json: answers,
-            desafio_abierto: desafio,
-        };
-
-        // Save temporarily in state and always ask for Lead info
-        setResultsData(dataToSave);
-        setStep('lead_capture');
-        setSubmitting(false);
-        window.scrollTo(0, 0);
-        return;
-    };
-
-    const handleLeadSubmit = async () => {
-        setSubmitting(true);
         try {
-            // First save the user info to the leads table
-            let currentUserId = null;
-            const { data: leadUser, error: leadError } = await supabase
-                .from('usuarios')
-                .insert({
-                    nombre: leadData.nombre,
-                    email: leadData.email,
-                    empresa: leadData.empresa,
-                    industria: leadData.industria,
-                    cargo: leadData.cargo,
-                    tamaño_empresa: leadData.tamaño_empresa
-                })
-                .select()
-                .single();
-
-            if (!leadError && leadUser) {
-                currentUserId = leadUser.id;
-            } else {
-                console.log("Could not save lead profile separately", leadError);
-            }
-
-            // Now append the user to the saved resultsData
-            const finalDataToSave = {
-                ...resultsData,
-                usuario_id: currentUserId,
+            // Calcular Scores
+            const calculateAvg = (keys: string[]) => {
+                const sum = keys.reduce((acc, k) => acc + (answers[k] || 0), 0);
+                return parseFloat((sum / keys.length).toFixed(2));
             };
 
-            const { data, error } = await supabase.from('diagnosticos').insert(finalDataToSave).select().single();
+            const sPricing = calculateAvg(["P01", "P02", "P03", "P04", "P05"]);
+            const sRentab = calculateAvg(["R01", "R02", "R03", "R04", "R05"]);
+            const sControl = calculateAvg(["C01", "C02", "C03", "C04", "C05"]);
+            const sBI = calculateAvg(["B01", "B02", "B03", "B04", "B05"]);
+            const sProy = calculateAvg(["G01", "G02", "G03", "G04", "G05"]);
+
+            const global = parseFloat(((sPricing + sRentab + sControl + sBI + sProy) / 5).toFixed(2));
+
+            let nivel = "optimizado";
+            if (global <= 2.0) nivel = "critico";
+            else if (global <= 3.0) nivel = "reactivo";
+            else if (global <= 4.0) nivel = "controlado";
+
+            // 1. First save/get the user info to the leads table
+            let currentUserId = userAuth?.id || null;
+
+            if (!currentUserId) {
+                const { data: leadUser, error: leadError } = await supabase
+                    .from('usuarios')
+                    .insert({
+                        nombre: leadData.nombre,
+                        email: leadData.email,
+                        empresa: leadData.empresa,
+                        industria: leadData.industria,
+                        cargo: leadData.cargo,
+                        tamaño_empresa: leadData.tamaño_empresa
+                    })
+                    .select()
+                    .single();
+
+                if (!leadError && leadUser) {
+                    currentUserId = leadUser.id;
+                }
+            }
+
+            // 2. Prepare Diagnostic Data
+            const dataToSave = {
+                usuario_id: currentUserId,
+                estado: "completado",
+                fecha_completado: new Date().toISOString(),
+                score_pricing: sPricing,
+                score_rentabilidad: sRentab,
+                score_control: sControl,
+                score_bi: sBI,
+                score_proyectos: sProy,
+                score_global: global,
+                nivel_madurez: nivel,
+                respuestas_json: answers,
+                desafio_abierto: desafio,
+            };
+
+            // 3. Save Diagnostic
+            const { data, error } = await supabase.from('diagnosticos').insert(dataToSave).select().single();
             if (error) throw error;
 
             // Limpiar cache local
             localStorage.removeItem("diag_progress");
 
+            // Mostrar resultados
+            setResultsData(dataToSave);
             setStep('results');
 
-            // Generate PDF
+            // 4. Trigger PDF Generation in background
             if (data && data.id) {
                 setGeneratingPdf(true);
                 setPdfError(false);
@@ -242,7 +231,6 @@ export default function DiagnosticoPage() {
                             setPdfResponseUrl(resData.pdfUrl);
                         } else {
                             setPdfError(true);
-                            console.error("No PDF URL returned:", resData);
                         }
                     })
                     .catch(err => {
@@ -253,13 +241,18 @@ export default function DiagnosticoPage() {
             }
 
         } catch (err) {
-            console.error("Error al guardar lead:", err);
-            alert("Error al procesar. Por favor intenta otra vez.");
+            console.error("Error al procesar diagnóstico:", err);
+            alert("Error al procesar el diagnóstico. Por favor intenta otra vez.");
         } finally {
             setSubmitting(false);
             window.scrollTo(0, 0);
         }
-    }
+    };
+
+    const handleLeadSubmit = async () => {
+        setStep('questions');
+        window.scrollTo(0, 0);
+    };
 
     const getColorByLevel = (level: string) => {
         if (level === "critico") return "text-red-500 bg-red-500/10 border-red-500/30";
