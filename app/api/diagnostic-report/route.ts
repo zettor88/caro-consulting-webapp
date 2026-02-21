@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "No diagnostic ID provided" }, { status: 400 });
         }
 
-        // 1. Fetch Diagnostic Data
+        // 1. Fetch Diagnostic Data with Service Role bypass
         const { data: diagnostico, error: fetchError } = await supabase
             .from('diagnosticos')
             .select(`
@@ -33,14 +33,27 @@ export async function POST(req: NextRequest) {
             .single();
 
         if (fetchError || !diagnostico) {
-            console.error("Error fetching diagnostic:", fetchError);
-            return NextResponse.json({ error: "Diagnostic not found" }, { status: 404 });
+            console.error("Critical Error fetching diagnostic:", fetchError);
+            return NextResponse.json({
+                error: "Diagnostic not found",
+                details: fetchError?.message,
+                idAttempted: diagnosticoId
+            }, { status: 404 });
         }
 
-        const { score_global, nivel_madurez, score_pricing, score_rentabilidad, score_control, score_bi, score_proyectos, usuarios } = diagnostico;
-        const nombreCliente = usuarios?.nombre || 'Cliente';
-        const empresaCliente = usuarios?.empresa || 'Empresa';
-        const emailCliente = usuarios?.email;
+        // Get info safely even if usuarios join failed for some reason
+        const score_global = diagnostico.score_global || 0;
+        const nivel_madurez = diagnostico.nivel_madurez || 'critico';
+        const score_pricing = diagnostico.score_pricing || 0;
+        const score_rentabilidad = diagnostico.score_rentabilidad || 0;
+        const score_control = diagnostico.score_control || 0;
+        const score_bi = diagnostico.score_bi || 0;
+        const score_proyectos = diagnostico.score_proyectos || 0;
+
+        const usuarios = diagnostico.usuarios;
+        const nombreCliente = Array.isArray(usuarios) ? usuarios[0]?.nombre : usuarios?.nombre || 'Cliente';
+        const empresaCliente = Array.isArray(usuarios) ? usuarios[0]?.empresa : usuarios?.empresa || 'Empresa';
+        const emailCliente = Array.isArray(usuarios) ? usuarios[0]?.email : usuarios?.email;
 
         // 2. GENERATE PDF
         const doc = new jsPDF();
