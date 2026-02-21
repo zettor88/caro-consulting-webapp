@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 const montserrat = Montserrat({ subsets: ["latin"], weight: ["400", "600", "700"] });
 
 export const metadata: Metadata = {
-    title: "Caro Consulting | Consulting Boutique B2B: Rentabilidad & Control de Gestión",
+    title: "V2 - Caro Consulting | Consulting Boutique B2B: Rentabilidad & Control de Gestión",
     description: "Consultora financiera experta en maximizar el EBITDA del sector B2B. Implementamos estrategias efectivas de Pricing, FP&A y Business Intelligence.",
     metadataBase: new URL('https://caro-consulting-webapp.vercel.app'),
     openGraph: {
