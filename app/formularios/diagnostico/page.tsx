@@ -104,8 +104,8 @@ export default function DiagnosticoPage() {
                     if (parsed.currentSection) setCurrentSection(parsed.currentSection);
                     if (parsed.desafio) setDesafio(parsed.desafio);
                     if (parsed.leadData) setLeadData(parsed.leadData);
-                    if (parsed.step) setStep(parsed.step);
                     if (parsed.resultsData) setResultsData(parsed.resultsData);
+                    // We specifically DO NOT restore 'step' to force lead capture first
                 } catch (e) { }
             }
             setLoadingInitial(false);
@@ -419,7 +419,7 @@ export default function DiagnosticoPage() {
                         <div className="bg-primary/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-primary/20">
                             <BarChart3 className="w-8 h-8 text-primary" />
                         </div>
-                        <h1 className="text-3xl md:text-5xl font-black mb-4">Diagnóstico Ejecutivo</h1>
+                        <h1 className="text-3xl md:text-5xl font-black mb-4">Diagnóstico Ejecutivo <span className="text-xs text-slate-300">V2</span></h1>
                         <p className="text-slate-600 text-lg">
                             Descubre en 8 minutos tu nivel de madurez financiera y tus oportunidades de rentabilidad oculta. Totalmente gratis.
                         </p>
