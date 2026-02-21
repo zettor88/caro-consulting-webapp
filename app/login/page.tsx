@@ -2,36 +2,76 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Lock, Mail, ArrowRight, BarChart3, Loader2 } from "lucide-react";
+import { Lock, Mail, ArrowRight, BarChart3, Loader2, User, Building, Briefcase } from "lucide-react";
 import Link from "next/link";
 import supabase from "@/lib/supabase";
 
 export default function LoginPage() {
     const router = useRouter();
+    const [mode, setMode] = useState<'login' | 'register'>('login');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    // Login State
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
 
-    const handleLogin = async (e: React.FormEvent) => {
+    // Register State
+    const [nombre, setNombre] = useState("");
+    const [empresa, setEmpresa] = useState("");
+    const [industria, setIndustria] = useState("");
+    const [cargo, setCargo] = useState("");
+    const [tamañoEmpresa, setTamañoEmpresa] = useState("");
+
+    const handleAuth = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setError("");
 
         try {
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email,
-                password,
-            });
+            if (mode === 'login') {
+                const { error: loginError } = await supabase.auth.signInWithPassword({
+                    email,
+                    password,
+                });
+                if (loginError) throw loginError;
+                router.push("/formularios/diagnostico");
+            } else {
+                // Registrar usuario en Auth
+                const { data, error: signUpError } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        data: { full_name: nombre }
+                    }
+                });
 
-            if (error) {
-                throw error;
+                if (signUpError) throw signUpError;
+
+                if (data.user) {
+                    // Esperamos 1 segundo para asegurarnos que Auth propague (o en caso de triggers tarden)
+                    // Insertamos perfil en public.usuarios
+                    const { error: perfilError } = await supabase.from('usuarios').insert({
+                        id: data.user.id,
+                        nombre,
+                        email,
+                        empresa,
+                        industria,
+                        cargo,
+                        tamaño_empresa: tamañoEmpresa
+                    });
+
+                    if (perfilError) {
+                        console.error("Error al crear perfil publico:", perfilError);
+                        // Continúa aunque falle el perfil público, luego se puede llenar
+                    }
+                }
+
+                router.push("/formularios/diagnostico");
             }
-
-            router.push("/dashboard");
         } catch (err: any) {
-            console.error("Login error:", err);
-            setError("Credenciales inválidas. Por favor intenta nuevamente.");
+            console.error("Auth error:", err);
+            setError(err.message || "Credenciales inválidas o error de red. Intenta nuevamente.");
         } finally {
             setLoading(false);
         }
@@ -52,11 +92,16 @@ export default function LoginPage() {
                         </span>
                     </div>
                     <h1 className="text-5xl font-black text-white leading-tight mb-6">
-                        Acceso Exclusivo a <br />
-                        <span className="text-primary">Inteligencia Financiera</span>
+                        {mode === 'login' ? (
+                            <>Acceso Exclusivo a <br /><span className="text-primary">Inteligencia Financiera</span></>
+                        ) : (
+                            <>Inicia tu <br /><span className="text-primary">Diagnóstico Ejecutivo</span></>
+                        )}
                     </h1>
                     <p className="text-slate-400 text-lg max-w-md">
-                        Monitorea en tiempo real tus métricas clave de rentabilidad, flujo de caja y gestión estratégica.
+                        {mode === 'login'
+                            ? "Monitorea en tiempo real tus métricas clave de rentabilidad, flujo de caja y gestión estratégica."
+                            : "Únete y descubre en minutos las fugas de rentabilidad y oportunidades de optimización en tu negocio con nuestro algoritmo experto."}
                     </p>
                 </div>
                 <div className="relative z-10">
@@ -67,9 +112,9 @@ export default function LoginPage() {
                 </div>
             </div>
 
-            {/* Right: Login Form */}
-            <div className="flex items-center justify-center p-8 bg-[#101022]">
-                <div className="w-full max-w-md">
+            {/* Right: Auth Form */}
+            <div className="flex items-center justify-center p-8 bg-[#101022] overflow-y-auto">
+                <div className="w-full max-w-md my-8">
                     <div className="lg:hidden flex justify-center mb-8">
                         <div className="flex items-center gap-2">
                             <div className="bg-primary/10 p-1.5 rounded border border-primary/20">
@@ -82,10 +127,77 @@ export default function LoginPage() {
                     </div>
 
                     <div className="bg-white/5 border border-white/5 p-8 rounded-2xl shadow-2xl backdrop-blur-sm">
-                        <h2 className="text-2xl font-bold text-white mb-2">Bienvenido</h2>
-                        <p className="text-slate-400 mb-8">Ingresa tus credenciales para acceder al dashboard.</p>
 
-                        <form onSubmit={handleLogin} className="space-y-5">
+                        <div className="flex gap-4 mb-8">
+                            <button
+                                onClick={() => { setMode('login'); setError(""); }}
+                                className={`flex-1 pb-3 text-sm font-bold uppercase tracking-wider border-b-2 transition-colors ${mode === 'login' ? 'text-white border-primary' : 'text-slate-500 border-transparent hover:text-slate-300'}`}
+                            >
+                                Ingresar
+                            </button>
+                            <button
+                                onClick={() => { setMode('register'); setError(""); }}
+                                className={`flex-1 pb-3 text-sm font-bold uppercase tracking-wider border-b-2 transition-colors ${mode === 'register' ? 'text-white border-primary' : 'text-slate-500 border-transparent hover:text-slate-300'}`}
+                            >
+                                Registrarse
+                            </button>
+                        </div>
+
+                        <form onSubmit={handleAuth} className="space-y-4">
+
+                            {mode === 'register' && (
+                                <>
+                                    <div>
+                                        <label className="block text-xs font-bold text-slate-300 uppercase mb-2 ml-1">Nombre Completo</label>
+                                        <div className="relative">
+                                            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                            <input required type="text" className="w-full bg-[#15152a] border border-white/10 rounded-lg py-3 pl-12 pr-4 text-white placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition" placeholder="Tu nombre" value={nombre} onChange={e => setNombre(e.target.value)} />
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="block text-xs font-bold text-slate-300 uppercase mb-2 ml-1">Empresa</label>
+                                            <div className="relative">
+                                                <Building className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                                <input required type="text" className="w-full bg-[#15152a] border border-white/10 rounded-lg py-3 pl-11 pr-3 text-white placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition" placeholder="Compañía" value={empresa} onChange={e => setEmpresa(e.target.value)} />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold text-slate-300 uppercase mb-2 ml-1">Cargo</label>
+                                            <div className="relative">
+                                                <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                                <input required type="text" className="w-full bg-[#15152a] border border-white/10 rounded-lg py-3 pl-11 pr-3 text-white placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition" placeholder="CEO, CFO..." value={cargo} onChange={e => setCargo(e.target.value)} />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="block text-xs font-bold text-slate-300 uppercase mb-2 ml-1">Industria</label>
+                                            <select required className="w-full bg-[#15152a] border border-white/10 rounded-lg py-3 px-4 text-white placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition appearance-none" value={industria} onChange={e => setIndustria(e.target.value)}>
+                                                <option value="" disabled>Selecciona...</option>
+                                                <option value="Retail">Retail</option>
+                                                <option value="Manufactura">Manufactura</option>
+                                                <option value="Servicios">Servicios</option>
+                                                <option value="Tecnologia">Tecnología</option>
+                                                <option value="Otro">Otro</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold text-slate-300 uppercase mb-2 ml-1">Tamaño</label>
+                                            <select required className="w-full bg-[#15152a] border border-white/10 rounded-lg py-3 px-4 text-white placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition appearance-none" value={tamañoEmpresa} onChange={e => setTamañoEmpresa(e.target.value)}>
+                                                <option value="" disabled>Empresa...</option>
+                                                <option value="micro">Micro</option>
+                                                <option value="pequeña">Pequeña</option>
+                                                <option value="mediana">Mediana</option>
+                                                <option value="grande">Grande</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+
                             <div>
                                 <label className="block text-xs font-bold text-slate-300 uppercase mb-2 ml-1">Email Corporativo</label>
                                 <div className="relative">
@@ -112,6 +224,7 @@ export default function LoginPage() {
                                         placeholder="••••••••"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
+                                        minLength={6}
                                     />
                                 </div>
                             </div>
@@ -125,12 +238,15 @@ export default function LoginPage() {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3.5 rounded-lg transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group"
+                                className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3.5 rounded-lg transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group mt-6"
                             >
                                 {loading ? (
-                                    <><Loader2 className="w-5 h-5 animate-spin" /> Ingresando...</>
+                                    <><Loader2 className="w-5 h-5 animate-spin" /> Procesando...</>
                                 ) : (
-                                    <>Ingresar al Dashboard <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /></>
+                                    <>
+                                        {mode === 'login' ? 'Ingresar a mi cuenta' : 'Crear Perfil y Empezar'}
+                                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                    </>
                                 )}
                             </button>
                         </form>
