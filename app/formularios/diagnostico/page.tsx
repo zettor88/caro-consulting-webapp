@@ -288,7 +288,7 @@ export default function DiagnosticoPage() {
 
     if (loadingInitial) {
         return (
-            <div className="min-h-screen bg-[#101022] flex items-center justify-center">
+            <div className="min-h-screen bg-slate-50 flex items-center justify-center">
                 <Loader2 className="w-10 h-10 text-primary animate-spin" />
             </div>
         );
@@ -310,11 +310,11 @@ export default function DiagnosticoPage() {
         const brechas = sortedDimensions.filter(d => d.score <= 3.0);
 
         return (
-            <div className="min-h-screen bg-[#101022] text-white font-sans selection:bg-primary selection:text-white bg-hero-glow">
+            <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-primary selection:text-slate-900 ">
                 <main className="max-w-4xl mx-auto p-8 pt-16">
                     <div className="text-center mb-12">
                         <h1 className="text-4xl md:text-5xl font-black mb-4 uppercase tracking-tight">Tu Diagnóstico <span className="text-primary">Completado</span></h1>
-                        <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+                        <p className="text-slate-600 text-lg max-w-2xl mx-auto">
                             Hemos procesado las variables de madurez de tu empresa. El algoritmo estructural arroja el siguiente panorama estratégico.
                         </p>
                     </div>
@@ -322,13 +322,13 @@ export default function DiagnosticoPage() {
                     <div className="grid md:grid-cols-3 gap-8 mb-12">
 
                         {/* SCORE GLOBAL CARD */}
-                        <div className={`glass-card p-8 rounded-2xl border flex flex-col items-center justify-center text-center shadow-2xl relative overflow-hidden col-span-1 border-white/5`}>
+                        <div className={`glass-card p-8 rounded-2xl border flex flex-col items-center justify-center text-center shadow-2xl relative overflow-hidden col-span-1 border-slate-200`}>
                             {/* Bg glow based on level */}
                             <div className={`absolute inset-0 opacity-10 ${getColorByLevel(nivel_madurez).split(' ')[1]}`}></div>
 
                             <div className="relative z-10">
-                                <span className="text-sm font-bold text-slate-400 uppercase tracking-widest block mb-2">Score Global</span>
-                                <div className="text-7xl font-black mb-4 text-white">
+                                <span className="text-sm font-bold text-slate-600 uppercase tracking-widest block mb-2">Score Global</span>
+                                <div className="text-7xl font-black mb-4 text-slate-900">
                                     {score_global.toFixed(1)}<span className="text-3xl text-slate-500">/5</span>
                                 </div>
                                 <div className={`inline-block px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider border ${getColorByLevel(nivel_madurez)}`}>
@@ -338,9 +338,9 @@ export default function DiagnosticoPage() {
                         </div>
 
                         {/* MESSAGE BY LEVEL */}
-                        <div className="glass-card p-8 rounded-2xl border border-white/5 md:col-span-2 shadow-2xl flex flex-col justify-center">
-                            <h3 className="text-xl font-bold mb-3 text-white">Análisis Inmediato:</h3>
-                            <p className="text-slate-300 leading-relaxed">
+                        <div className="glass-card p-8 rounded-2xl border border-slate-200 md:col-span-2 shadow-2xl flex flex-col justify-center">
+                            <h3 className="text-xl font-bold mb-3 text-slate-900">Análisis Inmediato:</h3>
+                            <p className="text-slate-700 leading-relaxed">
                                 {nivel_madurez === 'critico' && "La organización carece de procesos formales en áreas comerciales y financieras operando de forma reactiva y con alta exposición a pérdidas de rentabilidad no detectadas. Recomendamos intervención prioritaria."}
                                 {nivel_madurez === 'reactivo' && "La empresa cuenta con procesos básicos pero sin sistematización ni gobernanza. Las decisiones de margen se toman con información tardía. Existen oportunidades de alto impacto disponibles a corto plazo en base al análisis."}
                                 {nivel_madurez === 'controlado' && "La organización cuenta con procesos definidos y visibilidad. El desafío actual es la escalabilidad y analítica de datos predictiva. Hay brechas que significan rentabilidad cedida innecesariamente."}
@@ -353,10 +353,10 @@ export default function DiagnosticoPage() {
                     <h2 className="text-2xl font-black tracking-tight mb-6">Detalle por Dimensión</h2>
                     <div className="grid md:grid-cols-2 gap-4 mb-12">
                         {sortedDimensions.map((dim, i) => (
-                            <div key={i} className="bg-[#15152a] p-5 rounded-xl border border-white/5 flex items-center justify-between">
+                            <div key={i} className="bg-white p-5 rounded-xl border border-slate-200 flex items-center justify-between">
                                 <div>
-                                    <h4 className="font-bold text-white text-base">{dim.name}</h4>
-                                    <div className="text-xs font-bold text-slate-400 mt-1 uppercase">
+                                    <h4 className="font-bold text-slate-900 text-base">{dim.name}</h4>
+                                    <div className="text-xs font-bold text-slate-600 mt-1 uppercase">
                                         {dim.score <= 2.0 ? 'Prioridad Alta' : dim.score <= 3.0 ? 'Prioridad Media' : 'Mantenimiento Óptimo'}
                                     </div>
                                 </div>
@@ -378,7 +378,7 @@ export default function DiagnosticoPage() {
                                 {brechas.map((b, i) => (
                                     <div key={i} className="border-l-4 border-red-500 pl-5 py-2">
                                         <h4 className="font-bold text-lg mb-1">{b.name} (Score: {b.score.toFixed(1)})</h4>
-                                        <p className="text-slate-400 text-sm">
+                                        <p className="text-slate-600 text-sm">
                                             Recomendamos actuación prioritaria en esta dimensión para prevenir fuga de márgenes o problemas de visibilidad financiera que exponen a la empresa comercialmente.
                                         </p>
                                     </div>
@@ -390,8 +390,8 @@ export default function DiagnosticoPage() {
                     {/* CTA / PDF */}
                     <div className="p-8 bg-primary/10 rounded-2xl border border-primary/20 text-center shadow-xl shadow-primary/5">
                         <CheckCircle2 className="w-16 h-16 text-primary mx-auto mb-4" />
-                        <h3 className="text-2xl font-black mb-2 text-white">Informe Ejecutivo Generado</h3>
-                        <p className="text-slate-300 mb-8 max-w-xl mx-auto">
+                        <h3 className="text-2xl font-black mb-2 text-slate-900">Informe Ejecutivo Generado</h3>
+                        <p className="text-slate-700 mb-8 max-w-xl mx-auto">
                             Estamos procesando el PDF oficial con todas las recomendaciones detalladas para el panel gerencial. Recibirás un enlace a tu correo en los próximos minutos.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -412,9 +412,9 @@ export default function DiagnosticoPage() {
     if (step === 'lead_capture') {
         const isLeadFormComplete = leadData.nombre && leadData.email && leadData.empresa && leadData.industria && leadData.cargo && leadData.tamaño_empresa;
         return (
-            <div className="min-h-screen bg-[#101022] text-white font-sans selection:bg-primary selection:text-white bg-hero-glow">
-                <header className="p-6 border-b border-white/5 flex items-center justify-between max-w-5xl mx-auto w-full glass-nav rounded-b-xl sticky top-0 z-50">
-                    <Link href="/" className="flex items-center gap-2 text-slate-400 hover:text-white transition font-medium">
+            <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-primary selection:text-slate-900 ">
+                <header className="p-6 border-b border-slate-200 flex items-center justify-between max-w-5xl mx-auto w-full bg-white/80 backdrop-blur-md rounded-b-xl sticky top-0 z-50">
+                    <Link href="/" className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition font-medium">
                         <ArrowLeft className="w-5 h-5" /> Volver
                     </Link>
                     <span className="font-bold tracking-tight uppercase">
@@ -428,54 +428,54 @@ export default function DiagnosticoPage() {
                             <BarChart3 className="w-8 h-8 text-primary" />
                         </div>
                         <h1 className="text-3xl md:text-5xl font-black mb-4">Diagnóstico Ejecutivo</h1>
-                        <p className="text-slate-400 text-lg">
+                        <p className="text-slate-600 text-lg">
                             Descubre en 8 minutos tu nivel de madurez financiera y tus oportunidades de rentabilidad oculta. Totalmente gratis.
                         </p>
                     </div>
 
-                    <div className="glass-card p-8 rounded-2xl border border-white/5 shadow-2xl relative overflow-hidden animate-in fade-in slide-in-from-bottom-8 duration-700">
+                    <div className="glass-card p-8 rounded-2xl border border-slate-200 shadow-2xl relative overflow-hidden animate-in fade-in slide-in-from-bottom-8 duration-700">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-                        <h3 className="text-xl font-bold mb-6 text-white border-b border-white/10 pb-4">Tus Datos para el Informe</h3>
+                        <h3 className="text-xl font-bold mb-6 text-slate-900 border-b border-slate-200 pb-4">Tus Datos para el Informe</h3>
 
                         <div className="space-y-4 relative z-10">
                             <div>
-                                <label className="block text-xs font-bold text-slate-300 uppercase mb-2 ml-1">Nombre Completo</label>
+                                <label className="block text-xs font-bold text-slate-700 uppercase mb-2 ml-1">Nombre Completo</label>
                                 <div className="relative">
                                     <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
-                                    <input required type="text" className="w-full bg-[#15152a] border border-white/10 rounded-lg py-3 pl-12 pr-4 text-white placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition" placeholder="Tu nombre" value={leadData.nombre} onChange={e => setLeadData({ ...leadData, nombre: e.target.value })} />
+                                    <input required type="text" className="w-full bg-white border border-slate-200 rounded-lg py-3 pl-12 pr-4 text-slate-900 placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition" placeholder="Tu nombre" value={leadData.nombre} onChange={e => setLeadData({ ...leadData, nombre: e.target.value })} />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-xs font-bold text-slate-300 uppercase mb-2 ml-1">Email Corporativo</label>
+                                <label className="block text-xs font-bold text-slate-700 uppercase mb-2 ml-1">Email Corporativo</label>
                                 <div className="relative">
                                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
-                                    <input required type="email" className="w-full bg-[#15152a] border border-white/10 rounded-lg py-3 pl-12 pr-4 text-white placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition" placeholder="nombre@empresa.com" value={leadData.email} onChange={e => setLeadData({ ...leadData, email: e.target.value })} />
+                                    <input required type="email" className="w-full bg-white border border-slate-200 rounded-lg py-3 pl-12 pr-4 text-slate-900 placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition" placeholder="nombre@empresa.com" value={leadData.email} onChange={e => setLeadData({ ...leadData, email: e.target.value })} />
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-xs font-bold text-slate-300 uppercase mb-2 ml-1">Empresa</label>
+                                    <label className="block text-xs font-bold text-slate-700 uppercase mb-2 ml-1">Empresa</label>
                                     <div className="relative">
                                         <Building className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
-                                        <input required type="text" className="w-full bg-[#15152a] border border-white/10 rounded-lg py-3 pl-11 pr-3 text-white placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition" placeholder="Compañía" value={leadData.empresa} onChange={e => setLeadData({ ...leadData, empresa: e.target.value })} />
+                                        <input required type="text" className="w-full bg-white border border-slate-200 rounded-lg py-3 pl-11 pr-3 text-slate-900 placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition" placeholder="Compañía" value={leadData.empresa} onChange={e => setLeadData({ ...leadData, empresa: e.target.value })} />
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold text-slate-300 uppercase mb-2 ml-1">Cargo</label>
+                                    <label className="block text-xs font-bold text-slate-700 uppercase mb-2 ml-1">Cargo</label>
                                     <div className="relative">
                                         <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
-                                        <input required type="text" className="w-full bg-[#15152a] border border-white/10 rounded-lg py-3 pl-11 pr-3 text-white placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition" placeholder="CEO, CFO..." value={leadData.cargo} onChange={e => setLeadData({ ...leadData, cargo: e.target.value })} />
+                                        <input required type="text" className="w-full bg-white border border-slate-200 rounded-lg py-3 pl-11 pr-3 text-slate-900 placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition" placeholder="CEO, CFO..." value={leadData.cargo} onChange={e => setLeadData({ ...leadData, cargo: e.target.value })} />
                                     </div>
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-xs font-bold text-slate-300 uppercase mb-2 ml-1">Industria</label>
-                                    <select required className="w-full bg-[#15152a] border border-white/10 rounded-lg py-3 px-4 text-white placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition appearance-none" value={leadData.industria} onChange={e => setLeadData({ ...leadData, industria: e.target.value })}>
+                                    <label className="block text-xs font-bold text-slate-700 uppercase mb-2 ml-1">Industria</label>
+                                    <select required className="w-full bg-white border border-slate-200 rounded-lg py-3 px-4 text-slate-900 placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition appearance-none" value={leadData.industria} onChange={e => setLeadData({ ...leadData, industria: e.target.value })}>
                                         <option value="" disabled>Selecciona...</option>
                                         <option value="Retail">Retail</option>
                                         <option value="Manufactura">Manufactura</option>
@@ -485,8 +485,8 @@ export default function DiagnosticoPage() {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold text-slate-300 uppercase mb-2 ml-1">Tamaño</label>
-                                    <select required className="w-full bg-[#15152a] border border-white/10 rounded-lg py-3 px-4 text-white placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition appearance-none" value={leadData.tamaño_empresa} onChange={e => setLeadData({ ...leadData, tamaño_empresa: e.target.value })}>
+                                    <label className="block text-xs font-bold text-slate-700 uppercase mb-2 ml-1">Tamaño</label>
+                                    <select required className="w-full bg-white border border-slate-200 rounded-lg py-3 px-4 text-slate-900 placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition appearance-none" value={leadData.tamaño_empresa} onChange={e => setLeadData({ ...leadData, tamaño_empresa: e.target.value })}>
                                         <option value="" disabled>Empresa...</option>
                                         <option value="micro">Micro</option>
                                         <option value="pequeña">Pequeña</option>
@@ -499,7 +499,7 @@ export default function DiagnosticoPage() {
                             <button
                                 onClick={handleLeadSubmit}
                                 disabled={!isLeadFormComplete || submitting}
-                                className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 mt-6 disabled:opacity-50 disabled:cursor-not-allowed group"
+                                className="w-full bg-primary hover:bg-primary/90 text-slate-900 font-bold py-4 rounded-lg transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 mt-6 disabled:opacity-50 disabled:cursor-not-allowed group"
                             >
                                 {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Quiero Descargar mi Informe en PDF"} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </button>
@@ -515,9 +515,9 @@ export default function DiagnosticoPage() {
     const progressPercent = ((currentSection) / SECTIONS.length) * 100;
 
     return (
-        <div className="min-h-screen bg-[#101022] text-white font-sans selection:bg-primary selection:text-white bg-hero-glow">
-            <header className="p-6 border-b border-white/5 flex items-center justify-between max-w-5xl mx-auto w-full glass-nav rounded-b-xl sticky top-0 z-50">
-                <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-slate-400 hover:text-white transition font-medium">
+        <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-primary selection:text-slate-900 ">
+            <header className="p-6 border-b border-slate-200 flex items-center justify-between max-w-5xl mx-auto w-full bg-white/80 backdrop-blur-md rounded-b-xl sticky top-0 z-50">
+                <button onClick={() => router.push('/')} className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition font-medium">
                     <ArrowLeft className="w-5 h-5" /> Salir
                 </button>
                 <div className="flex-1 text-center">
@@ -529,7 +529,7 @@ export default function DiagnosticoPage() {
             </header>
 
             {/* Progress Bar */}
-            <div className="w-full h-1 bg-white/5 flex">
+            <div className="w-full h-1 bg-white flex">
                 <div className="h-full bg-primary transition-all duration-500 ease-out" style={{ width: `${progressPercent}%` }}></div>
             </div>
 
@@ -537,7 +537,7 @@ export default function DiagnosticoPage() {
 
                 <div className="mb-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <h2 className="text-3xl font-black mb-3 text-primary">{sectionData.title}</h2>
-                    <p className="text-slate-400 text-lg">
+                    <p className="text-slate-600 text-lg">
                         Evalúa del 1 (Totalmente en desacuerdo) al 5 (Totalmente de acuerdo) según la realidad actual de la empresa.
                     </p>
                 </div>
@@ -545,7 +545,7 @@ export default function DiagnosticoPage() {
                 <div className="space-y-12 mb-12">
                     {sectionData.questions.map((q, idx) => (
                         <div key={q.id} className="animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${idx * 100}ms` }}>
-                            <h3 className="text-lg font-medium text-white mb-6 leading-relaxed">
+                            <h3 className="text-lg font-medium text-slate-900 mb-6 leading-relaxed">
                                 <span className="text-primary font-black mr-2">{q.id}.</span> {q.text}
                             </h3>
 
@@ -560,8 +560,8 @@ export default function DiagnosticoPage() {
                                                 key={val}
                                                 onClick={() => handleSelectLikert(q.id, val)}
                                                 className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-lg font-bold transition-all ${isSelected
-                                                    ? "bg-primary text-white scale-110 shadow-xl shadow-primary/30 border-2 border-white/20"
-                                                    : "bg-[#1a1a32] text-slate-400 hover:bg-[#252542] hover:text-white border border-white/5"
+                                                    ? "bg-primary text-white scale-110 shadow-xl shadow-primary/30 border-2 border-primary"
+                                                    : "bg-white text-slate-500 hover:bg-blue-50 hover:text-blue-700 border border-slate-200"
                                                     }`}
                                             >
                                                 {val}
@@ -580,8 +580,8 @@ export default function DiagnosticoPage() {
                     ))}
 
                     {sectionData.hasOpenChallenge && (
-                        <div className="pt-8 border-t border-white/10 animate-in fade-in duration-500 delay-500">
-                            <h3 className="text-lg font-medium text-white mb-3">
+                        <div className="pt-8 border-t border-slate-200 animate-in fade-in duration-500 delay-500">
+                            <h3 className="text-lg font-medium text-slate-900 mb-3">
                                 <span className="text-primary font-black mr-2">Opcional.</span> ¿Existe algún dolor, problema o desafío específico que no haya sido cubierto?
                             </h3>
                             <textarea
@@ -589,7 +589,7 @@ export default function DiagnosticoPage() {
                                 onChange={(e) => setDesafio(e.target.value)}
                                 maxLength={500}
                                 rows={4}
-                                className="w-full bg-[#15152a] border border-white/10 rounded-lg p-5 text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition placeholder-slate-600 resize-none"
+                                className="w-full bg-white border border-slate-200 rounded-lg p-5 text-slate-900 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition placeholder-slate-600 resize-none"
                                 placeholder="Escribe brevemente aquí tu principal obstáculo..."
                             />
                             <div className="text-right text-xs text-slate-500 font-medium mt-2">{desafio.length}/500</div>
@@ -598,11 +598,11 @@ export default function DiagnosticoPage() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex items-center justify-between pt-8 border-t border-white/10">
+                <div className="flex items-center justify-between pt-8 border-t border-slate-200">
                     {currentSection > 0 ? (
                         <button
                             onClick={prevSection}
-                            className="px-6 py-3.5 rounded-lg font-bold transition-colors text-slate-400 hover:text-white hover:bg-white/5 flex items-center gap-2"
+                            className="px-6 py-3.5 rounded-lg font-bold transition-colors text-slate-600 hover:text-slate-900 hover:bg-white flex items-center gap-2"
                         >
                             <ArrowLeft className="w-5 h-5" /> Atrás
                         </button>
