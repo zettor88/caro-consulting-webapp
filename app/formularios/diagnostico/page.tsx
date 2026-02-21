@@ -83,6 +83,8 @@ export default function DiagnosticoPage() {
 
     // Results State
     const [resultsData, setResultsData] = useState<any>(null);
+    const [pdfResponseUrl, setPdfResponseUrl] = useState<string | null>(null);
+    const [generatingPdf, setGeneratingPdf] = useState(false);
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -256,11 +258,18 @@ export default function DiagnosticoPage() {
 
             // Generate PDF
             if (data && data.id) {
+                setGeneratingPdf(true);
                 fetch('/api/diagnostic-report', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ diagnosticoId: data.id })
-                }).catch(err => console.error("Report Generation Trigger Failed", err));
+                })
+                    .then(res => res.json())
+                    .then(resData => {
+                        if (resData.pdfUrl) setPdfResponseUrl(resData.pdfUrl);
+                    })
+                    .catch(err => console.error("Report Generation Trigger Failed", err))
+                    .finally(() => setGeneratingPdf(false));
             }
 
         } catch (err) {
@@ -395,9 +404,15 @@ export default function DiagnosticoPage() {
                             Estamos procesando el PDF oficial con todas las recomendaciones detalladas para el panel gerencial. Recibirás un enlace a tu correo en los próximos minutos.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <button className="bg-white/10 hover:bg-white/20 text-white px-8 py-3.5 rounded-lg font-bold transition flex items-center justify-center gap-2">
-                                <FileText className="w-5 h-5" /> Ver Informe PDF
-                            </button>
+                            {pdfResponseUrl ? (
+                                <a href={pdfResponseUrl} target="_blank" rel="noopener noreferrer" className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 px-8 py-3.5 rounded-lg font-bold transition flex items-center justify-center gap-2">
+                                    <FileText className="w-5 h-5" /> Descargar PDF Oficial
+                                </a>
+                            ) : (
+                                <button disabled className="bg-slate-100 text-slate-400 border border-slate-200 px-8 py-3.5 rounded-lg font-bold transition flex items-center justify-center gap-2 cursor-wait">
+                                    <Loader2 className="w-5 h-5 animate-spin" /> Procesando PDF...
+                                </button>
+                            )}
                             <button onClick={() => router.push('/agendar')} className="bg-primary hover:bg-primary/90 text-white px-8 py-3.5 rounded-lg font-bold transition shadow-lg shadow-primary/20">
                                 Agendar Auditoría Express
                             </button>
