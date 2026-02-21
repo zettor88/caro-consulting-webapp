@@ -1,0 +1,243 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import { Resend } from 'resend';
+
+// Configure Supabase
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY! || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+// Configure Resend safely
+const resendApiKey = process.env.RESEND_API_KEY;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
+
+export async function POST(req: NextRequest) {
+    try {
+        const body = await req.json();
+        const { diagnosticoId } = body;
+
+        if (!diagnosticoId) {
+            return NextResponse.json({ error: "No diagnostic ID provided" }, { status: 400 });
+        }
+
+        // 1. Fetch Diagnostic Data
+        const { data: diagnostico, error: fetchError } = await supabase
+            .from('diagnosticos')
+            .select(`
+                *,
+                usuarios (nombre, empresa, email)
+            `)
+            .eq('id', diagnosticoId)
+            .single();
+
+        if (fetchError || !diagnostico) {
+            console.error("Error fetching diagnostic:", fetchError);
+            return NextResponse.json({ error: "Diagnostic not found" }, { status: 404 });
+        }
+
+        const { score_global, nivel_madurez, score_pricing, score_rentabilidad, score_control, score_bi, score_proyectos, usuarios } = diagnostico;
+        const nombreCliente = usuarios?.nombre || 'Cliente';
+        const empresaCliente = usuarios?.empresa || 'Empresa';
+        const emailCliente = usuarios?.email;
+
+        // 2. GENERATE PDF
+        const doc = new jsPDF();
+
+        // Colors & Styling
+        const primaryColor: [number, number, number] = [37, 99, 235]; // Blue
+        const darkColor: [number, number, number] = [16, 16, 34]; // Dark bg
+        const lightGray: [number, number, number] = [200, 200, 200];
+
+        let cursorY = 20;
+
+        // -- Page 1: Cover --
+        doc.setFillColor(...darkColor);
+        doc.rect(0, 0, 210, 297, 'F');
+
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(28);
+        doc.text("REPORTE EJECUTIVO", 105, 80, { align: 'center' });
+        doc.setFontSize(16);
+        doc.text("DE DIAGNOSTICO FINANCIERO", 105, 90, { align: 'center' });
+
+        doc.setDrawColor(...primaryColor);
+        doc.setLineWidth(2);
+        doc.line(80, 100, 130, 100);
+
+        doc.setFontSize(14);
+        doc.setTextColor(...primaryColor);
+        doc.text(`PREPARADO PARA:`, 105, 130, { align: 'center' });
+
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(22);
+        doc.text(empresaCliente.toUpperCase(), 105, 140, { align: 'center' });
+        doc.setFontSize(14);
+        doc.text(`Por Caro Consulting`, 105, 250, { align: 'center' });
+
+        doc.addPage();
+
+        // -- Page 2: Summary --
+        // Reset to white page
+        doc.setFillColor(255, 255, 255);
+        doc.rect(0, 0, 210, 297, 'F');
+
+        doc.setTextColor(...darkColor);
+        doc.setFontSize(20);
+        doc.text("RESUMEN EJECUTIVO", 20, 30);
+
+        doc.setFontSize(11);
+        doc.setTextColor(80, 80, 80);
+        const introText = `Estimado/a ${nombreCliente},\n\nHemos analizado las 5 dimensiones clave de su organizacion. Este reporte identifica areas criticas que pueden estar afectando la rentabilidad de ${empresaCliente}.`;
+        doc.text(introText, 20, 45, { maxWidth: 170 });
+
+        // Score Box
+        doc.setDrawColor(...primaryColor);
+        doc.setFillColor(245, 248, 255);
+        doc.roundedRect(20, 65, 170, 30, 3, 3, 'FD');
+
+        doc.setFontSize(14);
+        doc.setTextColor(...primaryColor);
+        doc.text("SCORE GLOBAL", 30, 78);
+
+        doc.setFontSize(24);
+        doc.setTextColor(...darkColor);
+        doc.text(`${score_global.toFixed(1)} / 5.0`, 30, 88);
+
+        let colorNivel = primaryColor;
+        if (nivel_madurez === 'critico') colorNivel = [220, 38, 38];
+        if (nivel_madurez === 'reactivo') colorNivel = [234, 88, 12];
+        if (nivel_madurez === 'optimizado') colorNivel = [22, 163, 74];
+
+        doc.setFontSize(14);
+        doc.setTextColor(...colorNivel);
+        doc.text(`NIVEL: ${nivel_madurez.toUpperCase()}`, 100, 83);
+
+        // Dimensions Table
+        autoTable(doc, {
+            startY: 110,
+            head: [['Dimension Estrategica', 'Puntuacion (1-5)', 'Estado']],
+            body: [
+                ['Pricing & Gestion Comercial', score_pricing.toFixed(1), score_pricing < 3 ? 'Requiere Atencion' : 'Adecuado'],
+                ['Rentabilidad & Margenes', score_rentabilidad.toFixed(1), score_rentabilidad < 3 ? 'Requiere Atencion' : 'Adecuado'],
+                ['Control de Gestion', score_control.toFixed(1), score_control < 3 ? 'Requiere Atencion' : 'Adecuado'],
+                ['Reporteria & BI', score_bi.toFixed(1), score_bi < 3 ? 'Requiere Atencion' : 'Adecuado'],
+                ['Gestion de Proyectos', score_proyectos.toFixed(1), score_proyectos < 3 ? 'Requiere Atencion' : 'Adecuado'],
+            ],
+            theme: 'grid',
+            headStyles: { fillColor: darkColor, textColor: 255, fontStyle: 'bold' },
+            bodyStyles: { textColor: 50 },
+            alternateRowStyles: { fillColor: [248, 248, 250] }
+        });
+
+        // Recommendations
+        cursorY = (doc as any).lastAutoTable.finalY + 20;
+        doc.setFontSize(16);
+        doc.setTextColor(...darkColor);
+        doc.text("Recomendaciones a Corto Plazo", 20, cursorY);
+
+        doc.setFontSize(10);
+        doc.setTextColor(80, 80, 80);
+
+        const brechas: { name: string, score: number }[] = [
+            { name: "Pricing", score: score_pricing },
+            { name: "Rentabilidad", score: score_rentabilidad },
+            { name: "Control", score: score_control },
+            { name: "BI", score: score_bi },
+            { name: "Proyectos", score: score_proyectos }
+        ].filter(d => d.score < 3.0).sort((a, b) => a.score - b.score);
+
+        cursorY += 10;
+        if (brechas.length > 0) {
+            brechas.forEach((b) => {
+                doc.text(`• Dimension Critica - ${b.name} (${b.score.toFixed(1)}): Le recomendamos agendar nuestra Auditoria Express para aislar fugas de capital en esta area inmediatamente.`, 25, cursorY, { maxWidth: 160 });
+                cursorY += 12;
+            });
+        } else {
+            doc.text("Su organizacion muestra gran madurez en sistemas. Recomendamos evaluar estrategias avanzadas de BI.", 25, cursorY, { maxWidth: 160 });
+        }
+
+        // CTA
+        doc.setDrawColor(...darkColor);
+        doc.setFillColor(...darkColor);
+        doc.roundedRect(40, cursorY + 20, 130, 15, 2, 2, 'FD');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(12);
+        doc.text("Agendar Auditoria Gratuita", 105, cursorY + 30, { align: 'center' });
+        doc.link(40, cursorY + 20, 130, 15, { url: 'https://caroconsulting.com/agendar' });
+
+        // Generate PDF Buffer
+        const pdfOutput = doc.output('arraybuffer');
+        const buffer = Buffer.from(pdfOutput);
+
+        // 3. UPLOAD TO SUPABASE STORAGE
+        const fileName = `diagnostico_${empresaCliente.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_${Date.now()}.pdf`;
+
+        const { error: uploadError } = await supabase.storage
+            .from('diagnosticos')
+            .upload(fileName, buffer, {
+                contentType: 'application/pdf',
+                upsert: false
+            });
+
+        if (uploadError) {
+            console.error("Storage upload error (continuing anyway...):", uploadError);
+            // We won't block the logic if storage fails, just log it.
+        }
+
+        const { data: publicUrlData } = supabase.storage
+            .from('diagnosticos')
+            .getPublicUrl(fileName);
+
+        const pdfUrl = publicUrlData.publicUrl;
+
+        // 4. Update Database Record with PDF URL
+        await supabase
+            .from('diagnosticos')
+            .update({ pdf_url: pdfUrl })
+            .eq('id', diagnosticoId);
+
+        // 5. SEND EMAIL VIA RESEND (If applicable)
+        if (emailCliente && resend) {
+            try {
+                const resendFromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'; // Use Resend's default testing email if none provided
+
+                await resend.emails.send({
+                    from: `Caro Consulting <${resendFromEmail}>`,
+                    to: emailCliente,
+                    bcc: 'sebastian@caroconsulting.com',
+                    subject: `Resultados Diagnostico Financiero - ${empresaCliente}`,
+                    html: `
+                        <h2>Hola ${nombreCliente},</h2>
+                        <p>Hemos procesado con exito tu diagnostico ejecutivo de salud financiera.</p>
+                        <p>El Score Global arrojado es de: <strong>${score_global.toFixed(1)} / 5.0 (Nivel ${nivel_madurez.toUpperCase()})</strong>.</p>
+                        <p>Hemos adjuntado el Reporte Ejecutivo en formato PDF para ti.</p>
+                        <br/>
+                        <a href="${pdfUrl}" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px;">
+                            Descargar Reporte PDF
+                        </a>
+                        <br/><br/>
+                        <p>Agendemos una llamada de 15 minutos para interpretar estos resultados juntos.</p>
+                        <p>Atte, El equipo de Caro Consulting</p>
+                    `,
+                    attachments: [
+                        {
+                            filename: 'Reporte_Diagnostico_CaroConsulting.pdf',
+                            content: buffer,
+                        },
+                    ],
+                });
+            } catch (emailErr) {
+                console.error("Error sending email:", emailErr);
+            }
+        }
+
+        return NextResponse.json({ success: true, pdfUrl });
+
+    } catch (error: any) {
+        console.error("Diagnostic Report Generator Error:", error);
+        return NextResponse.json({ error: error.message || "Internal server error" }, { status: 500 });
+    }
+}
+}
