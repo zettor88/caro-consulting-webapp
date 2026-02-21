@@ -85,6 +85,7 @@ export default function DiagnosticoPage() {
     const [resultsData, setResultsData] = useState<any>(null);
     const [pdfResponseUrl, setPdfResponseUrl] = useState<string | null>(null);
     const [generatingPdf, setGeneratingPdf] = useState(false);
+    const [pdfError, setPdfError] = useState(false);
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -259,6 +260,7 @@ export default function DiagnosticoPage() {
             // Generate PDF
             if (data && data.id) {
                 setGeneratingPdf(true);
+                setPdfError(false);
                 fetch('/api/diagnostic-report', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -266,9 +268,17 @@ export default function DiagnosticoPage() {
                 })
                     .then(res => res.json())
                     .then(resData => {
-                        if (resData.pdfUrl) setPdfResponseUrl(resData.pdfUrl);
+                        if (resData.pdfUrl) {
+                            setPdfResponseUrl(resData.pdfUrl);
+                        } else {
+                            setPdfError(true);
+                            console.error("No PDF URL returned:", resData);
+                        }
                     })
-                    .catch(err => console.error("Report Generation Trigger Failed", err))
+                    .catch(err => {
+                        console.error("Report Generation Trigger Failed", err);
+                        setPdfError(true);
+                    })
                     .finally(() => setGeneratingPdf(false));
             }
 
@@ -408,6 +418,10 @@ export default function DiagnosticoPage() {
                                 <a href={pdfResponseUrl} target="_blank" rel="noopener noreferrer" className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 px-8 py-3.5 rounded-lg font-bold transition flex items-center justify-center gap-2">
                                     <FileText className="w-5 h-5" /> Descargar PDF Oficial
                                 </a>
+                            ) : pdfError ? (
+                                <button onClick={() => window.location.reload()} className="bg-red-50 text-red-600 border border-red-200 px-8 py-3.5 rounded-lg font-bold transition flex items-center justify-center gap-2">
+                                    <AlertTriangle className="w-5 h-5" /> Error en PDF
+                                </button>
                             ) : (
                                 <button disabled className="bg-slate-100 text-slate-400 border border-slate-200 px-8 py-3.5 rounded-lg font-bold transition flex items-center justify-center gap-2 cursor-wait">
                                     <Loader2 className="w-5 h-5 animate-spin" /> Procesando PDF...
