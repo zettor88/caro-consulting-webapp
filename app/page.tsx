@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, BarChart3, PieChart, TrendingUp, CheckCircle, Linkedin, Calendar, MonitorPlay, ChevronRight, Mail, Target, Layers } from "lucide-react";
 
 export default function Home() {
@@ -310,13 +311,37 @@ export default function Home() {
 
                         {/* Bio Column */}
                         <div className="w-full md:w-7/12 order-1 md:order-2">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 text-xs font-bold uppercase tracking-widest mb-6">
-                                El Consultor
+                            <div className="flex flex-col md:flex-row gap-8 items-start mb-8 border-b border-white/10 pb-8">
+                                {/* Profile Image */}
+                                <div className="w-32 h-32 md:w-48 md:h-48 shrink-0 relative rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-600">
+                                    <Image
+                                        src="/sebastian-caro.png"
+                                        alt="Sebastián Caro - Consultor B2B"
+                                        fill
+                                        className="object-cover object-top"
+                                        sizes="(max-width: 768px) 128px, 192px"
+                                        priority
+                                    />
+                                </div>
+
+                                <div>
+                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 text-xs font-bold uppercase tracking-widest mb-4">
+                                        El Consultor
+                                    </div>
+                                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">Sebastián Caro</h2>
+                                    <p className="text-blue-400 text-lg font-semibold mb-5">
+                                        Pricing Estratégico | Rentabilidad | Control de Gestión | BI (Power BI)
+                                    </p>
+                                    <a
+                                        href="https://www.linkedin.com/in/sebastiancaroalvarado/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 bg-[#0077b5] hover:bg-[#005e93] text-white px-5 py-2.5 rounded-md text-sm font-semibold transition shadow-md"
+                                    >
+                                        <Linkedin className="w-4 h-4 shrink-0" /> Ver trayectoria en LinkedIn
+                                    </a>
+                                </div>
                             </div>
-                            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Sebastián Caro</h2>
-                            <p className="text-blue-400 text-lg font-semibold mb-8 border-b border-white/10 pb-6">
-                                Pricing Estratégico | Rentabilidad | Control de Gestión | BI (Power BI) | Gestión de Proyectos
-                            </p>
 
                             <p className="text-slate-300 leading-relaxed text-lg mb-6">
                                 Soy Ingeniero Civil Industrial y MBA(c), con más de 10 años liderando estrategia comercial,
