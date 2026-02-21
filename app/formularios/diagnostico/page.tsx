@@ -181,42 +181,12 @@ export default function DiagnosticoPage() {
             desafio_abierto: desafio,
         };
 
-        // If not logged in, we need to ask for their info first before showing results!
-        if (!userAuth?.id) {
-            setResultsData(dataToSave); // Store temporarily in state
-            setStep('lead_capture');
-            setSubmitting(false);
-            window.scrollTo(0, 0);
-            return;
-        }
-
-        try {
-            const { data, error } = await supabase.from('diagnosticos').insert(dataToSave).select().single();
-            if (error) throw error;
-
-            // Limpiar cache local
-            localStorage.removeItem("diag_progress");
-
-            // Mostrar pantalla de resultados
-            setResultsData(dataToSave);
-            setStep('results');
-
-            // En background: Se llama API route para generar PDF y Email automáticamente
-            if (data && data.id) {
-                fetch('/api/diagnostic-report', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ diagnosticoId: data.id })
-                }).catch(err => console.error("Report Generation Trigger Failed", err));
-            }
-
-        } catch (err) {
-            console.error("Error al guardar diagnóstico:", err);
-            alert("Error al procesar el diagnóstico. Por favor intenta otra vez.");
-        } finally {
-            setSubmitting(false);
-            window.scrollTo(0, 0);
-        }
+        // Save temporarily in state and always ask for Lead info
+        setResultsData(dataToSave);
+        setStep('lead_capture');
+        setSubmitting(false);
+        window.scrollTo(0, 0);
+        return;
     };
 
     const handleLeadSubmit = async () => {
