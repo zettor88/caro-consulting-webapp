@@ -89,11 +89,19 @@ export default function DiagnosticoPage() {
 
     useEffect(() => {
         const checkAuth = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session) {
-                setUserAuth(session.user);
+            // Timeout de seguridad para evitar quedarse en el loader
+            const timeout = setTimeout(() => {
+                setLoadingInitial(false);
+            }, 2000);
+
+            try {
+                const { data: { session } } = await supabase.auth.getSession();
+                if (session) {
+                    setUserAuth(session.user);
+                }
+            } catch (e) {
+                console.error("Auth check failed", e);
             }
-            // Allow anonymous access
 
             // Load saved progress if exists
             const saved = localStorage.getItem("diag_progress");
@@ -105,9 +113,9 @@ export default function DiagnosticoPage() {
                     if (parsed.desafio) setDesafio(parsed.desafio);
                     if (parsed.leadData) setLeadData(parsed.leadData);
                     if (parsed.resultsData) setResultsData(parsed.resultsData);
-                    // We specifically DO NOT restore 'step' to force lead capture first
                 } catch (e) { }
             }
+            clearTimeout(timeout);
             setLoadingInitial(false);
         };
         checkAuth();
