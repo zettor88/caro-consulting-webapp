@@ -143,80 +143,67 @@ export default function Home() {
 
                     <div className="grid md:grid-cols-2 gap-8 lg:grid-cols-3 mb-12">
                         {/* Servicio 1 */}
-                        <div className="bg-white p-10 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col">
-                            <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-800 mb-6">
+                        <Link href="/servicios/pricing-estrategico" className="group bg-white p-10 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all flex flex-col">
+                            <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-800 mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                                 <TrendingUp className="w-6 h-6" />
                             </div>
                             <h3 className="text-xl font-bold text-slate-900 mb-2">Pricing Estratégico & Gobernanza Comercial</h3>
-                            <p className="text-slate-600 mb-6 text-sm font-medium">Aumentar contribución sin perder competitividad.</p>
-                            <ul className="space-y-3 mt-auto pt-6 border-t border-slate-100">
-                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Política de precios y descuentos</li>
-                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Segmentación de clientes</li>
-                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Modelo de rentabilidad / contribución</li>
-                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Reglas de aprobación y control de fugas</li>
-                            </ul>
-                        </div>
+                            <p className="text-slate-600 mb-6 text-sm font-medium leading-relaxed">Aumentar contribución sin perder competitividad.</p>
+                            <div className="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between text-primary font-bold text-sm">
+                                Ver más detalles <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </div>
+                        </Link>
 
                         {/* Servicio 2 */}
-                        <div className="bg-white p-10 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col">
-                            <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-800 mb-6">
+                        <Link href="/servicios/control-gestion" className="group bg-white p-10 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all flex flex-col">
+                            <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-800 mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                                 <BarChart3 className="w-6 h-6" />
                             </div>
                             <h3 className="text-xl font-bold text-slate-900 mb-2">Control de Gestión Externo (PYMEs)</h3>
-                            <p className="text-slate-600 mb-6 text-sm font-medium">Control mensual y visibilidad ejecutiva sin sumar estructura fija.</p>
-                            <ul className="space-y-3 mt-auto pt-6 border-t border-slate-100">
-                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> KPIs financieros y comerciales</li>
-                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Tablero gerencial mensual</li>
-                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Análisis de desviaciones y planes</li>
-                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Modelo de presupuesto/forecast</li>
-                            </ul>
-                        </div>
+                            <p className="text-slate-600 mb-6 text-sm font-medium leading-relaxed">Control mensual y visibilidad ejecutiva sin sumar estructura fija.</p>
+                            <div className="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between text-primary font-bold text-sm">
+                                Ver más detalles <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </div>
+                        </Link>
 
                         {/* Servicio 3 */}
-                        <div className="bg-white p-10 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col">
-                            <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-800 mb-6">
+                        <Link href="/servicios/implementacion-kpis" className="group bg-white p-10 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all flex flex-col">
+                            <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-800 mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                                 <Target className="w-6 h-6" />
                             </div>
                             <h3 className="text-xl font-bold text-slate-900 mb-2">Implementación de KPIs e Indicadores</h3>
-                            <p className="text-slate-600 mb-6 text-sm font-medium">Medir lo que importa para mejorar performance.</p>
-                            <ul className="space-y-3 mt-auto pt-6 border-t border-slate-100">
-                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Definición de KPIs (margen, mix, OPEX)</li>
-                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Diccionario de métricas estandarizado</li>
-                                <li className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Rituales de seguimiento (semanal/mensual)</li>
-                            </ul>
-                        </div>
+                            <p className="text-slate-600 mb-6 text-sm font-medium leading-relaxed">Medir lo que importa para mejorar performance.</p>
+                            <div className="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between text-primary font-bold text-sm">
+                                Ver más detalles <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </div>
+                        </Link>
 
                         {/* Servicio 4 */}
-                        <div className="bg-slate-900 text-white p-10 rounded-2xl border border-slate-800 shadow-lg flex flex-col lg:col-span-1 md:col-span-2 relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
+                        <Link href="/servicios/business-intelligence" className="group bg-slate-900 text-white p-10 rounded-2xl border border-slate-800 shadow-lg hover:shadow-primary/10 transition-all flex flex-col lg:col-span-1 md:col-span-2 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 p-6 opacity-10 pointer-events-none group-hover:scale-110 transition-transform">
                                 <MonitorPlay className="w-32 h-32" />
                             </div>
-                            <div className="relative z-10 w-14 h-14 bg-white/10 border border-white/20 rounded-xl flex items-center justify-center text-white mb-6">
+                            <div className="relative z-10 w-14 h-14 bg-white/10 border border-white/20 rounded-xl flex items-center justify-center text-white mb-6 group-hover:bg-primary transition-colors">
                                 <MonitorPlay className="w-6 h-6" />
                             </div>
                             <h3 className="relative z-10 text-xl font-bold text-white mb-2">Business Intelligence (Power BI)</h3>
-                            <p className="relative z-10 text-slate-300 mb-6 text-sm font-medium">Reportería automatizada para decidir a tiempo.</p>
-                            <ul className="relative z-10 space-y-3 mt-auto pt-6 border-t border-white/10">
-                                <li className="flex gap-2 text-slate-200 text-sm"><CheckCircle className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" /> Dashboards ejecutivos interactivos</li>
-                                <li className="flex gap-2 text-slate-200 text-sm"><CheckCircle className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" /> Automatización de reportes manuales</li>
-                                <li className="flex gap-2 text-slate-200 text-sm"><CheckCircle className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" /> Modelo de datos centralizado listo para gestión</li>
-                            </ul>
-                        </div>
+                            <p className="relative z-10 text-slate-300 mb-6 text-sm font-medium leading-relaxed">Reportería automatizada para decidir a tiempo.</p>
+                            <div className="relative z-10 mt-auto pt-6 border-t border-white/10 flex items-center justify-between text-blue-400 font-bold text-sm">
+                                Ver más detalles <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </div>
+                        </Link>
 
                         {/* Servicio 5 */}
-                        <div className="bg-white p-10 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col lg:col-span-2 md:col-span-2">
-                            <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-800 mb-6">
+                        <Link href="/servicios/control-proyectos" className="group bg-white p-10 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all flex flex-col lg:col-span-2 md:col-span-2">
+                            <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-800 mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                                 <Layers className="w-6 h-6" />
                             </div>
                             <h3 className="text-xl font-bold text-slate-900 mb-2">Control Financiero de Proyectos</h3>
-                            <p className="text-slate-600 mb-6 text-sm font-medium">Evitar desviaciones y sobrecostos en obras o proyectos complejos.</p>
-                            <div className="mt-auto pt-6 border-t border-slate-100 grid sm:grid-cols-2 gap-3">
-                                <div className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Presupuesto base vs Avance real</div>
-                                <div className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Estimación al término (Forecast / EAC)</div>
-                                <div className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> Seguimiento de obras adicionales y variaciones</div>
-                                <div className="flex gap-2 text-slate-600 text-sm"><CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /> KPIs de disciplina y avance financiero</div>
+                            <p className="text-slate-600 mb-6 text-sm font-medium leading-relaxed">Evitar desviaciones y sobrecostos en obras o proyectos complejos.</p>
+                            <div className="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between text-primary font-bold text-sm">
+                                Ver más detalles <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </div>
-                        </div>
+                        </Link>
                     </div>
 
                     <div className="text-center mt-12">
